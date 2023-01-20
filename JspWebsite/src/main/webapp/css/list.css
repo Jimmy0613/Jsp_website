@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+.list button {
+	background-color: #d2eed7;
+	margin-left: 340px;
+}
+
+.list {
+	font-weight: normal;
+	color: #636363;
+	padding: 30px;
+	background-color: white;
+	margin: 20px;
+	
+}
+
+.list_m {
+	background-color: #f8f8f8;
+	border: solid 0.1px #959595;
+	width: 440px;
+	display: grid;
+	grid-template-rows: 30px auto auto;
+}
+
+.list_n {
+	text-align: center;
+	vertical-align: center;
+	height: 30px;
+	display: grid;
+	grid-template-columns: 100px 250px 40px 50px;
+	border-bottom: 0.1px solid #e8e8e8;
+}
+.list_z{
+	min-height: 310px;
+}
+#t {
+	text-align: left;
+}
+
+.list_p {
+	display: grid;
+	grid-template-rows: 1fr;
+}
+.page{
+	text-align:center;
+	height:40px;
+	font-size:18px;
+}

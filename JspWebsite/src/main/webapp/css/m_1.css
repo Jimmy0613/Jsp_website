@@ -1,0 +1,23 @@
+@charset "UTF-8";
+#bed{
+	grid-row-start: 1;
+	grid-row-end: 6;
+	grid-column-start:1;
+	grid-column-end:3;
+}
+#bed button{
+	margin-left: 25px;
+}
+#bedimg{
+	width: 150px;
+}
+#player{
+	grid-row-start: 3;
+	grid-row-end: 4;
+	grid-column-start:3;
+	grid-column-end:4;
+	width: 100px;
+}
+#player img{
+	width: 70px;
+}
