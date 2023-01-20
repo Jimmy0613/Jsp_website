@@ -15,7 +15,7 @@
 	</div>
 	<div id="s_menu_right_t">메뉴</div>
 	<div id="s_content">
-		<form action="proc/loginProc.jsp">
+		<form action="ServletLogin">
 			<p id="form_l">
 			<input type="hidden" name="location" value="../index_rpg.jsp">
 				<br> &nbsp;<b> 아이디</b> &nbsp;&nbsp; <input name="id"

@@ -119,7 +119,7 @@
 		if (p2.getStory() >= 5) {
 		%>
 		<button id="we_btn"
-			onclick="location.href='game.jsp?m_id=m_1&mode=move'">거실</button>
+			onclick="location.href='game.jsp?m_id=m_5&mode=move'">거실</button>
 		<%
 		}
 		%>

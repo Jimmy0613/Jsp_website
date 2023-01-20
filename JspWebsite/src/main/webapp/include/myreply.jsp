@@ -10,9 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-	<script>
+<script type="text/javascript">
 	function selectAll(selectAll)  {
 		  const checkboxes = document.getElementsByName("delmyreply");
 		  checkboxes.forEach((checkbox) => {
@@ -20,7 +18,33 @@
 		  })
 	}
 </script>
-	<form action="delMyreply.jsp">
+<script type="text/javascript">
+	function delRe_confirm() {
+		var formDelReply = document.formDelReply;
+		var ok = confirm('선택한 댓글을 모두 삭제하시겠습니까?');
+		if (ok) {
+			formDelReply.method = "post";
+			formDelReply.action = "ServletDelMyreply";
+			formDelReply.submit();
+		} else {
+			location.href = "mypage.jsp";
+		}
+	}
+</script>
+</head>
+<body>
+	<%
+	MemberDTO me2 = (MemberDTO) session.getAttribute("loginMember");
+	Board bo2 = new Board();
+	int cupm;
+	if (request.getParameter("page").equals(null)) {
+		cupm = 1;
+	} else {
+		cupm = Integer.parseInt(request.getParameter("page"));
+	}
+	ArrayList<ReplyDTO> myreply = bo2.myreply(me2.getId(), cupm);
+	%>
+	<form name="formDelReply" method="post" action="ServletDelMyreply" enctype="UTF-8">
 		<span id="t">내가 쓴 댓글</span> <br>
 		<div class="list">
 			<div class="list_m">
@@ -37,15 +61,6 @@
 				</div>
 				<div class="list_z">
 					<%
-					MemberDTO me2 = (MemberDTO) session.getAttribute("loginMember");
-					Board bo2 = new Board();
-					int cupm;
-					if (request.getParameter("page").equals(null)) {
-						cupm = 1;
-					} else {
-						cupm = Integer.parseInt(request.getParameter("page"));
-					}
-					ArrayList<ReplyDTO> myreply = bo2.myreply(me2.getId(), cupm);
 					if (myreply.size() != 0) {
 						for (ReplyDTO r : myreply) {
 							String pNum = r.getpNum() + "";
@@ -88,8 +103,8 @@
 					<%
 					}
 					%>
-					<button type="submit"
-						style="width: 40px; height: 25px; font-size: 0.7em; background-color: #d2eed7;">삭제</button>
+					<input type="button" onclick="delRe_confirm()"
+						style="width: 40px; height: 25px; font-size: 0.7em; background-color: #d2eed7;" value="삭제">
 					<br>
 					<%
 					} else {
