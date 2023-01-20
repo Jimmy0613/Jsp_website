@@ -26,6 +26,22 @@
 					+ "&category=" + category;
 		}
 	}
+	function delRe_confirm() {
+		var ok = confirm("정말 삭제하시겠습니까?");
+		var formDelReply = document.formDelReply;
+		var reNum = formDelReply.reNum.value;
+		var postNum = formDelReply.postNum.value;
+		var page = formDelReply.page.value;
+		var category = formDelReply.category.value;
+		if (ok) {
+			formDelReply.method = "post";
+			formDelReply.action = "ServletDelReply";
+			formDelReply.submit();
+		} else {
+			location.href = "read.jsp?postNum=" + postNum + "&page=" + category
+					+ "&category=" + category + "&reNum=" + renum;
+		}
+	}
 </script>
 </head>
 <body>
@@ -102,9 +118,14 @@
 					if (loginMember != null) {
 						if (r.getWriter().equals(loginMember.getName())) {
 					%>
-					<a
-						href="deleteReply.jsp?reNum=<%=r.getrNum()%>&postNum=<%=postNum%>&page=<%=currentPage%>&category=<%=category%>"
-						title="삭제">(x)</a>
+					<form name="formDelReply" method="post" action="ServletDelReply"
+						encType="UTF-8">
+						<input type="hidden" name="postNum" value="<%=postNum%>">
+						<input type="hidden" name="reNum" value="<%=r.getrNum()%>">
+						<input type="hidden" name="category" value="<%=category%>">
+						<input type="hidden" name="page" value="<%=currentPage%>">
+						<input type="button" onclick="delRe_confirm()" value="(x)">
+					</form>
 					<%
 					}
 					}
