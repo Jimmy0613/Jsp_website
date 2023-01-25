@@ -38,7 +38,7 @@
 		<b class="icon_t" id="icon2_t">가입</b>
 
 		<div class="icon" id="icon3">
-			<a href="login_rpg.jsp"><img src="img/login.png"></a>
+			<a href="login.jsp?location=../character.jsp"><img src="img/login.png"></a>
 		</div>
 		<b class="icon_t" id="icon3_t">로그인</b>
 	</div>
@@ -57,7 +57,7 @@
 		<b class="icon_t" id="icon2_t">캐릭터</b>
 
 		<div class="icon" id="icon3">
-			<a href="proc/logoutProc.jsp?location=../index_rpg.jsp"><img
+			<a href="ServletLogout?location=../index_rpg.jsp"><img
 				src="img/logout.png"></a>
 		</div>
 		<b class="icon_t" id="icon3_t">로그아웃</b>

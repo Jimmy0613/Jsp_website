@@ -41,11 +41,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<%
 				if (member == null) {
 				%>
-				<div style="padding:20px;">
-					<span style="color:grey;">로그인이 필요합니다.</span> <br>
-					<br> <a style="font-size: 0.9em;"
-						href="login.jsp?location=../index.jsp">로그인</a> <a
-						style="font-size: 0.9em;" href="join.jsp?location=../index.jsp">
+				<div style="padding: 20px;">
+					<span style="color: grey;">로그인이 필요합니다.</span> <br> <br> <a
+						style="font-size: 0.9em;" href="login.jsp?location=../index.jsp">로그인</a>
+					<a style="font-size: 0.9em;" href="join.jsp?location=../index.jsp">
 						회원가입 </a>
 				</div>
 				<%
@@ -53,9 +52,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				%>
 				<div class="login_info"
 					style="align-items: center; justify-content: center;">
-					<div><%=member.getInfo()%>
-					</div>
 					<div id="f">
+					<div style="grid-column-start:1; grid-column-end:3;">
+					<%=member.getInfo()%>
+					</div>
 						<button id="memberinfo" onclick="location.href='mypage.jsp'">회원정보</button>
 						<form id="logout" action="ServletLogout">
 							<input type="hidden" name="location" value="../index.jsp">
@@ -72,7 +72,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<%
 				if (member == null) {
 				%>
-				<div style="padding:20px; color:grey;">로그인이 필요합니다.</div>
+				<div style="padding: 20px; color: grey;">로그인이 필요합니다.</div>
 				<%
 				} else {
 				%>

@@ -132,7 +132,7 @@ a:hover {
 
 #f{
 	display: grid;
-	margin: 10px;
+	grid-template-rows: 1fr 1fr;
 	grid-template-columns: 1fr 1fr;
 }
 #f button{

@@ -39,7 +39,7 @@ public class ServletLogin extends HttpServlet {
 			out.close();
 		} else {
 			out.println("<script>alert('로그인 실패.. " + alert + "');</script>");
-			out.println("<script>location.href='" + location + "'</script>");
+			out.println("<script>location.href='../login.jsp'</script>");
 			out.close();
 		}
 	}

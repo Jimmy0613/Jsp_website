@@ -20,7 +20,7 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/popup.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="../css/popup.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%
