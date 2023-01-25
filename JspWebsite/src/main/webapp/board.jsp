@@ -26,7 +26,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<div class="container">
 		<div class="header">
-			<div class="title"></div>
+			<div class="title">JspWebsite</div>
 			<div class="menu">
 				<%@ include file="include/menuTop.jsp"%>
 			</div>
