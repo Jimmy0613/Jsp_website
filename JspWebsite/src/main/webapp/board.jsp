@@ -26,7 +26,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
 				<%@ include file="include/menuTop.jsp"%>
 			</div>
@@ -35,23 +35,25 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			<div class="menu_left">
 				<%@ include file="include/menuLeft.jsp"%>
 			</div>
+			<%
+			String category = request.getParameter("category");
+			if (category == null) {
+				category = "popular";
+			}
+			if (category.equals("popular")) {
+			%>
 			<div class="list">
-				<%
-				String category = request.getParameter("category");
-				if (category == null) {
-					category = "popular";
-				}
-				if (category.equals("popular")) {
-				%>
 				<%@ include file="include/listPopular.jsp"%>
-				<%
-				} else {
-				%>
-				<%@ include file="include/listBoard.jsp"%>
-				<%
-				}
-				%>
 			</div>
+			<%
+			} else {
+			%>
+			<div class="list">
+				<%@ include file="include/listBoard.jsp"%>
+			</div>
+			<%
+			}
+			%>
 		</div>
 	</div>
 </body>

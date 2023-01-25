@@ -16,7 +16,6 @@
 <body>
 	<%
 	Charac ch = new Charac();
-
 	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
 	String loginC1 = loginMember.getCharacter1();
 	String loginC2 = loginMember.getCharacter2();

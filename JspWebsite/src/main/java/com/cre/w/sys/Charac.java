@@ -38,6 +38,7 @@ public class Charac extends CharacterDAO {
 	}
 
 	public void characterUpdate(CharacterDTO player) {
+		levelCheck(player);
 		String sql = String.format(
 				"update %s set power=%d, level=%d, max_power=%d, coin=%d, exp=%d, max_exp=%d, story=%d, location='%s' where name='%s'",
 				Db.TABLE_CHARACTER, player.getPower(), player.getLevel(), player.getMaxPower(), player.getCoin(),
@@ -55,6 +56,8 @@ public class Charac extends CharacterDAO {
 			player.setExp(exp_over);
 			log.send("🎊 레벨이 올랐습니다. (레벨 " + player.getLevel() + ", 최대 힘 +1)", "good");
 		}
+		player.setInfo();
+		player.setProfile();
 	}
 
 }

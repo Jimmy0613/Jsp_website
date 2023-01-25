@@ -1,5 +1,12 @@
 @charset "UTF-8";
-
+.container{
+	width: 800px;
+	min-height:800px;
+	height: auto;
+	background-color: aliceblue;
+	display: grid;
+	grid-template-rows: 150px 750px;
+}
 .content {
 	grid-template-columns: 400px 400px;
 	grid-template-rows: 200px 150px 250px 150px;
@@ -15,8 +22,6 @@
 	grid-column-end: 2;
 	background-color: white;
 	display: grid;
-	align-items:center;
-	justify-content:center;
 }
 
 .login {
@@ -33,6 +38,7 @@
 	grid-column-start: 2;
 	grid-column-end: 3;
 	background-color: white;
+	height:150px;
 }
 
 .notice {

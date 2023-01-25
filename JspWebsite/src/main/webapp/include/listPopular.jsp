@@ -76,7 +76,5 @@
 		</div>
 		<!-- 페이징 부분 -->
 	</div>
-	<div>
-	</div>
 </body>
 </html>

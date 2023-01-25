@@ -23,6 +23,9 @@ public class ServletLogin extends HttpServlet {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 		String location = request.getParameter("location");
+		if (location == null) {
+			location = "../index.jsp";
+		}
 
 		String alert = member.loginAlert(id, pw);
 		MemberDTO loginMember = member.getMember(id);

@@ -15,34 +15,32 @@
 	<%
 	Map mapr = new Map();
 	Charac cr = new Charac();
-	CharacterDTO pr = (CharacterDTO)session.getAttribute("player");
-	MapDTO mr = mapr.getMap(request.getParameter("m_id"));
-	Log log = new Log();
+	CharacterDTO pr = (CharacterDTO) session.getAttribute("player");
+	String midr = (String)session.getAttribute("m_id");
+	String midr_jsp = midr + ".jsp";
+	Log logr = new Log();
 	if (pr.getPower() <= 0) {
 		pr.setPower(0);
 		cr.characterUpdate(pr);
 		session.setAttribute("player", pr);
-		log.send("힘이 모두 빠져 ''나의 방''으로 소환되었습니다..", "bad");
+		logr.send("힘이 모두 빠져 ''나의 방''으로 소환되었습니다..", "bad");
 	%>
-	<jsp:forward page="game.jsp">
+	<jsp:forward page="<%=midr_jsp%>">
 		<jsp:param value="normal" name="mode" />
-		<jsp:param value="<%=mr.getMapId()%>" name="m_id" />
 	</jsp:forward>
 
 	<%
 	} else if (pr.getStory() < 6) {
-			log.send("❌ ''이야기 <6> 지도''를 먼저 완료해야 합니다.", "bad");
+	logr.send("❌ ''이야기 <6> 지도''를 먼저 완료해야 합니다.", "bad");
 	%>
-	<jsp:forward page="game.jsp">
+	<jsp:forward page="<%=midr_jsp %>">
 		<jsp:param value="normal" name="mode" />
-		<jsp:param value="<%=mr.getMapId()%>" name="m_id" />
 	</jsp:forward>
 	<%
 	} else {
 	%>
-	<jsp:forward page="game.jsp">
+	<jsp:forward page="m_1.jsp">
 		<jsp:param value="move" name="mode" />
-		<jsp:param value="m_1" name="m_id" />
 	</jsp:forward>
 	<%
 	}

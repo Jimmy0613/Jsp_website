@@ -11,8 +11,8 @@
 </head>
 <body>
 	<%
-	Log log = new Log();
-	ArrayList<LogDTO> dtos = log.select();
+	Log logt = new Log();
+	ArrayList<LogDTO> dtos = logt.select();
 	String str = "";
 	String cls = "";
 	int lastNum = dtos.size();

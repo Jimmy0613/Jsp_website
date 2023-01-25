@@ -14,10 +14,11 @@
 </head>
 <body>
 	<%
-	Map map = new Map();
-	MapDTO ms = map.getMap(request.getParameter("m_id"));
+	Map maps = new Map();
 	MemberDTO loginMember = (MemberDTO)session.getAttribute("loginMember");
 	CharacterDTO ps = (CharacterDTO)session.getAttribute("player");
+	String mids = (String)session.getAttribute("m_id");
+	MapDTO ms = maps.getMap(mids);
 	%>
 	<script>
 		function showLog() {
@@ -58,19 +59,19 @@
 	</div>
 	<div id="s_menu_right">
 		<div class="icon" id="icon1">
-			<a href="game.jsp?m_id=<%=ms.getMapId()%>&mode=return"><img
+			<a href="<%=ms.getMapId()%>.jsp?mode=return"><img
 				src="img/returnhome.png"></a>
 		</div>
 		<b class="icon_t" id="icon1_t">방으로</b>
 
 		<div class="icon" id="icon2">
-			<a href="game.jsp?m_id=<%=ms.getMapId()%>&mode=map"><img
+			<a href="<%=ms.getMapId()%>.jsp?mode=map"><img
 				src="img/map.png" id="mapimg"></a>
 		</div>
 		<b class="icon_t" id="icon2_t">지도</b>
 
 		<div class="icon" id="icon3">
-			<a href="game.jsp?m_id=<%=ms.getMapId()%>&mode=bag"><img
+			<a href="<%=ms.getMapId()%>.jsp?mode=bag"><img
 				src="img/bag.png" id="bagimg"></a>
 		</div>
 		<b class="icon_t" id="icon3_t">가방</b>

@@ -10,27 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-	function selectAll(selectAll)  {
-		  const checkboxes = document.getElementsByName("delmyreply");
-		  checkboxes.forEach((checkbox) => {
-		    checkbox.checked = selectAll.checked;
-		  })
-	}
-</script>
-<script type="text/javascript">
-	function delRe_confirm() {
-		var formDelReply = document.formDelReply;
-		var ok = confirm('선택한 댓글을 모두 삭제하시겠습니까?');
-		if (ok) {
-			formDelReply.method = "post";
-			formDelReply.action = "ServletDelMyreply";
-			formDelReply.submit();
-		} else {
-			location.href = "mypage.jsp";
-		}
-	}
-</script>
 </head>
 <body>
 	<%
@@ -44,81 +23,73 @@
 	}
 	ArrayList<ReplyDTO> myreply = bo2.myreply(me2.getId(), cupm);
 	%>
-	<form name="formDelReply" method="post" action="ServletDelMyreply" enctype="UTF-8">
-		<span id="t">내가 쓴 댓글</span> <br>
-		<div class="list">
-			<div class="list_m">
-				<div class="list_n" style="background-color: white;">
-					<div>
-						<input type="checkbox" name="all" value="selectall"
-							onclick="selectAll(this)">
+	<span id="t">내가 쓴 댓글</span>
+	<br>
+	<div class="list">
+		<div class="list_m">
+			<div class="list_n" style="background-color: white;">
+				<div></div>
+				<div>게시판</div>
+				<div>내용</div>
+				<div>♡</div>
+				<div>글번호</div>
+				<hr>
+			</div>
+			<div class="list_z">
+				<%
+				if (myreply.size() != 0) {
+					for (ReplyDTO r : myreply) {
+						String pNum = r.getpNum() + "";
+						PostDTO po = bo2.selectPost(pNum);
+						String category = "";
+						if (po == null) {
+					category = " ?? ";
+						} else {
+					category = bo2.switchCategory(po.getCategory());
+						}
+						String content = "";
+						if (r.getContent().length() > 16) {
+					content = r.getContent().substring(0, 16) + "...";
+						} else {
+					content = r.getContent();
+						}
+				%>
+				<div class="list_n">
+					<div></div>
+					<div><%=category%></div>
+					<div style="text-align: left;">
+						<%
+						if (po == null) {
+						%>
+						<a title="삭제된 글입니다."><%=r.getContent()%></a>
+						<%
+						} else {
+						%>
+						<a
+							href="read.jsp?postNum=<%=r.getpNum()%>&category=<%=po.getCategory()%>&page=1"><%=r.getContent()%></a>
+						<%
+						}
+						%>
 					</div>
-					<div>게시판</div>
-					<div>내용</div>
-					<div>♡</div>
-					<div>글번호</div>
-					<hr>
+					<div></div>
+					<div><%=pNum%></div>
 				</div>
-				<div class="list_z">
-					<%
-					if (myreply.size() != 0) {
-						for (ReplyDTO r : myreply) {
-							String pNum = r.getpNum() + "";
-							PostDTO po = bo2.selectPost(pNum);
-							String category = "";
-							if (po == null) {
-						category = " ?? ";
-							} else {
-						category = bo2.switchCategory(po.getCategory());
-							}
-							String content = "";
-							if (r.getContent().length() > 16) {
-						content = r.getContent().substring(0, 16) + "...";
-							} else {
-						content = r.getContent();
-							}
-					%>
-					<div class="list_n">
-						<div>
-							<input type="checkbox" name="delmyreply" value="<%=r.getrNum()%>">
-						</div>
-						<div><%=category%></div>
-						<div style="text-align: left;">
-							<%
-							if (po == null) {
-							%>
-							<a title="삭제된 글입니다."><%=r.getContent()%></a>
-							<%
-							} else {
-							%>
-							<a
-								href="read.jsp?postNum=<%=r.getpNum()%>&category=<%=po.getCategory()%>&page=1"><%=r.getContent()%></a>
-							<%
-							}
-							%>
-						</div>
-						<div></div>
-						<div><%=pNum%></div>
-					</div>
-					<%
-					}
-					%>
-					<input type="button" onclick="delRe_confirm()"
-						style="width: 40px; height: 25px; font-size: 0.7em; background-color: #d2eed7;" value="삭제">
-					<br>
-					<%
-					} else {
-					%>
-					<div>작성한 댓글이 없습니다.</div>
-					<%
-					}
-					%>
-				</div>
-				<div class="page">
-					<%@ include file="pageMypage.jsp"%>
-				</div>
+				<%
+				}
+				%>
+				<br>
+				<%
+				} else {
+				%>
+				<div>작성한 댓글이 없습니다.</div>
+				<%
+				}
+				%>
+			</div>
+			<div class="page">
+				<%@ include file="pageMypage.jsp"%>
 			</div>
 		</div>
-	</form>
+	</div>
 </body>
 </html>

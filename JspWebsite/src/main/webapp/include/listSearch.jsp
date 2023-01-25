@@ -98,7 +98,7 @@
 						}
 					</script>
 					<a style="cursor:pointer;" title="<%=p.getTitle()%>"
-						onclick="openPost('/JspWebsite/read.jsp?postNum=<%=p.getpNum()%>&page=1&category=<%=p.getCategory()%>')" ><%=title%>
+						onclick="openPost('/read.jsp?postNum=<%=p.getpNum()%>&page=1&category=<%=p.getCategory()%>')" ><%=title%>
 						<%
 						if (p.getReply() > 0) {
 						%> (<%=p.getReply()%>) <%

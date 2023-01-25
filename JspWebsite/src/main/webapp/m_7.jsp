@@ -1,15 +1,14 @@
+<%@page import="com.cre.w.dto.CharacterDTO"%>
 <%@page import="com.cre.w.dto.MapDTO"%>
+<%@page import="com.cre.w.sys.Log"%>
 <%@page import="com.cre.w.sys.Map"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>jsp_rpg_v0.0.4</title>
+<title>집 앞</title>
 <%
 /* CSS/JS 파일 캐시 방지 */
 String styleCss = application.getRealPath("/css/common_rpg.css");
@@ -27,17 +26,19 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	href="css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
 	href="css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+<link rel="stylesheet" href="css/m_6.css">
 </head>
 <body>
-
 	<%
 	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO)session.getAttribute("player");
+	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
 	character.characterUpdate(player);
 	session.setAttribute("player", player);
-	String m_id = request.getParameter("m_id");
+	session.setAttribute("m_id", "m_7");
 	String mode = request.getParameter("mode");
-	String map_jsp = "include/" + m_id + ".jsp";
+	Map map = new Map();
+	Log log = new Log();
+	MapDTO m7 = map.getMap("m_7");
 	%>
 	<div class="container">
 		<div class="header">
@@ -49,28 +50,48 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		<div class="content">
 			<div id="gamebox">
 				<div id="screen">
-					<%
-					if (mode.equals("bag")) {
-					%>
-					<%@ include file="include/bag.jsp"%>
-					<%
-					} else if (mode.equals("map")) {
-					%>
-					<%@ include file="include/map.jsp"%>
-					<%
-					} else if (mode.equals("return") || player.getPower() <= 0) {
-					%>
-					<%@ include file="include/return.jsp"%>
-					<%
-					} else {
-					%>
-					<jsp:include page="<%=map_jsp%>">
-						<jsp:param value="<%=mode%>" name="mode" />
-						<jsp:param value="<%=m_id%>" name="m_id" />
-					</jsp:include>
-					<%
-					}
-					%>
+					<div id="t">
+						<%@include file="include/title.jsp"%>
+					</div>
+					<div id="n"></div>
+					<div id="w">
+						<!-- m_6 마당 -->
+						<button id="we_btn" onclick="location.href='m_6.jsp?mode=move'">마당</button>
+					</div>
+					<!------------------스크린 ------------------>
+					<div id="screen_c">
+						<%
+						if (mode.equals("bag")) {
+						%>
+						<%@ include file="include/bag.jsp"%>
+						<%
+						} else if (mode.equals("map")) {
+						%>
+						<%@ include file="include/map.jsp"%>
+						<%
+						} else if (mode.equals("return") || player.getPower() <= 0) {
+						%>
+						<%@ include file="include/return.jsp"%>
+						<%
+						} else {
+						switch (mode) {
+						case "move":
+							map.move(m7, player);
+						case "normal":
+							out.println("준비중 ㅎㅎ");
+							break;
+						case "action1":
+
+							break;
+						case "action2":
+
+						}
+						}
+						%>
+					</div>
+					<!------------------스크린 ------------------>
+					<div id="e"></div>
+					<div id="s"></div>
 				</div>
 				<div id="system">
 					<%@ include file="include/sys_game.jsp"%>

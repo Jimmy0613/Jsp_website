@@ -48,17 +48,17 @@ public class Member extends MemberDAO {
 	public String joinAlert(String input_id, String input_pw1, String input_pw2, String input_name,
 			String input_email) {
 		String alert = "";
-		if (input_id.length() > 12) {
+		if (input_id.length() < 6) {
 			alert = alert + "(아이디 글자 수 확인)";
 		} else if (isId(input_id)) {
 			alert = alert + "(중복된 아이디) ";
 		}
-		if (input_pw1.length() > 14) {
+		if (input_pw1.length() < 8) {
 			alert = alert + "(비밀번호 글자 수 확인) ";
 		} else if (!input_pw1.equals(input_pw2)) {
 			alert = alert + "(비밀번호 일치하지 않음) ";
 		}
-		if (input_name.length() > 6) {
+		if (input_name.length() < 2) {
 			alert = alert + "(이름 글자 수 확인) ";
 		} else if (isName(input_name)) {
 			alert = alert + "(중복된 이름) ";

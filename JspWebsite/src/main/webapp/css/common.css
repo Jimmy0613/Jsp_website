@@ -11,6 +11,15 @@ body {
 	background-position: center; /* 이미지를 요소의 정가운데로 처리 */
 	background-attachment: fixed; /* 스크롤바 움직일때 이미지가 따라다님 */
 }
+
+.container {
+	width: 800px;
+	min-height:800px;
+	height: auto;
+	background-color: aliceblue;
+	display: grid;
+	grid-template-rows: 150px auto;
+}
 #gamebox {
 	width: 700px;
 	height: 700px;
@@ -19,7 +28,6 @@ body {
 	grid-template-rows: 400px 300px;
 	align-items: center;
 	justify-content: center;
-	border: 2px solid navy;
 }
 
 
@@ -47,6 +55,7 @@ button {
 	background-color: pink;
 	width: 80px;
 	height: 30px;
+	cursor: pointer;
 }
 
 input {
@@ -71,15 +80,6 @@ input {
 	width: 120px;
 	border: solid 1px grey;
 }
-.container {
-	width: 800px;
-	min-height:800px;
-	height: auto;
-	background-color: aliceblue;
-	display: grid;
-	grid-template-rows: 150px auto;
-	grid-template-columns: 100px 700px;
-}
 
 .header {
 	background-color: #e7dae0;
@@ -94,8 +94,8 @@ input {
 a {
 	text-decoration: none;
 	color: inherit;
+	cursor:pointer;
 }
-
 a:hover {
 	color: #ff8c00;
 }

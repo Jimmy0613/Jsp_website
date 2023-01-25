@@ -18,10 +18,11 @@
 	String c_name = request.getParameter("c_name");
 	CharacterDTO player = character.getCharacter(c_name);
 	session.setAttribute("player", player);
+	session.setAttribute("m_id", player.getLocation());
 	log.load();
 	log.send("[ " + Log.turnCount + " ] 환영합니다!", "good");
 	log.send("💡 시스템 메시지는 캐릭터 변경, 로그아웃시 초기화됩니다.", "tip");
-	response.sendRedirect("game.jsp?m_id=" + player.getLocation() + "&mode=normal");
+	response.sendRedirect(player.getLocation() + ".jsp?mode=normal");
 	%>
 </body>
 </html>

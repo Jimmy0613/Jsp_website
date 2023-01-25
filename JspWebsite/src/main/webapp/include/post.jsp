@@ -46,18 +46,22 @@
 </head>
 <body>
 	<%
+	Board board = new Board();
+	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
 	String currentPage = request.getParameter("page");
 	String postNum = request.getParameter("postNum");
+	PostDTO post = board.selectPost(postNum);
 	String category = request.getParameter("category");
 	if (category == null) {
 		category = "popular";
 	}
-	Board board = new Board();
-	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+	String category2 = board.switchCategory(category);
 	board.view(postNum);
-	PostDTO post = board.selectPost(postNum);
 	ArrayList<ReplyDTO> reply = board.reply(postNum);
 	%>
+	<div style="font-size: 1.2em; font-weight: bolder; color: black;"><%=category2%>게시판
+	</div>
+	<br>
 	<div class="p">
 		<div id="p" style="font-weight: bolder"><%=post.getTitle()%>
 		</div>
@@ -78,103 +82,105 @@
 			| 조회수
 			<%=post.getViews()%></div>
 		<div id="c"><%=post.getContent()%></div>
-		<div id="p">
-			<div id="reply">
-				<form action="ServletHeart">
-					<span
-						style="display: grid; grid-template-columns: 150px 100px; align-items: center; justify-content: left;">댓글
-						<%=post.getReply()%>개 | 하트 <%=post.getHeart()%>개 <%
-					if (loginMember != null) {
-					%> <input type="hidden" name="postNum" value="<%=post.getpNum()%>">
-						<input type="hidden" name="category" value="<%=category%>">
-						<input type="hidden" name="page" value="<%=currentPage%>">
-						<button id="heartBtn" type="submit">❤</button>
-					</span>
-				</form>
-				<%
-				}
-				%>
-				<hr>
-				<%
-				if (reply.size() != 0) {
+		<div id="p" style="display: flex;">
+			댓글
+			<%=post.getReply()%>개 | 하트
+			<%=post.getHeart()%>개
+			<%
+		if (loginMember != null) {
+		%>
+			<form action="ServletHeart">
+				<input type="hidden" name="postNum" value="<%=post.getpNum()%>">
+				<input type="hidden" name="category" value="<%=category%>">
+				<input type="hidden" name="page" value="<%=currentPage%>">
+				<button id="heartBtn" type="submit">❤</button>
+			</form>
+			<%
+			}
+			%>
+		</div>
+		<hr style="height:0.1px; width: 95%;">
+		<div id="p" style="color: black; font-size: 0.8em;">
+			<%
+			if (reply.size() != 0) {
 
-					for (ReplyDTO r : reply) {
-				%>
-				<div id="p" style="color: black; font-size: 0.8em;">
-					<%
-					if (category.equals("anonym")) {
-					%>
-					익명:
-					<%
-					} else {
-					%>
-					<%=r.getWriter()%>:
-					<%
-					}
-					%>
-					<%=r.getContent()%>
-					(<%=r.getrDate()%>)
-					<%
-					if (loginMember != null) {
-						if (r.getWriter().equals(loginMember.getName())) {
-					%>
-					<form name="formDelReply" method="post" action="ServletDelReply"
-						encType="UTF-8">
-						<input type="hidden" name="postNum" value="<%=postNum%>">
-						<input type="hidden" name="reNum" value="<%=r.getrNum()%>">
-						<input type="hidden" name="category" value="<%=category%>">
-						<input type="hidden" name="page" value="<%=currentPage%>">
-						<input type="button" onclick="delRe_confirm()" value="(x)">
-					</form>
-					<%
-					}
-					}
-					%>
-				</div>
+				for (ReplyDTO r : reply) {
+			%>
+			<div id="reply">
 				<%
-				}
+				if (category.equals("anonym")) {
+				%>
+				익명:
+				<%
 				} else {
 				%>
-				아직 댓글이 없습니다.
+				<%=r.getWriter()%>:
 				<%
 				}
 				%>
+				<%=r.getContent()%>
+				(<%=r.getrDate()%>)
 				<%
 				if (loginMember != null) {
+					if (r.getWriter().equals(loginMember.getName())) {
 				%>
-				<form class="reply" action="ServletReply">
-					<input type="hidden" value="<%=postNum%>" name="postNum"> <input
-						type="hidden" value="<%=category%>" name="category"> <input
-						type="hidden" value="<%=currentPage%>" name="page"> <input
-						name="reply" placeholder=" (댓글 작성)">
-					<button type="submit">등록</button>
+				<form name="formDelReply" method="post" action="ServletDelReply"
+					encType="UTF-8">
+					<input type="hidden" name="postNum" value="<%=postNum%>"> <input
+						type="hidden" name="reNum" value="<%=r.getrNum()%>"> <input
+						type="hidden" name="category" value="<%=category%>"> <input
+						type="hidden" name="page" value="<%=currentPage%>"> <a
+						onclick="delRe_confirm()">(x)</a>
 				</form>
 				<%
+				}
 				}
 				%>
 			</div>
+			<%
+			}
+			} else {
+			%>
+			<div id="reply">아직 댓글이 없습니다.</div>
+			<%
+			}
+			%>
+			<%
+			if (loginMember != null) {
+			%>
+			<form class="reply" action="ServletReply">
+				<input type="hidden" value="<%=postNum%>" name="postNum"> <input
+					type="hidden" value="<%=category%>" name="category"> <input
+					type="hidden" value="<%=currentPage%>" name="page"> <input
+					name="reply" placeholder=" (댓글 작성)">
+				<button type="submit">등록</button>
+			</form>
+			<%
+			}
+			%>
 		</div>
 	</div>
+	<div id="edl">
+		<%
+		if (loginMember != null) {
+			if (loginMember.getName().equals(post.getWriter()) || loginMember.getId().equals("manager")) {
+		%>
+		<button
+			onclick="location.href='edit.jsp?postNum=<%=postNum%>&category=<%=category%>&page=<%=currentPage%>'">수정</button>
 
-	<%
-	if (loginMember != null) {
-		if (loginMember.getName().equals(post.getWriter()) || loginMember.getId().equals("manager")) {
-	%>
-	<button
-		onclick="location.href='edit.jsp?postNum=<%=postNum%>&category=<%=category%>&page=<%=currentPage%>'">수정</button>
-
-	<form name="formDelete" method="post" action="ServletDelete"
-		encType="UTF-8">
-		<input type="hidden" name="postNum" value="<%=postNum%>"> <input
-			type="hidden" name="category" value="<%=category%>"> <input
-			type="hidden" name="page" value="<%=currentPage%>"> <input
-			type="button" onclick="del_confirm()" value="삭제">
-	</form>
-	<%
-	}
-	}
-	%>
-	<button
-		onclick="location.href='board.jsp?category=<%=category%>&page=<%=currentPage%>'">목록</button>
+		<form name="formDelete" method="post" action="ServletDelete"
+			encType="UTF-8">
+			<input type="hidden" name="postNum" value="<%=postNum%>"> <input
+				type="hidden" name="category" value="<%=category%>"> <input
+				type="hidden" name="page" value="<%=currentPage%>">
+			<button onclick="del_confirm()">삭제</button>
+		</form>
+		<%
+		}
+		}
+		%>
+		<button
+			onclick="location.href='board.jsp?category=<%=category%>&page=<%=currentPage%>'">목록</button>
+	</div>
 </body>
 </html>

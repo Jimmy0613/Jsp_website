@@ -1,3 +1,4 @@
+<%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.sys.Board"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -24,17 +25,62 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	href="css/index.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
+	<%
+	MemberDTO member = (MemberDTO) session.getAttribute("loginMember");
+	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
 				<%@include file="include/menuTop.jsp"%>
 			</div>
 		</div>
-
 		<div class="content">
-			<%@include file="include/memberInfo.jsp"%>
-			<div class="rps">하트얻기 가위바위보</div>
+			<div class="member_info">
+				<p style="margin: 10px;">내 정보</p>
+				<%
+				if (member == null) {
+				%>
+				<div style="padding:20px;">
+					<span style="color:grey;">로그인이 필요합니다.</span> <br>
+					<br> <a style="font-size: 0.9em;"
+						href="login.jsp?location=../index.jsp">로그인</a> <a
+						style="font-size: 0.9em;" href="join.jsp?location=../index.jsp">
+						회원가입 </a>
+				</div>
+				<%
+				} else {
+				%>
+				<div class="login_info"
+					style="align-items: center; justify-content: center;">
+					<div><%=member.getInfo()%>
+					</div>
+					<div id="f">
+						<button id="memberinfo" onclick="location.href='mypage.jsp'">회원정보</button>
+						<form id="logout" action="ServletLogout">
+							<input type="hidden" name="location" value="../index.jsp">
+							<button type="submit">로그아웃</button>
+						</form>
+					</div>
+				</div>
+				<%
+				}
+				%>
+			</div>
+			<div class="rps">
+				<p style="margin: 10px;">하트얻기 가위바위보</p>
+				<%
+				if (member == null) {
+				%>
+				<div style="padding:20px; color:grey;">로그인이 필요합니다.</div>
+				<%
+				} else {
+				%>
+				<div id="rps"></div>
+				<%
+				}
+				%>
+			</div>
 			<div class="notice">
 				<p style="margin: 10px;">
 					공지사항 <a href="board.jsp?category=notice" style="font-size: 0.8em;">더보기</a>
@@ -75,11 +121,16 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						[
 						<%=cgp%>
 						] <a title="<%=p.getTitle()%>"
-							href="read.jsp?page=1&postNum=<%=p.getpNum()%>"><%=title%> <%
- if (p.getReply() > 0) {
- %> (<%=p.getReply()%>) <%
- }
- %> &nbsp;&nbsp; (❤ <%=p.getHeart()%>) </a>
+							href="read.jsp?page=1&postNum=<%=p.getpNum()%>"><%=title%> </a>
+						<%
+						if (p.getReply() > 0) {
+						%>
+						(<%=p.getReply()%>)
+						<%
+						}
+						%>
+						&nbsp;&nbsp; (❤
+						<%=p.getHeart()%>)
 						<hr>
 					</div>
 					<%
@@ -87,7 +138,12 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					%>
 				</div>
 			</div>
-			<div class="game">rpg</div>
+			<div class="game">
+				<p style="margin: 10px;">
+					RPG <a href="index_rpg.jsp" style="font-size: 0.8em;">바로가기</a>
+				</p>
+				<img src="img/rpg.png" style="width: 320px; margin-left: 10px;">
+			</div>
 			<div class="lotto">로또</div>
 		</div>
 	</div>

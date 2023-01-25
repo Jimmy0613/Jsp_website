@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<span><a href="index.jsp">홈</a> <a href="board.jsp?category=popular">게시판</a> <a href="index_rpg.jsp">rpg</a></span>
+<span><a href="index.jsp">홈</a> <a href="board.jsp?category=popular">게시판</a> <a href="index_rpg.jsp">RPG</a></span>
 </body>
 </html>

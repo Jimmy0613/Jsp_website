@@ -34,7 +34,7 @@ public class ServletJoin extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		if (alert.equals("")) {
 			member.newMember(id, pw, name, email);
-			out.println("<script>alert('가입 완료! 홈으로 이동합니다.');</script>");
+			out.println("<script>alert('가입 완료!');</script>");
 			out.println("<script>location.href='" + location + "'</script>");
 			out.close();
 		} else {

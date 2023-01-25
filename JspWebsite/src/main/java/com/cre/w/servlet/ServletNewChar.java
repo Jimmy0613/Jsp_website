@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.cre.w.dto.MemberDTO;
-import com.cre.w.sys.Board;
 import com.cre.w.sys.Charac;
 import com.cre.w.sys.Member;
 
@@ -25,7 +24,6 @@ public class ServletNewChar extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberDTO loginMember = (MemberDTO)session.getAttribute("loginMember");
 		String loginC1 = loginMember.getCharacter1();
-		String loginC2 = loginMember.getCharacter2();
 		String input_name = request.getParameter("c_name");
 		String alert = character.newAlert(input_name);
 		
