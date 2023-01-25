@@ -4,7 +4,7 @@ import com.cre.w.dao.BoardDAO;
 import com.cre.w.dto.MemberDTO;
 
 public class Page extends BoardDAO {
-	public final static int PER_PAGE = 10;
+	public final static int PER_PAGE = 3;
 	public final static int PAGE_BLOCK = 5;
 	Board board = new Board();
 	

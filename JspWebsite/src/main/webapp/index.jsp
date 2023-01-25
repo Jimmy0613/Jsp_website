@@ -1,3 +1,5 @@
+<%@page import="com.cre.w.dao.RpsDAO"%>
+<%@page import="com.cre.w.dto.RpsDTO"%>
 <%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.sys.Board"%>
@@ -53,9 +55,9 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<div class="login_info"
 					style="align-items: center; justify-content: center;">
 					<div id="f">
-					<div style="grid-column-start:1; grid-column-end:3;">
-					<%=member.getInfo()%>
-					</div>
+						<div style="grid-column-start: 1; grid-column-end: 3;">
+							<%=member.getInfo()%> | ❤ <%=member.getHeart()%>
+						</div>
 						<button id="memberinfo" onclick="location.href='mypage.jsp'">회원정보</button>
 						<form id="logout" action="ServletLogout">
 							<input type="hidden" name="location" value="../index.jsp">
@@ -68,15 +70,37 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				%>
 			</div>
 			<div class="rps">
-				<p style="margin: 10px;">하트얻기 가위바위보</p>
+				<p style="margin: 10px;">
+				<span>하트 걸고 가위바위보?!</span><br>
+				<span style="font-size:0.7em;">가위 바위 보 글자를 클릭하면 바로 도전!</span><br>
+				<span style="font-size:0.7em;">이기면 +2, 지면 -1, 비기면 0!</span>
+				</p>
 				<%
 				if (member == null) {
 				%>
-				<div style="padding: 20px; color: grey;">로그인이 필요합니다.</div>
+				<div style="padding: 10px; color: grey;">로그인이 필요합니다.</div>
 				<%
 				} else {
+				RpsDAO rps = new RpsDAO();
+				int count = rps.getCountToday(member.getId());
+				int chance = 3 - count;
 				%>
-				<div id="rps"></div>
+				<div id="rps" style="padding: 10px;">
+					<span>오늘 남은 횟수: <%=chance%>회
+					</span> <br>
+					<%
+					if (chance > 0) {
+					%>
+					<span> &#187; <a href="ServletRps?input=s">가위!!</a> <a href="ServletRps?input=r">바위!!!</a> <a href="ServletRps?input=p">보!!!!</a> &#171;
+					</span>
+					<%
+					} else {
+					%>
+					<span>&#187; 오늘 기회를 모두 사용했습니다. &#171;</span>
+					<%
+					}
+					%>
+				</div>
 				<%
 				}
 				%>
