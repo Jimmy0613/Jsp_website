@@ -20,9 +20,9 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/index.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/index.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%
@@ -32,7 +32,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		<div class="header">
 			<div class="title"></div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
@@ -44,8 +44,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<div style="padding:20px;">
 					<span style="color:grey;">로그인이 필요합니다.</span> <br>
 					<br> <a style="font-size: 0.9em;"
-						href="login.jsp?location=/index.jsp">로그인</a> <a
-						style="font-size: 0.9em;" href="join.jsp?location=/index.jsp">
+						href="/login.jsp?location=/index.jsp">로그인</a> <a
+						style="font-size: 0.9em;" href="/join.jsp?location=/index.jsp">
 						회원가입 </a>
 				</div>
 				<%
@@ -56,8 +56,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<div><%=member.getInfo()%>
 					</div>
 					<div id="f">
-						<button id="memberinfo" onclick="location.href='mypage.jsp'">회원정보</button>
-						<form id="logout" action="ServletLogout">
+						<button id="memberinfo" onclick="location.href='/web/mypage'">회원정보</button>
+						<form id="logout" action="/web/logout">
 							<input type="hidden" name="location" value="/index.jsp">
 							<button type="submit">로그아웃</button>
 						</form>
@@ -83,7 +83,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<div class="notice">
 				<p style="margin: 10px;">
-					공지사항 <a href="board.jsp?category=notice" style="font-size: 0.8em;">더보기</a>
+					공지사항 <a href="/web/board?category=notice" style="font-size: 0.8em;">더보기</a>
 				</p>
 				<div id="notice">
 					<%
@@ -93,7 +93,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					%>
 					<div id="n">
 						[ 운영자 ] <a
-							href="read.jsp?category=notice&page=1&postNum=<%=p.getpNum()%>"><%=p.getTitle()%></a>
+							href="/web/read?category=notice&postNum=<%=p.getpNum()%>"><%=p.getTitle()%></a>
 						<hr>
 					</div>
 					<%
@@ -103,7 +103,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<div class="hot">
 				<p style="margin: 10px;">
-					인기글 <a href="board.jsp" style="font-size: 0.8em;">더보기</a>
+					인기글 <a href="/web/board" style="font-size: 0.8em;">더보기</a>
 				</p>
 				<div id="hot">
 					<%
@@ -121,7 +121,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						[
 						<%=cgp%>
 						] <a title="<%=p.getTitle()%>"
-							href="read.jsp?page=1&postNum=<%=p.getpNum()%>"><%=title%> </a>
+							href="/web/read?postNum=<%=p.getpNum()%>&category=<%=p.getCategory()%>"><%=title%> </a>
 						<%
 						if (p.getReply() > 0) {
 						%>
@@ -140,9 +140,9 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<div class="game">
 				<p style="margin: 10px;">
-					RPG <a href="index_rpg.jsp" style="font-size: 0.8em;">바로가기</a>
+					RPG <a href="/index_rpg.jsp" style="font-size: 0.8em;">바로가기</a>
 				</p>
-				<img src="img/rpg.png" style="width: 320px; margin-left: 10px;">
+				<img src="/img/rpg.png" style="width: 320px; margin-left: 10px;">
 			</div>
 			<div class="lotto">로또</div>
 		</div>

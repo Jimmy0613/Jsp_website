@@ -19,8 +19,8 @@
 			%>
 			<div>
 				<span style="color:grey;">로그인이 필요합니다.</span> <br><br> <a style="font-size: 0.9em;"
-					href="login.jsp?location=../board.jsp">로그인</a> <a
-					style="font-size: 0.9em;" href="join.jsp?location=../board.jsp">
+					href="/login.jsp?location=/web/board">로그인</a> <a
+					style="font-size: 0.9em;" href="/join.jsp?location=/web/board">
 					회원가입 </a>
 			</div>
 			<%
@@ -30,9 +30,9 @@
 				<span><%=member.getInfo()%> </span> <span
 					style="text-align: center;">❤ <%=member.getHeart()%></span>
 				<div id="f">
-					<button id="memberinfo" onclick="location.href='mypage.jsp'">회원정보</button>
-					<form id="logout" action="ServletLogout">
-						<input type="hidden" name="location" value="../board.jsp">
+					<button id="memberinfo" onclick="location.href='/web/mypage'">회원정보</button>
+					<form id="logout" action="/web/logout">
+						<input type="hidden" name="location" value="/web/board">
 						<button type="submit">로그아웃</button>
 					</form>
 				</div>
@@ -43,7 +43,7 @@
 		</div>
 		<hr>
 	</div>
-	<form action="search.jsp">
+	<form action="/search.jsp">
 		<p id="search">
 			<input type="hidden" name="category" value="all"> <input
 				type="hidden" name="key" value="title"> <input
@@ -54,22 +54,22 @@
 	<div id="board_name">
 		<div>
 			<p class="board_name">
-				<a href="board.jsp?category=notice&page=1">공지사항</a>
+				<a href="/web/board?category=notice">공지사항</a>
 			</p>
 		</div>
 		<div>
 			<p class="board_name">
-				<a href="board.jsp?category=general&page=1">자유게시판</a>
+				<a href="/web/board?category=general">자유게시판</a>
 			</p>
 		</div>
 		<div>
 			<p class="board_name">
-				<a href="board.jsp?category=anonym&page=1">익명게시판</a>
+				<a href="/web/board?category=anonym">익명게시판</a>
 			</p>
 		</div>
 		<div>
 			<p class="board_name">
-				<a href="board.jsp?category=report&page=1">신고게시판</a>
+				<a href="/web/board?category=report">신고게시판</a>
 			</p>
 		</div>
 	</div>

@@ -13,6 +13,9 @@ public class Board extends BoardDAO {
 		switch (category) {
 		case "general":
 			break;
+		case "popular":
+			cg = "인기글";
+			break;
 		case "anonym":
 			cg = "익명";
 			break;
@@ -38,6 +41,19 @@ public class Board extends BoardDAO {
 		return selectList(sql);
 	}
 
+	public ArrayList<PostDTO> getList(String category, int page) {
+		ArrayList<PostDTO> arr = null;
+		switch (category) {
+		case "popular":
+			arr = popular();
+			break;
+		default:
+			arr = list(category, page);
+			break;
+		}
+		return arr;
+	}
+
 	public ArrayList<PostDTO> popular() {
 		String sql = String.format(
 				"SELECT * FROM %s where(category = 'general' or category = 'anonym') order by heart desc, views desc limit 0, 10;",
@@ -50,11 +66,12 @@ public class Board extends BoardDAO {
 				Db.TABLE_BOARD, cg, (currentPage - 1) * Page.PER_PAGE, Page.PER_PAGE);
 		return selectList(sql);
 	}
-	
-	public ArrayList<PostDTO> searchList(String key, String keyword, String where){
+
+	public ArrayList<PostDTO> searchList(String key, String keyword, String where) {
 		String sql = String.format("select * from %s where %s like '%%%s%%' %s;", Db.TABLE_BOARD, key, keyword, where);
 		return selectList(sql);
 	}
+
 	public ArrayList<PostDTO> mypost(String myId, int currentPage) {
 		String sql = String.format("SELECT * FROM %s where wr_id='%s' order by post_num desc limit %d, %d;",
 				Db.TABLE_BOARD, myId, (currentPage - 1) * Page.PER_PAGE, Page.PER_PAGE);

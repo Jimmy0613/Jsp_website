@@ -29,13 +29,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	String postNum = request.getParameter("postNum");
-		String category = request.getParameter("category");
-		Board board = new Board();
-		PostDTO post = board.selectPost(postNum);
+	String category = request.getParameter("category");
+	Board board = new Board();
+	PostDTO post = board.selectPost(postNum);
+	String content = post.getContent().replace("<br>", "\r\n");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
 				<%@include file="include/menuTop.jsp"%>
 			</div>
@@ -46,12 +47,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<div class="write">
 				<span style="font-size: 1.2em;">수정</span>
-				<form action="ServletEdit">
-				<input type="hidden" name="postNum" value="<%=postNum %>">
-				<input type="hidden" name="category" value="<%=category %>">
-					<input id="title" placeholder="제목" name="title" value="<%=post.getTitle()%>"> <input
-						id="writer" placeholder="<%=post.getWriter()%>" readonly><br>
-					<textarea id="content" placeholder="내용" name="content"><%=post.getContent() %></textarea>
+				<form action="/web/edit">
+					<input type="hidden" name="postNum" value="<%=postNum%>">
+					<input type="hidden" name="category" value="<%=category%>">
+					<input id="title" placeholder="제목" name="title"
+						value="<%=post.getTitle()%>"> <input id="writer"
+						placeholder="<%=post.getWriter()%>" readonly><br>
+					<textarea id="content" name="content"><%=content%></textarea>
 					<button id="write_button" type="submit">글쓰기</button>
 				</form>
 			</div>

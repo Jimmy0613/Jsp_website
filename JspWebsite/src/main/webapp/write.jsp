@@ -22,33 +22,29 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/board.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/board.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%
 	String category = request.getParameter("category");
 	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-	if (loginMember == null) {
-		out.println("<script>alert('글쓰기는 로그인 후 가능합니다.')</script>");
-		out.println("<script>location.href='list.jsp?category=" + category + "&page=1'</script>");
-	}
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div class="menu_left">
-				<%@ include file="include/menuLeft.jsp"%>
+				<%@ include file="/include/menuLeft.jsp"%>
 			</div>
 			<div class="write">
 				<span style="font-size: 1.2em;">글쓰기</span>
-				<form action="ServletWrite">
+				<form action="/web/write">
 					<input type="hidden" name="category" value="<%=category%>"> <br>
 					<input id="title" placeholder="제목" name="title"> 
 					<%if(category.equals("anonym")) {%>

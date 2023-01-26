@@ -26,14 +26,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
-			<div class="menu"><%@include file="include/menuTop.jsp"%></div>
+			<div class="title"></div>
+			<div class="menu"><%@include file="/include/menuTop.jsp"%></div>
 		</div>
 		<div class="content">
 			<div class="join">
 				<span style="font-size: 1.2em;">회원가입</span>
 				<div class="join_m">
-					<form action="ServletJoin">
+					<form action="/web/join">
 						<input type="hidden" name="location" value="<%=location%>">
 						아이디: <input name="id" placeholder=" 6~12자" maxlength="12" required><br>
 						비밀번호: <input name="pw" type="password" placeholder="8~14자"
@@ -42,7 +42,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 							required><br> 이름: <input name="name"
 							placeholder=" 2~6자" required><br> 이메일: <input
 							name="email" type="email" placeholder=" (선택)"><br>
-						<button class="" type="submit">가입하기</button><a href="login.jsp?location=../index.jsp"> 로그인 </a>
+						<button class="" type="submit">가입하기</button><a href="/login.jsp?location=/index.jsp"> 로그인 </a>
 					</form>
 				</div>
 			</div>

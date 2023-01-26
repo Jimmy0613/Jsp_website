@@ -1,3 +1,4 @@
+<%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.sys.Board"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,7 +12,6 @@
 </head>
 <body>
 	<%
-	Board board = new Board();
 	ArrayList<PostDTO> list = new ArrayList<>();
 	int cupb;
 	if (request.getParameter("page")==null) {
@@ -20,8 +20,8 @@
 		cupb = Integer.parseInt(request.getParameter("page"));
 	}
 	String cgb = request.getParameter("category");
-	list = board.list(cgb, cupb);
-	String cgb2 = board.switchCategory(cgb);
+	list = (ArrayList<PostDTO>)request.getAttribute("list");
+	String cgb2 = (String)request.getAttribute("cgKorean");
 	%>
 	<div style="font-size: 1.2em; font-weight: bolder; color: black;"><%=cgb2%>게시판
 	</div>
@@ -61,7 +61,7 @@
 					}
 					%>
 					<a title="<%=b.getTitle()%>"
-						href="read.jsp?postNum=<%=b.getpNum()%>&page=<%=cupb%>&category=<%=cgb%>"><%=title%>
+						href="/web/read?postNum=<%=b.getpNum()%>&page=<%=cupb%>&category=<%=cgb%>"><%=title%>
 						<%
 						if (b.getReply() > 0) {
 						%> (<%=b.getReply()%>) <%
@@ -83,11 +83,28 @@
 	</div>
 	<!-- 페이징 부분 -->
 	<div class="page">
-		<%@ include file="pageBoard.jsp"%>
+		<%@ include file="/include/pageBoard.jsp"%>
 	</div>
 	<!-- 페이징 부분 -->
 	<div>
-		<%@ include file="writeButton.jsp"%>
+		<%
+	MemberDTO loginMember = (MemberDTO)session.getAttribute("loginMember");
+	if (loginMember != null) {
+		if (cgb.equals("notice")) {
+			if (loginMember.getId().equals("manager")) {
+	%>
+	<button
+		onclick="location.href='/write.jsp?category=<%=cgb%>'">글쓰기</button>
+	<%
+	}
+	} else {
+	%>
+	<button
+		onclick="location.href='/write.jsp?category=<%=cgb%>'">글쓰기</button>
+	<%
+	}
+	}
+	%>
 	</div>
 
 </body>

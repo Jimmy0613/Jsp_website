@@ -11,9 +11,7 @@
 </head>
 <body>
 	<%
-	Board board2 = new Board();
-	ArrayList<PostDTO> list = new ArrayList<>();
-	list = board2.popular();
+	ArrayList<PostDTO> list = (ArrayList<PostDTO>)request.getAttribute("list");
 	%>
 	<div style="font-size: 1.2em; font-weight: bolder; color: black;">인기글
 	</div>
@@ -53,7 +51,7 @@
 					}
 					%>
 					<a title="<%=b.getTitle()%>"
-						href="read.jsp?postNum=<%=b.getpNum()%>&page=1"><%=title%>
+						href="/web/read?postNum=<%=b.getpNum()%>"><%=title%>
 						<%if(b.getReply()>0){ %>
 						(<%=b.getReply() %>)
 						<%} %>
@@ -71,10 +69,6 @@
 			}
 			%>
 		</div>
-		<!-- 페이징 부분 -->
-		<div class="page">
-		</div>
-		<!-- 페이징 부분 -->
 	</div>
 </body>
 </html>

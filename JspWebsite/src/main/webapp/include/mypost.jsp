@@ -13,14 +13,7 @@
 <body>
 	<%
 	MemberDTO me = (MemberDTO) session.getAttribute("loginMember");
-	Board bo = new Board();
-	int cupm;
-	if (request.getParameter("page").equals(null)) {
-		cupm = 1;
-	} else {
-		cupm = Integer.parseInt(request.getParameter("page"));
-	}
-	ArrayList<PostDTO> mypost = bo.mypost(me.getId(), cupm);
+	ArrayList<PostDTO> mypost = (ArrayList<PostDTO>)request.getAttribute("list");
 	%>
 	<span id="t">내가 쓴 글</span>
 	<br>
@@ -37,6 +30,7 @@
 			<div class="list_z">
 				<%
 				if (mypost.size() != 0) {
+					Board bo = new Board();
 					for (PostDTO p : mypost) {
 						String category = bo.switchCategory(p.getCategory());
 						String title = "";
@@ -51,7 +45,7 @@
 					<div><%=category%></div>
 					<div style="text-align: left;">
 						<a
-							href="read.jsp?postNum=<%=p.getpNum()%>&category=<%=p.getCategory()%>&page=1"><%=title%></a>
+							href="/web/read?postNum=<%=p.getpNum()%>&category=<%=p.getCategory()%>"><%=title%></a>
 						<%
 						if (p.getReply() > 0) {
 						%>
@@ -75,7 +69,7 @@
 				%>
 			</div>
 			<div class="page">
-				<%@ include file="pageMypage.jsp"%>
+				<%@ include file="/include/pageMypage.jsp"%>
 			</div>
 		</div>
 	</div>

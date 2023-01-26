@@ -22,9 +22,9 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/mypage.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/mypage.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%
@@ -43,15 +43,15 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div class="mypage">
 				<div class="myInfo">
-					<span id="t">회원 정보</span><span style="font-size:0.8em;"> &nbsp;<a href="proc/logoutProc.jsp?location=../index.jsp">로그아웃</a></span>
+					<span id="t">회원 정보</span><span style="font-size:0.8em;"> &nbsp;<a href="/web/logout?location=/index.jsp">로그아웃</a></span>
 					<hr>
 					<div id="p">
 						<div id="y">
@@ -63,11 +63,11 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 								<%
 								if (loginMember.getEmail().equals("")) {
 								%>
-								<a href="mypage.jsp?mode=myemail">등록</a>
+								<a href="/mypage.jsp?mode=myemail">등록</a>
 								<%
 								} else {
 								%>
-								<%=loginMember.getEmail()%><a href="mypage.jsp?mode=myemail"><br>변경</a>
+								<%=loginMember.getEmail()%><a href="/mypage.jsp?mode=myemail"><br>변경</a>
 								<%
 								}
 								%>
@@ -79,8 +79,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 							</div>
 							<div>
 								<%=loginMember.getHeart()%>
-								개<br> <a href="mypage.jsp?mode=mypost"><%=loginMember.getPCount()%>
-									개</a><br> <a href="mypage.jsp?mode=myreply"><%=loginMember.getRCount()%>
+								개<br> <a href="/web/mypage?mode=mypost"><%=loginMember.getPCount()%>
+									개</a><br> <a href="/mypage.jsp?mode=myreply"><%=loginMember.getRCount()%>
 									개</a><br>
 							</div>
 						</div>
@@ -95,23 +95,17 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					switch (mode) {
 					case "mypost":
 					%>
-					<jsp:include page="include/mypost.jsp">
-						<jsp:param value="<%=cup %>" name="page" />
-						<jsp:param value="mypost" name="mode" />
-					</jsp:include>
+					<%@include file="/include/mypost.jsp" %>
 					<%
 					break;
 					case "myreply":
 					%>
-					<jsp:include page="include/myreply.jsp">
-						<jsp:param value="<%=cup %>" name="page" />
-						<jsp:param value="myreply" name="mode" />
-					</jsp:include>
+					<%@include file="/include/myreply.jsp" %>
 					<%
 					break;
 					case "myemail":
 					%>
-					<%@ include file="include/myemail.jsp"%>
+					<%@ include file="/include/myemail.jsp"%>
 					<%
 					break;
 					}

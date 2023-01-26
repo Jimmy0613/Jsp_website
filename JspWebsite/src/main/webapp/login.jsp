@@ -29,20 +29,20 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu"><%@include file="include/menuTop.jsp"%></div>
 		</div>
 		<div class="content">
 			<div class="join">
 				<span style="font-size: 1.2em;">로그인</span>
 				<div class="join_m">
-					<form class="login" action="ServletLogin">
+					<form class="login" action="/web/login">
 						<p>
 							<input type="hidden" name="location" value="<%=location%>">
 							아이디<br> <input name="id"><br>비밀번호<br> <input
 								name="pw" type="password"> <br>
 							<button id="login_button" type="submit">로그인</button>
-							<a href="join.jsp?location=../login.jsp"> 회원가입 </a>
+							<a href="join.jsp?location=/login.jsp"> 회원가입 </a>
 						</p>
 					</form>
 				</div>

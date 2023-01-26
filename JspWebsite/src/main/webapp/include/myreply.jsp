@@ -14,14 +14,7 @@
 <body>
 	<%
 	MemberDTO me2 = (MemberDTO) session.getAttribute("loginMember");
-	Board bo2 = new Board();
-	int cupm;
-	if (request.getParameter("page").equals(null)) {
-		cupm = 1;
-	} else {
-		cupm = Integer.parseInt(request.getParameter("page"));
-	}
-	ArrayList<ReplyDTO> myreply = bo2.myreply(me2.getId(), cupm);
+	ArrayList<ReplyDTO> myreply = (ArrayList<ReplyDTO>)session.getAttribute("reply");
 	%>
 	<span id="t">내가 쓴 댓글</span>
 	<br>
@@ -38,6 +31,7 @@
 			<div class="list_z">
 				<%
 				if (myreply.size() != 0) {
+					Board bo2 = new Board();
 					for (ReplyDTO r : myreply) {
 						String pNum = r.getpNum() + "";
 						PostDTO po = bo2.selectPost(pNum);
@@ -66,7 +60,7 @@
 						} else {
 						%>
 						<a
-							href="read.jsp?postNum=<%=r.getpNum()%>&category=<%=po.getCategory()%>&page=1"><%=r.getContent()%></a>
+							href="/web/read?postNum=<%=r.getpNum()%>&category=<%=po.getCategory()%>&page=1"><%=r.getContent()%></a>
 						<%
 						}
 						%>
