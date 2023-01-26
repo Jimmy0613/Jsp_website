@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+body {
+	background-image: url(../img/background.jpg);
+	height: auto;
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	font-weight: bolder;
+	background-repeat: no-repeat; /* 배경이미지X */
+	background-position: center; /* 이미지를 요소의 정가운데로 처리 */
+	background-attachment: fixed; /* 스크롤바 움직일때 이미지가 따라다님 */
+}
+
+.container {
+	width: 800px;
+	min-height:800px;
+	height: auto;
+	background-color: aliceblue;
+	display: grid;
+	grid-template-rows: 150px auto;
+}
+#gamebox {
+	width: 700px;
+	height: 700px;
+	background-color: aliceblue;
+	display: grid;
+	grid-template-rows: 400px 300px;
+	align-items: center;
+	justify-content: center;
+}
+
+
+#screen {
+	width: 680px;
+	height: 380px;
+	background-color:beige;
+	display: grid;
+	grid-template-rows: 30px 50px 250px 50px;
+	grid-template-columns: 100px 480px 100px;
+	justify-self: center;
+	align-self: center;
+	font-weight: bolder;
+	border-bottom: 1.5px solid navy;
+}
+
+#rule{
+	font-size:14px;
+	text-align:left;
+}
+
+
+button {
+	border-color: white;
+	background-color: pink;
+	width: 80px;
+	height: 30px;
+	cursor: pointer;
+}
+
+input {
+	width: 130px;
+	height: 20px;
+	background-color: #323478;
+	color: white;
+	border: none;
+	margin-bottom: 5px;
+}
+#search {
+	margin: 7px;
+	padding: 5px;
+}
+#search button{
+	width: 50px;
+	font-size:0.8em;
+}
+#search input{
+	background-color: white;
+	color: black;
+	width: 120px;
+	border: solid 1px grey;
+}
+
+.header {
+	background-color: #e7dae0;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	display: grid;
+	grid-template-rows: 100px 50px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	cursor:pointer;
+}
+a:hover {
+	color: #ff8c00;
+}
+
+.menu a {
+	margin: 40px;
+}
+
+.menu {
+	display: grid;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2em;
+}
+
+.menu:hover {
+	background-color: white;
+}
+
+.content {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+	display: grid;
+	align-items:center;
+	justify-content:center;
+}
+.login_info{
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	align-items:center;
+}
+
+#f{
+	display: grid;
+	margin: 10px;
+	grid-template-columns: 1fr 1fr;
+}
+#f button{
+	margin: 5px;
+}

@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+#s_content {
+	display: grid;
+	grid-template-rows: 10px 20px 160px 30px;
+}
+
+#exp {
+	grid-row-start: 1;
+	grid-row-end: 2;
+	background-color: lightgreen;
+	font-size: 8px;
+	width: 580px;
+}
+
+#map_info {
+	grid-row-start: 2;
+	grid-row-end: 3;
+	width: 580px;
+	font-size:14px;
+	text-align:left;
+	font-weight: bolder;
+	background-color: #0080ff;
+	color: white;
+	font-weight: bolder;
+}
+
+#msgbox {
+	grid-row-start: 3;
+	grid-row-end: 4;
+	width: 580px;
+	height: 160px;
+	font-size:13px;
+	text-align:left;
+	background-color: #6c6c6c;
+	color: white;
+}
+
+#show {
+	grid-row-start: 4;
+	grid-row-end: 5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#show button{
+	width: 150px;
+	background-color: cornflowerblue;
+}

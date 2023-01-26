@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.list_n {
+	grid-template-columns: 50px 100px 200px 40px 50px;
+}
+.list_s {
+	background-color: #f8f8f8;
+	border: solid 0.1px #959595;
+	width: 440px;
+	display: grid;
+	grid-template-rows: 30px auto auto;
+}
