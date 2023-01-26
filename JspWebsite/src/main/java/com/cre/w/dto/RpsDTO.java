@@ -1,8 +1,5 @@
 package com.cre.w.dto;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class RpsDTO {
 	private String member_id;
 	private String result;
