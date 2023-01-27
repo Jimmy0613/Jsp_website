@@ -1,8 +1,8 @@
 <%@page import="com.cre.w.dto.MapDTO"%>
 <%@page import="com.cre.w.dto.CharacterDTO"%>
-<%@page import="com.cre.w.sys.Map"%>
-<%@page import="com.cre.w.sys.Log"%>
-<%@page import="com.cre.w.sys.Charac"%>
+<%@page import="com.cre.w.Map"%>
+<%@page import="com.cre.w.Log"%>
+<%@page import="com.cre.w.Charac"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>

@@ -13,7 +13,7 @@ final String VERSION = "_v0.0.4";
 %>
 </head>
 <body>
-	<b id="title">&nbsp; jsp_rpg<%=VERSION%></b>
+	<b id="title">&nbsp; COLORFUL<%=VERSION%></b>
 	<hr>
 </body>
 </html>

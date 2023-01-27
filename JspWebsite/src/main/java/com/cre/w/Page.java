@@ -1,4 +1,4 @@
-package com.cre.w.sys;
+package com.cre.w;
 
 import com.cre.w.dao.BoardDAO;
 import com.cre.w.dto.MemberDTO;

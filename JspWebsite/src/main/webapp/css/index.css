@@ -1,23 +1,30 @@
 @charset "UTF-8";
-.container{
+
+.container {
 	width: 800px;
-	min-height:800px;
+	min-height: 800px;
 	height: auto;
 	background-color: aliceblue;
 	display: grid;
 	grid-template-rows: 150px 750px;
 }
+
 .content {
 	grid-template-columns: 400px 400px;
 	grid-template-rows: 200px 150px 250px 150px;
 }
 
+#rtext {
+	color: black;
+	text-shadow: 1px 1px 0px #ffffff, 3px 3px 2px #663333;
+}
+
 .member_info {
 	height: 150px;
-	margin-left:40px;
-	margin-right:20px;
-	margin-top:20px;
-	margin-bottom:20px;
+	margin-left: 40px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	grid-column-start: 1;
 	grid-column-end: 2;
 	background-color: white;
@@ -26,19 +33,26 @@
 
 .login {
 	display: grid;
-	align-items:center;
-	justify-content:center;
+	align-items: center;
+	justify-content: center;
 }
 
 .rps {
-	margin-left:20px;
-	margin-right:40px;
-	margin-top:20px;
-	margin-bottom:20px;
+	margin-left: 20px;
+	margin-right: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	grid-column-start: 2;
 	grid-column-end: 3;
+	height: 150px;
 	background-color: white;
-	height:150px;
+	vertical-align: center;
+	justify-content: center;
+	align-items: center;
+}
+
+#rps {
+	margin: 10px;
 }
 
 .notice {
@@ -50,14 +64,16 @@
 	margin-right: 40px;
 	background-color: white;
 }
-#notice{
-	margin:10px;
-	background-color:#d9eedb;
-	color:#636363;
+
+#notice {
+	margin: 10px;
+	background-color: #d9eedb;
+	color: #636363;
 	font-weight: normal;
 	font-size: 0.9em;
 	min-height: 100px;
 }
+
 .hot {
 	grid-column-start: 1;
 	grid-column-end: 2;
@@ -69,14 +85,15 @@
 	background-color: white;
 }
 
-#hot{
-	margin:10px;
-	background-color:#ffffac;
-	color:#636363;
+#hot {
+	margin: 10px;
+	background-color: #ffffac;
+	color: #636363;
 	font-weight: normal;
 	font-size: 0.9em;
 	min-height: 100px;
 }
+
 .game {
 	grid-column-start: 2;
 	grid-column-end: 3;
@@ -88,12 +105,15 @@
 	background-color: white;
 }
 
-.lotto {
+.sample {
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 4;
 	grid-row-end: 5;
-	margin-left: 40px; margin-right : 40px; margin-top: 20px; margin-bottom: 20px;
+	margin-left: 40px;
+	margin-right: 40px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 	background-color: white;
 	margin-right: 40px;
 }

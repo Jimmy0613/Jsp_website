@@ -33,7 +33,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			<div class="join">
 				<span style="font-size: 1.2em;">회원가입</span>
 				<div class="join_m">
-					<form action="/web/join">
+					<form action="/member/join">
 						<input type="hidden" name="location" value="<%=location%>">
 						아이디: <input name="id" placeholder=" 6~12자" maxlength="12" required><br>
 						비밀번호: <input name="pw" type="password" placeholder="8~14자"

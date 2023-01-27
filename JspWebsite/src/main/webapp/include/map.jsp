@@ -1,7 +1,7 @@
 <%@page import="com.cre.w.dto.MapDTO"%>
 <%@page import="com.cre.w.dto.CharacterDTO"%>
-<%@page import="com.cre.w.sys.Map"%>
-<%@page import="com.cre.w.sys.Log"%>
+<%@page import="com.cre.w.Map"%>
+<%@page import="com.cre.w.Log"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 	Map mapm = new Map();
 	CharacterDTO pm = (CharacterDTO) session.getAttribute("player");
 	String midm = (String)session.getAttribute("m_id");
-	String midm_jsp = midm + ".jsp";
+	String midm_jsp = "/" + midm + ".jsp";
 	Log logm = new Log();
 	if (pm.getStory() < 6) {
 		logm.send("❌ 지도를 획득한 후 이용할 수 있습니다.", "bad");
@@ -38,7 +38,7 @@
 	<button id="m_btn"
 		onclick="location.href='<%=midm_jsp%>?mode=normal'">접기</button>
 	<div id="map_open">
-		<%@include file="map_house.jsp"%>
+		<%@include file="/include/map_house.jsp"%>
 	</div>
 	<%
 	}

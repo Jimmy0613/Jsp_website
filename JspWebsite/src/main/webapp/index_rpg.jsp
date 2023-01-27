@@ -85,7 +85,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<b class="icon_t" id="icon2_t">캐릭터</b>
 
 						<div class="icon" id="icon3">
-							<a href="/web/logout?location=/index_rpg.jsp"><img
+							<a href="/member/logout?location=/index_rpg.jsp"><img
 								src="/img/logout.png"></a>
 						</div>
 						<b class="icon_t" id="icon3_t">로그아웃</b>

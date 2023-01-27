@@ -10,6 +10,7 @@ public class Db {
 	public static final String TABLE_MAP = "MAP";
 	public static final String TABLE_LOG = "LOG";
 	public static final String TABLE_STORY = "STORY";
+	public static final String TABLE_RPS = "RPS_LOG";
 	//칼럼 이름=================================================
 	//members : member_id/password/member_name/email/join_date/post_count/reply_count/heart/character1/character2/grade
 	//board: post_num/category/writer/title/content/post_date/reply/views/heart

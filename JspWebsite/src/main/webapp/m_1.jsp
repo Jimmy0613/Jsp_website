@@ -1,7 +1,7 @@
 <%@page import="com.cre.w.dto.CharacterDTO"%>
 <%@page import="com.cre.w.dto.MapDTO"%>
-<%@page import="com.cre.w.sys.Map"%>
-<%@page import="com.cre.w.sys.Log"%>
+<%@page import="com.cre.w.Map"%>
+<%@page import="com.cre.w.Log"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" trimDirectiveWhitespaces="true"%>
 <!DOCTYPE html>
@@ -43,7 +43,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
 				<%@include file="/include/menuTop.jsp"%>
 			</div>

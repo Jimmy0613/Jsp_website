@@ -1,4 +1,4 @@
-package com.cre.w.sys;
+package com.cre.w;
 
 import com.cre.w.dao.LogDAO;
 import com.cre.w.db.Db;

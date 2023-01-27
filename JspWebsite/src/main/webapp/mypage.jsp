@@ -1,6 +1,6 @@
-<%@page import="com.cre.w.sys.Board"%>
+<%@page import="com.cre.w.Board"%>
 <%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.sys.Member"%>
+<%@page import="com.cre.w.Member"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -51,44 +51,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		</div>
 		<div class="content">
 			<div class="mypage">
-				<div class="myInfo">
-					<span id="t">회원 정보</span><span style="font-size: 0.8em;">
-						&nbsp;<a href="/web/logout?location=/index.jsp">로그아웃</a>
-					</span>
-					<hr>
-					<div id="p">
-						<div id="y">
-							<div>
-								<b>이름</b> <br> <b>아이디</b> <br> <b>이메일</b>
-
-							</div>
-							<div><%=loginMember.getName()%><br><%=loginMember.getId()%><br>
-								<%
-								if (loginMember.getEmail().equals("")) {
-								%>
-								<a href="/mypage.jsp?mode=myemail">등록</a>
-								<%
-								} else {
-								%>
-								<%=loginMember.getEmail()%><a href="/mypage.jsp?mode=myemail"><br>변경</a>
-								<%
-								}
-								%>
-							</div>
-						</div>
-						<div id="y">
-							<div>
-								<b>하트(❤)</b><br> <b>작성 글</b><br> <b>작성 댓글</b><br>
-							</div>
-							<div>
-								<%=loginMember.getHeart()%>
-								개<br> <a href="/web/mypost"><%=loginMember.getPCount()%>
-									개</a><br> <a href="/web/myreply"><%=loginMember.getRCount()%>
-									개</a><br>
-							</div>
-						</div>
-					</div>
-				</div>
+				<%@include file="/include/myinfo.jsp" %>
 				<div id="x">
 					<%
 					String mode = request.getParameter("mode");
@@ -97,10 +60,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					}
 					switch (mode) {
 					case "mypost":
-						response.sendRedirect("/web/mypost");
+						response.sendRedirect("/board/mypost");
 						break;
 					case "myreply":
-						response.sendRedirect("/web/myreply");
+						response.sendRedirect("/board/myreply");
 						break;
 					case "myemail":
 					%>

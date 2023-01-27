@@ -1,6 +1,6 @@
 <%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
-<%@page import="com.cre.w.sys.Board"%>
+<%@page import="com.cre.w.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -61,7 +61,7 @@
 					}
 					%>
 					<a title="<%=b.getTitle()%>"
-						href="/web/read?postNum=<%=b.getpNum()%>&page=<%=cupb%>&category=<%=cgb%>"><%=title%>
+						href="/board/read?postNum=<%=b.getpNum()%>&page=<%=cupb%>&category=<%=cgb%>"><%=title%>
 						<%
 						if (b.getReply() > 0) {
 						%> (<%=b.getReply()%>) <%

@@ -1,8 +1,8 @@
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.sys.Board"%>
-<%@page import="com.cre.w.sys.Page"%>
+<%@page import="com.cre.w.Board"%>
+<%@page import="com.cre.w.Page"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
 	//(처음) 관련================================================
 	if (cPage1 > 1) {
 	%>
-	<a href="/web/mypost?page=1&mode=<%=md%>"
+	<a href="/board/mypost?page=1&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">처음</a>
 	<%
 	} else {
@@ -35,12 +35,12 @@
 	if (cPage1 % Page.PAGE_BLOCK == 1) { 
 	%>
 	<a
-		href="/web/mypost?page=<%=((pb - 1) * Page.PAGE_BLOCK)%>&mode=<%=md%>"
+		href="/board/mypost?page=<%=((pb - 1) * Page.PAGE_BLOCK)%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">이전</a>
 	<%
 	} else if (cPage1 > 1) {
 	%>
-	<a href="/web/mypost?page=<%=(cPage1 - 1)%>&mode=<%=md%>"
+	<a href="/board/mypost?page=<%=(cPage1 - 1)%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">이전</a>
 	<%
 	}
@@ -56,11 +56,11 @@
 	if (i == cPage1) {
 	%>
 	<a style="font-weight: bolder;"
-		href="/web/mypost?page=<%=i%>&mode=<%=md%>"><%=i%></a>
+		href="/board/mypost?page=<%=i%>&mode=<%=md%>"><%=i%></a>
 	<%
 	} else {
 	%>
-	<a href="/web/mypost?page=<%=i%>&mode=<%=md%>"><%=i%></a>
+	<a href="/board/mypost?page=<%=i%>&mode=<%=md%>"><%=i%></a>
 	<%
 	}
 	}
@@ -68,12 +68,12 @@
 	//(다음) 관련 ===============================================
 	if (cPage1 % Page.PAGE_BLOCK == 0) {
 	%>
-	<a href="/web/mypost?page=<%=(pb * Page.PAGE_BLOCK + 1)%>&mode=<%=md%>"
+	<a href="/board/mypost?page=<%=(pb * Page.PAGE_BLOCK + 1)%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">다음</a>
 	<%
 	} else if (cPage1 < tp1) { 
 	%>
-	<a href="/web/mypost?page=<%=cPage1 + 1%>&mode=<%=md%>"
+	<a href="/board/mypost?page=<%=cPage1 + 1%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">다음</a>
 	<%
 	} else {
@@ -85,7 +85,7 @@
 	//(마지막) 관련================================================
 	if (cPage1 < tp1) {
 	%>
-	<a href="/web/mypost?page=<%=tp1%>&mode=<%=md%>"
+	<a href="/board/mypost?page=<%=tp1%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">마지막</a>
 	<%
 	} else { 

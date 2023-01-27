@@ -1,4 +1,4 @@
-package com.cre.w.servlet;
+package com.cre.w.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -12,16 +12,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import com.cre.w.Board;
+import com.cre.w.Member;
+import com.cre.w.Page;
 import com.cre.w.dto.MemberDTO;
 import com.cre.w.dto.PostDTO;
 import com.cre.w.dto.ReplyDTO;
-import com.cre.w.sys.Board;
-import com.cre.w.sys.Charac;
-import com.cre.w.sys.Member;
-import com.cre.w.sys.Page;
 
-@WebServlet("/web/*")
-public class Controller extends HttpServlet {
+@WebServlet("/board/*")
+public class BoardCntrler extends HttpServlet {
 	Board board = new Board();
 	Member member = new Member();
 	Page pp = new Page();
@@ -30,7 +29,6 @@ public class Controller extends HttpServlet {
 
 	String forward;
 
-	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String where = "";
@@ -75,40 +73,8 @@ public class Controller extends HttpServlet {
 		if (location == null) {
 			location = "/index.jsp";
 		}
-
 		if (path != null) {
 			switch (path) {
-			case "/join":
-				String alertJoin = member.joinAlert(request.getParameter("id"), request.getParameter("pw"),
-						request.getParameter("pwcheck"), request.getParameter("name"), request.getParameter("email"));
-				if (alertJoin.equals("")) {
-					member.newMember(request.getParameter("id"), request.getParameter("pw"),
-							request.getParameter("name"), request.getParameter("email"));
-					out.println("<script>alert('가입 완료!');</script>");
-					out.println("<script>location.href='" + location + "'</script>");
-					return;
-				} else {
-					out.println("<script>alert('가입 실패.." + alertJoin + "');</script>");
-					out.println("<script>location.href='/join.jsp'</script>");
-					return;
-				}
-			case "/login":
-				String alertLogin = member.loginAlert(request.getParameter("id"), request.getParameter("pw"));
-				MemberDTO login = member.getMember(request.getParameter("id"));
-				if (alertLogin.equals("")) {
-					session.setAttribute("loginMember", login);
-					out.println("<script>alert('" + login.getId() + "님 안녕하세요!');</script>");
-					out.println("<script>location.href='" + location + "'</script>");
-					return;
-				} else {
-					out.println("<script>alert('로그인 실패.. " + alertLogin + "');</script>");
-					out.println("<script>location.href='" + location + "'</script>");
-					return;
-				}
-			case "/logout":
-				session.removeAttribute("loginMember");
-				response.sendRedirect(location);
-				return;
 			case "/write":
 				String conWrite = request.getParameter("content");
 				conWrite = conWrite.replace("\r\n", "<br>");
@@ -116,9 +82,13 @@ public class Controller extends HttpServlet {
 				loginMember.setPCount(loginMember.getPCount() + 1);
 				member.memberUpdate(loginMember);
 				session.setAttribute("loginMember", loginMember);
-				board.newPost(loginMember.getId(), loginMember.getName(), request.getParameter("title"), conWrite,
+				String writerName = loginMember.getName();
+				if(category.equals("anonym")) {
+					writerName="익명";
+				}
+				board.newPost(loginMember.getId(), writerName, request.getParameter("title"), conWrite,
 						category);
-				response.sendRedirect("/web/board?category=" + category + "&page=" + page);
+				response.sendRedirect("/board/board?category=" + category + "&page=" + page);
 				return;
 			case "/reply":
 				post = board.selectPost(postNum);
@@ -130,7 +100,7 @@ public class Controller extends HttpServlet {
 				session.setAttribute("loginMember", loginMember);
 				board.newReply(loginMember.getId(), loginMember.getName(), request.getParameter("conReply"), postNum);
 				board.replyCount(postNum, "+1");
-				response.sendRedirect("/web/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
+				response.sendRedirect("/board/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
 				return;
 			case "/board":
 				list = board.getList(category, page);
@@ -151,6 +121,7 @@ public class Controller extends HttpServlet {
 				request.setAttribute("currentPb", currentPb);
 				forward = "/board.jsp";
 				break;
+
 			case "/search":
 				String key = request.getParameter("key");
 				if (key == null) {
@@ -187,6 +158,14 @@ public class Controller extends HttpServlet {
 				request.setAttribute("currentPb", currentPb);
 				forward = "/search.jsp";
 				break;
+			case "/read":
+				board.view(postNum);
+				post = board.selectPost(postNum);
+				request.setAttribute("post", post);
+				reply = board.reply(postNum);
+				request.setAttribute("reply", reply);
+				forward = "/read.jsp";
+				break;
 			case "/mypost":
 				list = board.mypost(loginMember.getId(), page);
 				request.setAttribute("list", list);
@@ -219,50 +198,17 @@ public class Controller extends HttpServlet {
 				request.setAttribute("currentPb", currentPb);
 				forward = "/myreply.jsp";
 				break;
-			case "/myemail":
-				String email = request.getParameter("email");
-				if (member.isEmail(email)) {
-					out.println("<script>alert('이미 등록된 이메일입니다.')</script>");
-					out.println("<script>location.href='/mypage.jsp?mode=myemail'</script>");
-					return;
-				} else if (loginMember.getEmail().equals("")) {
-					loginMember.setEmail(email);
-					member.memberUpdate(loginMember);
-					session.setAttribute("loginMember", loginMember);
-					out.println("<script>alert('등록되었습니다.')</script>");
-					out.println("<script>location.href='/mypage.jsp'</script>");
-					return;
-				} else if (email.equals(loginMember.getEmail())) {
-					out.println("<script>alert('기존과 동일한 이메일입니다.')</script>");
-					out.println("<script>location.href='/mypage.jsp?mode=myemail'</script>");
-					return;
-				} else {
-					loginMember.setEmail(email);
-					member.memberUpdate(loginMember);
-					session.setAttribute("loginMember", loginMember);
-					out.println("<script>alert('변경되었습니다.')</script>");
-					out.println("<script>location.href='/mypage.jsp'</script>");
-					return;
-				}
-			case "/read":
-				board.view(postNum);
-				post = board.selectPost(postNum);
-				request.setAttribute("post", post);
-				reply = board.reply(postNum);
-				request.setAttribute("reply", reply);
-				forward = "/read.jsp";
-				break;
 			case "/edit":
 				String conEdit = request.getParameter("content");
 				conEdit = conEdit.replace("\r\n", "<br>");
 				board.edit(postNum, request.getParameter("title"), conEdit);
-				response.sendRedirect("/web/read?category=" + category + "&page=" + page + "&postNum=" + postNum);
+				response.sendRedirect("/board/read?category=" + category + "&page=" + page + "&postNum=" + postNum);
 				return;
 			case "/heart":
 				post = board.selectPost(postNum);
 				if (loginMember.getHeart() < 1) {
 					out.println("<script>alert('하트가 부족합니다..')</script>");
-					out.println("<script>location.href='/web/read?category=" + category + "&postNum=" + postNum
+					out.println("<script>location.href='/board/read?category=" + category + "&postNum=" + postNum
 							+ "&page=" + page + "'</script>");
 					return;
 				} else {
@@ -270,7 +216,7 @@ public class Controller extends HttpServlet {
 					if (writer != null) {
 						if (loginMember.getId().equals(post.getWr_id())) {
 							out.println("<script>alert('내가 쓴 글에는 할 수 없습니다.')</script>");
-							out.println("<script>location.href='/web/read?category=" + category + "&postNum=" + postNum
+							out.println("<script>location.href='/board/read?category=" + category + "&postNum=" + postNum
 									+ "&page=" + page + "'</script>");
 							return;
 						} else {
@@ -281,12 +227,12 @@ public class Controller extends HttpServlet {
 							writer.setHeart(writer.getHeart() + 1);
 							member.memberUpdate(writer);
 							response.sendRedirect(
-									"/web/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
+									"/board/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
 							return;
 						}
 					} else {
 						out.println("<script>alert('작성자 탈퇴 등의 이유로 해당 글에는 할 수 없습니다.')</script>");
-						out.println("<script>location.href='/web/read?category=" + category + "&postNum=" + postNum
+						out.println("<script>location.href='/board/read?category=" + category + "&postNum=" + postNum
 								+ "&page=" + page + "'</script>");
 						return;
 					}
@@ -299,7 +245,7 @@ public class Controller extends HttpServlet {
 				session.setAttribute("loginMember", loginMember);
 				board.delete(postNum);
 				request.removeAttribute("postNum");
-				response.sendRedirect("/web/board?category=" + category + "&page=" + page);
+				response.sendRedirect("/board/board?category=" + category + "&page=" + page);
 				return;
 			case "/delReply":
 				post = board.selectPost(postNum);
@@ -311,44 +257,21 @@ public class Controller extends HttpServlet {
 				session.setAttribute("loginMember", loginMember);
 				board.deleteReply(request.getParameter("reNum"));
 				board.replyCount(postNum, "-1");
-				response.sendRedirect("/web/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
+				response.sendRedirect("/board/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
 				return;
-			case "/newChar":
-				Charac character = new Charac();
-				String loginC1 = loginMember.getCharacter1();
-				String input_name = request.getParameter("c_name");
-				String alertCh = character.newAlert(input_name);
-				if (alertCh.equals("")) {
-					character.newCharacter(input_name, loginMember.getId());
-					if (loginC1.equals("x")) {
-						member.updateCharacter("CHARACTER1", input_name, loginMember.getId());
-						loginMember.setCharacter1(input_name);
-						member.memberUpdate(loginMember);
-					} else {
-						member.updateCharacter("CHARACTER2", input_name, loginMember.getId());
-						loginMember.setCharacter2(input_name);
-						member.memberUpdate(loginMember);
-					}
-					session.setAttribute("loginMember", loginMember);
-					out.println("<script>location.href='/character.jsp'</script>");
-					return;
-				} else {
-					out.println("<script>alert('사용할 수 없는 이름입니다. " + alertCh + "')</script>");
-					out.println("<script>location.href='/newChar.jsp'</script>");
-					return;
-				}
 			}
-		}
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-		dispatcher.forward(request, response);
-		out.close();
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+			dispatcher.forward(request, response);
+			out.close();
+
+		}
 
 	}
 
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

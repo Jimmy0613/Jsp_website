@@ -4,7 +4,7 @@
 <%@page import="com.cre.w.dto.ReplyDTO"%>
 <%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
-<%@page import="com.cre.w.sys.Board"%>
+<%@page import="com.cre.w.Board"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -51,50 +51,12 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		</div>
 		<div class="content">
 			<div class="mypage">
-				<div class="myInfo">
-					<span id="t">회원 정보</span><span style="font-size: 0.8em;">
-						&nbsp;<a href="/web/logout?location=/index.jsp">로그아웃</a>
-					</span>
-					<hr>
-					<div id="p">
-						<div id="y">
-							<div>
-								<b>이름</b> <br> <b>아이디</b> <br> <b>이메일</b>
-
-							</div>
-							<div><%=loginMember.getName()%><br><%=loginMember.getId()%><br>
-								<%
-								if (loginMember.getEmail().equals("")) {
-								%>
-								<a href="/mypage.jsp?mode=myemail">등록</a>
-								<%
-								} else {
-								%>
-								<%=loginMember.getEmail()%><a href="/mypage.jsp?mode=myemail"><br>변경</a>
-								<%
-								}
-								%>
-							</div>
-						</div>
-						<div id="y">
-							<div>
-								<b>하트(❤)</b><br> <b>작성 글</b><br> <b>작성 댓글</b><br>
-							</div>
-							<div>
-								<%=loginMember.getHeart()%>
-								개<br> <a href="/web/mypost"><%=loginMember.getPCount()%>
-									개</a><br> <a href="/web/myreply"><%=loginMember.getRCount()%>
-									개</a><br>
-							</div>
-						</div>
-					</div>
-				</div>
+				<%@include file="/include/myinfo.jsp" %>
 				<div id="x">
 					<span id="t">내가 쓴 댓글</span> <br>
 					<div class="list">
 						<div class="list_m">
 							<div class="list_n" style="background-color: white;">
-								<div></div>
 								<div>게시판</div>
 								<div>내용</div>
 								<div>♡</div>
@@ -122,7 +84,6 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 										}
 								%>
 								<div class="list_n">
-									<div></div>
 									<div><%=category%></div>
 									<div style="text-align: left;">
 										<%
@@ -133,7 +94,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 										} else {
 										%>
 										<a
-											href="/web/read?postNum=<%=r.getpNum()%>&category=<%=po.getCategory()%>&page=1"><%=r.getContent()%></a>
+											href="/board/read?postNum=<%=r.getpNum()%>&category=<%=po.getCategory()%>&page=1"><%=r.getContent()%></a>
 										<%
 										}
 										%>

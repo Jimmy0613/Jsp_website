@@ -1,9 +1,8 @@
-package com.cre.w.sys;
+package com.cre.w;
 
 import com.cre.w.dao.CharacterDAO;
 import com.cre.w.db.Db;
 import com.cre.w.dto.CharacterDTO;
-import com.cre.w.dto.MemberDTO;
 
 public class Charac extends CharacterDAO {
 
@@ -26,14 +25,6 @@ public class Charac extends CharacterDAO {
 	public void newCharacter(String name, String mem_id) {
 		String sql = String.format("INSERT INTO %s(NAME, MEMBER_ID) VALUES('%s','%s');", Db.TABLE_CHARACTER, name,
 				mem_id);
-		update(sql);
-	}
-
-	public void memberUpdate(MemberDTO member) {
-		String sql = String.format(
-				"update %s set password='%s', email='%s', post_count=%d, reply_count=%d, heart=%d where member_id='%s'",
-				Db.TABLE_MEMBER, member.getPw(), member.getEmail(), member.getPCount(), member.getRCount(),
-				member.getHeart(), member.getId());
 		update(sql);
 	}
 

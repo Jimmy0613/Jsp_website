@@ -1,4 +1,4 @@
-<%@page import="com.cre.w.sys.Board"%>
+<%@page import="com.cre.w.Board"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -51,7 +51,7 @@
 					}
 					%>
 					<a title="<%=b.getTitle()%>"
-						href="/web/read?postNum=<%=b.getpNum()%>"><%=title%>
+						href="/board/read?postNum=<%=b.getpNum()%>"><%=title%>
 						<%if(b.getReply()>0){ %>
 						(<%=b.getReply() %>)
 						<%} %>

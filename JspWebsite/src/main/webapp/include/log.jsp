@@ -2,7 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
-<%@page import="com.cre.w.sys.Log"%>
+<%@page import="com.cre.w.Log"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

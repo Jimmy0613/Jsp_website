@@ -1,13 +1,13 @@
 package com.cre.w.dao;
 
+import com.cre.w.Charac;
 import com.cre.w.db.Db;
 import com.cre.w.dto.MapDTO;
-import com.cre.w.sys.Charac;
 
 public class MapDAO extends DAO {
 
 	LogDAO log = new LogDAO();
-	Charac ch = new com.cre.w.sys.Charac();
+	Charac ch = new com.cre.w.Charac();
 
 	public MapDTO getMap(String mapId) {
 		MapDTO dto = null;

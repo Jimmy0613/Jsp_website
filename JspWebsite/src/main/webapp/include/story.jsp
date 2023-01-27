@@ -1,7 +1,7 @@
 <%@page import="com.cre.w.dto.CharacterDTO"%>
-<%@page import="com.cre.w.sys.Charac"%>
+<%@page import="com.cre.w.Charac"%>
 <%@page import="com.cre.w.dto.StoryDTO"%>
-<%@page import="com.cre.w.sys.Story"%>
+<%@page import="com.cre.w.Story"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>

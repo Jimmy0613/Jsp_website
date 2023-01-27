@@ -1,6 +1,6 @@
 <%@page import="com.cre.w.dto.CharacterDTO"%>
 <%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.sys.Charac"%>
+<%@page import="com.cre.w.Charac"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -103,7 +103,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<b class="icon_t" id="icon1_t">홈</b>
 
 						<div class="icon" id="icon2">
-							<a href="/web/logout?location=/index_rpg.jsp"><img
+							<a href="/member/logout?location=/index_rpg.jsp"><img
 								src="img/logout.png"></a>
 						</div>
 						<b class="icon_t" id="icon2_t">로그아웃</b>

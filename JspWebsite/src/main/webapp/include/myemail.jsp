@@ -14,7 +14,7 @@
 	<span id="t">이메일</span>
 	<br>
 	<div class="email">
-		<form action="/web/myemail">
+		<form action="/member/myemail">
 			<%
 			if (eme.getEmail().equals("")) {
 			%>

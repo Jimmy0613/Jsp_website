@@ -7,7 +7,7 @@ import com.cre.w.dto.LogDTO;
 
 public class LogDAO extends DAO {
 
-	public ArrayList<com.cre.w.dto.LogDTO> select() {
+	public ArrayList<LogDTO> select() {
 		ArrayList<LogDTO> dtos = new ArrayList<>();
 		String sql = String.format("SELECT * FROM %s", Db.TABLE_LOG);
 

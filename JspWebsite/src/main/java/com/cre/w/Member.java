@@ -1,20 +1,14 @@
-package com.cre.w.sys;
+package com.cre.w;
 
 import com.cre.w.dao.MemberDAO;
 import com.cre.w.db.Db;
 import com.cre.w.dto.MemberDTO;
 
 public class Member extends MemberDAO {
-	public void updateCharacter(String char12, String c_name, String loginId) {
-		String sql = String.format("UPDATE %s SET %s = '%s' WHERE MEMBER_ID = '%s';", Db.TABLE_MEMBER, char12, c_name,
-				loginId);
-		update(sql);
-	}
-
 	public void memberUpdate(MemberDTO member) {
-		String sql = String.format("update %s set password='%s', email='%s', post_count=%d, reply_count=%d, heart=%d where member_id='%s'",
+		String sql = String.format("update %s set password='%s', email='%s', post_count=%d, reply_count=%d, heart=%d, character1='%s', character2='%s' where member_id='%s'",
 				Db.TABLE_MEMBER, member.getPw(), member.getEmail(), member.getPCount(),
-				member.getRCount(), member.getHeart(), member.getId());
+				member.getRCount(), member.getHeart(), member.getId(), member.getCharacter1(), member.getCharacter2());
 		update(sql);
 	}
 

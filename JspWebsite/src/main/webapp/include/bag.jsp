@@ -1,8 +1,8 @@
 <%@page import="com.cre.w.dto.MapDTO"%>
 <%@page import="com.cre.w.dto.CharacterDTO"%>
-<%@page import="com.cre.w.sys.Log"%>
-<%@page import="com.cre.w.sys.Map"%>
-<%@page import="com.cre.w.sys.Charac"%>
+<%@page import="com.cre.w.Log"%>
+<%@page import="com.cre.w.Map"%>
+<%@page import="com.cre.w.Charac"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,12 +17,12 @@
 	Log logb = new Log();
 	Map mapb = new Map();
 	CharacterDTO pb = (CharacterDTO) session.getAttribute("player");
-	String midb = (String)session.getAttribute("m_id");
-	String midb_jsp = midb + ".jsp";
+	String midb = (String) session.getAttribute("m_id");
+	String midb_jsp = "/" + midb + ".jsp";
 	if (pb.getStory() < 5) {
 		logb.send("❌ 가방을 획득한 후 이용할 수 있습니다.", "bad");
 	%>
-	<jsp:forward page="/<%=midb_jsp%>">
+	<jsp:forward page="<%=midb_jsp%>">
 		<jsp:param value="normal" name="mode" />
 	</jsp:forward>
 	<%
@@ -31,7 +31,7 @@
 	logb.send("[ " + Log.turnCount + " ] 가방을 열었습니다.", "normal");
 	%>
 	<button id="b_btn"
-		onclick="location.href='/<%=midb_jsp %>?mode=normal'">닫기</button>
+		onclick="location.href='<%=midb_jsp%>?mode=normal'">닫기</button>
 	<div id="bag_open">
 		<div id="tool_t">도구</div>
 		<div id="food_t">음식</div>

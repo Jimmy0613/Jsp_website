@@ -1,5 +1,5 @@
 <%@page import="com.cre.w.dto.LogDTO"%>
-<%@page import="com.cre.w.sys.Log"%>
+<%@page import="com.cre.w.Log"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

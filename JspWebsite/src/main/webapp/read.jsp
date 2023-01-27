@@ -2,7 +2,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
-<%@page import="com.cre.w.sys.Board"%>
+<%@page import="com.cre.w.Board"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.dao.BoardDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -22,10 +22,10 @@
 		var category = formDelete.category.value;
 		if (ok) {
 			formDelete.method = "get";
-			formDelete.action = "/web/delete";
+			formDelete.action = "/board/delete";
 			formDelete.submit();
 		} else {
-			location.href = "/web/read?postNum=" + postNum + "&page="
+			location.href = "/board/read?postNum=" + postNum + "&page="
 					+ category + "&category=" + category;
 		}
 	}
@@ -55,7 +55,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
 				<%@include file="/include/menuTop.jsp"%>
 			</div>
@@ -95,7 +95,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 					if (loginMember != null) {
 					%>
-						<form action="/web/heart">
+						<form action="/board/heart">
 							<input type="hidden" name="postNum" value="<%=post.getpNum()%>">
 							<input type="hidden" name="category" value="<%=category%>">
 							<input type="hidden" name="page" value="<%=currentPage%>">
@@ -106,7 +106,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						%>
 					</div>
 					<hr style="height: 0.1px; width: 95%;">
-					<div id="p" style="color: black; font-size: 0.8em;">
+					<div id="p" style="color: black; font-size: 0.9em;">
 						<%
 						if (reply.size() != 0) {
 
@@ -131,7 +131,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 								if (r.getWriter().equals(loginMember.getName())) {
 									String formId = "form" + r.getrNum();
 							%>
-							<form id="<%=formId%>" method="get" action="/web/delReply"
+							<form id="<%=formId%>" method="get" action="/board/delReply"
 								encType="UTF-8">
 								<input type="hidden" name="postNum" value="<%=postNum%>">
 								<input type="hidden" name="reNum" value="<%=r.getrNum()%>">
@@ -155,7 +155,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (loginMember != null) {
 						%>
-						<form class="reply" action="/web/reply">
+						<form class="reply" action="/board/reply">
 							<input type="hidden" value="<%=postNum%>" name="postNum">
 							<input type="hidden" value="<%=category%>" name="category">
 							<input type="hidden" value="<%=currentPage%>" name="page">
@@ -175,8 +175,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<button
 						onclick="location.href='/edit.jsp?postNum=<%=postNum%>&category=<%=category%>&page=<%=currentPage%>'">수정</button>
 
-					<form name="formDelete" method="get" action="/web/delete"
-						encType="UTF-8">
+					<form name="formDelete"	encType="UTF-8">
 						<input type="hidden" name="postNum" value="<%=postNum%>">
 						<input type="hidden" name="category" value="<%=category%>">
 						<input type="hidden" name="page" value="<%=currentPage%>">
@@ -187,7 +186,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					}
 					%>
 					<button
-						onclick="location.href='/web/board?category=<%=category%>&page=<%=currentPage%>'">목록</button>
+						onclick="location.href='/board/board?category=<%=category%>&page=<%=currentPage%>'">목록</button>
 				</div>
 			</div>
 		</div>

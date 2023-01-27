@@ -1,6 +1,6 @@
 package com.cre.w.dto;
 
-import com.cre.w.sys.Map;
+import com.cre.w.Map;
 
 public class MapDTO {
 	Map map = new Map();

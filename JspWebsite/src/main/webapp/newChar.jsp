@@ -51,7 +51,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<div id="s_menu_right_t">메뉴</div>
 					<div id="character">
 						<div id="c_info">
-							<form id="form_c" action="/web/newChar">
+							<form id="form_c" action="/game/newChar">
 								<input type="hidden" name="id" value="<%=loginMember.getId()%>">
 								이름:&nbsp;&nbsp; <input name="c_name" placeholder="2~6자">
 								&nbsp;&nbsp;<br>

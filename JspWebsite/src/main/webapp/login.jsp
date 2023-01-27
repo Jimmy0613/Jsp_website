@@ -36,7 +36,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			<div class="join">
 				<span style="font-size: 1.2em;">로그인</span>
 				<div class="join_m">
-					<form class="login" action="/web/login">
+					<form class="login" action="/member/login">
 						<p>
 							<input type="hidden" name="location" value="<%=location%>">
 							아이디<br> <input name="id"><br>비밀번호<br> <input

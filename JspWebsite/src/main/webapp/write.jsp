@@ -1,6 +1,6 @@
 <%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.sys.Board"%>
-<%@page import="com.cre.w.sys.Member"%>
+<%@page import="com.cre.w.Board"%>
+<%@page import="com.cre.w.Member"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.dao.BoardDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -44,7 +44,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<div class="write">
 				<span style="font-size: 1.2em;">글쓰기</span>
-				<form action="/web/write">
+				<form action="/board/write">
 					<input type="hidden" name="category" value="<%=category%>"> <br>
 					<input id="title" placeholder="제목" name="title"> 
 					<%if(category.equals("anonym")) {%>

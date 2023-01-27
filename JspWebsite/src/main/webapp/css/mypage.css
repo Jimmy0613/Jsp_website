@@ -76,8 +76,8 @@
 	vertical-align: center;
 	height: auto;
 	display: grid;
-	grid-template-columns: 40px 100px 250px 30px 50px;
-	font-size:0.9em;
+	grid-template-columns: 100px 250px 30px 50px;
+	font-size:1em;
 	border-bottom: 0.1px solid #e8e8e8;
 }
 .list_n input{

@@ -1,6 +1,6 @@
 <%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.sys.Board"%>
-<%@page import="com.cre.w.sys.Member"%>
+<%@page import="com.cre.w.Board"%>
+<%@page import="com.cre.w.Member"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -47,7 +47,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<div class="write">
 				<span style="font-size: 1.2em;">수정</span>
-				<form action="/web/edit">
+				<form action="/board/edit">
 					<input type="hidden" name="postNum" value="<%=postNum%>">
 					<input type="hidden" name="category" value="<%=category%>">
 					<input id="title" placeholder="제목" name="title"
