@@ -30,7 +30,7 @@
 				<span><%=member.getInfo()%> </span> <span
 					style="text-align: center;">❤ <%=member.getHeart()%></span>
 				<div id="f">
-					<button id="memberinfo" onclick="location.href='/web/mypage'">회원정보</button>
+					<button id="memberinfo" onclick="location.href='/mypage.jsp'">회원정보</button>
 					<form id="logout" action="/web/logout">
 						<input type="hidden" name="location" value="/web/board">
 						<button type="submit">로그아웃</button>
@@ -43,7 +43,7 @@
 		</div>
 		<hr>
 	</div>
-	<form action="/search.jsp">
+	<form action="/web/search">
 		<p id="search">
 			<input type="hidden" name="category" value="all"> <input
 				type="hidden" name="key" value="title"> <input

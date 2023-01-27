@@ -17,15 +17,15 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet" href="css/m_1.css">
 </head>
 <body>
@@ -45,7 +45,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		<div class="header">
 			<div class="title">Jsp Website</div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
@@ -53,14 +53,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<!---------------------------------------------------스크린 --------------------------------------------------->
 				<div id="screen">
 					<div id="t">
-						<%@include file="include/title.jsp"%>
+						<%@include file="/include/title.jsp"%>
 					</div>
 					<div id="n">
 						<!-- m_2 복도 -->
 						<%
 						if (player.getStory() >= 0) {
 						%>
-						<button id="ns_btn" onclick="location.href='m_2.jsp?mode=move'">복도</button>
+						<button id="ns_btn" onclick="location.href='/m_2.jsp?mode=move'">복도</button>
 						<%
 						}
 						%>
@@ -70,15 +70,15 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (mode.equals("bag")) {
 						%>
-						<%@ include file="include/bag.jsp"%>
+						<%@ include file="/include/bag.jsp"%>
 						<%
 						} else if (mode.equals("map")) {
 						%>
-						<%@ include file="include/map.jsp"%>
+						<%@ include file="/include/map.jsp"%>
 						<%
 						} else if (mode.equals("return") || player.getPower() <= 0) {
 						%>
-						<%@ include file="include/return.jsp"%>
+						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
 						String msg = "";
@@ -88,11 +88,11 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						case "normal":
 						%>
 						<div id="bed">
-							<button onclick="location.href='m_1.jsp?mode=action1'">잠자기</button>
-							<img src="img/bed.jpg" id="bedimg">
+							<button onclick="location.href='/m_1.jsp?mode=action1'">잠자기</button>
+							<img src="/img/bed.jpg" id="bedimg">
 						</div>
 						<div id="player">
-							<img src="img/humannormal.jpg" id="playerimg">
+							<img src="/img/humannormal.jpg" id="playerimg">
 						</div>
 						<%
 						break;
@@ -106,18 +106,18 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 							log.send("💡 ''지난 이야기 보기''를 통해 완료한 이야기 목록을 볼 수 있습니다.", "tip");
 							log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (복도)", "map");
 						%>
-						<jsp:forward page="m_1.jsp">
+						<jsp:forward page="/m_1.jsp">
 							<jsp:param value="normal" name="mode" />
 						</jsp:forward>
 						<%
 						}
 						%>
 						<div id="bed">
-							<button onclick="location.href='m_1.jsp?mode=action1'">잠자기</button>
-							<img src="img/bed.jpg" id="bedimg">
+							<button onclick="location.href='/m_1.jsp?mode=action1'">잠자기</button>
+							<img src="/img/bed.jpg" id="bedimg">
 						</div>
 						<div id="player">
-							<img src="img/humannormal.jpg" id="playerimg">
+							<img src="/img/humannormal.jpg" id="playerimg">
 						</div>
 						<%
 						} else {
@@ -125,8 +125,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						log.send("[ " + Log.turnCount + " ] 🛏 침대에 누웠습니다..", "normal");
 						%>
 						<div id="bed">
-							<button onclick="location.href='m_1.jsp?mode=action2'">일어나기</button>
-							<img src="img/sleeping.jpg" id="bedimg">
+							<button onclick="location.href='/m_1.jsp?mode=action2'">일어나기</button>
+							<img src="/img/sleeping.jpg" id="bedimg">
 						</div>
 						<%
 						}
@@ -142,18 +142,18 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (주방)", "map");
 						}
 						%>
-						<jsp:forward page="m_1.jsp">
+						<jsp:forward page="/m_1.jsp">
 							<jsp:param value="action3" name="mode" />
 						</jsp:forward>
 						<%
 						case "action3":
 						%>
 						<div id="bed">
-							<button onclick="location.href='m_1.jsp?mode=action1'">잠자기</button>
-							<img src="img/bed.jpg" id="bedimg">
+							<button onclick="location.href='/m_1.jsp?mode=action1'">잠자기</button>
+							<img src="/img/bed.jpg" id="bedimg">
 						</div>
 						<div id="player">
-							<img src="img/humanPower.png" id="playerimg">
+							<img src="/img/humanPower.png" id="playerimg">
 						</div>
 						<%
 						break;
@@ -166,7 +166,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				</div>
 				<!----------------------------------------------------------------------------------------------------------------->
 				<div id="system">
-					<%@ include file="include/sys_game.jsp"%>
+					<%@ include file="/include/sys_game.jsp"%>
 				</div>
 			</div>
 		</div>

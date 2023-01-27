@@ -11,37 +11,14 @@
 </head>
 <body>
 	<%
-	String key = request.getParameter("key");
-	String keyword = request.getParameter("keyword");
-	String category = request.getParameter("category");
-	if (category == null) {
-		category = "all";
-	}
-	int cups;
-	if (request.getParameter("page") == null) {
-		cups = 1;
-	} else {
-		cups = Integer.parseInt(request.getParameter("page"));
-	}
-	Board board = new Board();
-	String where = "";
-	switch (category) {
-		case "all" :
-			where = String.format("order by post_num desc limit %d, %d", (cups - 1) * Page.PER_PAGE, Page.PER_PAGE);
-			break;
-		case "general" :
-		case "anonym" :
-			where = String.format("where category = '%s' order by post_num desc limit %d, %d", category,
-			(cups - 1) * Page.PER_PAGE, Page.PER_PAGE);
-			break;
-	}
-	ArrayList<PostDTO> searchList = board.searchList(key, keyword, where);
+	String keyword = (String)request.getAttribute("keyword");
+	ArrayList<PostDTO> searchList = (ArrayList<PostDTO>)request.getAttribute("list");
 	%>
 	<div style="font-size: 1.2em; font-weight: bolder; color: black;">검색
 	</div>
 	<br>
 	<div id="search">
-		<form>
+		<form action="/web/search">
 			<span> <select name="key">
 					<option value="title">제목</option>
 					<option value="content">내용</option>
@@ -98,7 +75,7 @@
 						}
 					</script>
 					<a style="cursor:pointer;" title="<%=p.getTitle()%>"
-						onclick="openPost('/read.jsp?postNum=<%=p.getpNum()%>&page=1&category=<%=p.getCategory()%>')" ><%=title%>
+						onclick="openPost('/web/read?postNum=<%=p.getpNum()%>&page=1&category=<%=p.getCategory()%>')" ><%=title%>
 						<%
 						if (p.getReply() > 0) {
 						%> (<%=p.getReply()%>) <%
@@ -120,7 +97,7 @@
 	</div>
 	<!-- 페이징 부분 -->
 	<div class="page">
-		<%@ include file="pageSearch.jsp"%>
+		<%@ include file="/include/pageSearch.jsp"%>
 	</div>
 	<!-- 페이징 부분 -->
 

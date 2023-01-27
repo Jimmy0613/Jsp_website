@@ -56,7 +56,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<div><%=member.getInfo()%>
 					</div>
 					<div id="f">
-						<button id="memberinfo" onclick="location.href='/web/mypage'">회원정보</button>
+						<button id="memberinfo" onclick="location.href='/mypage.jsp'">회원정보</button>
 						<form id="logout" action="/web/logout">
 							<input type="hidden" name="location" value="/index.jsp">
 							<button type="submit">로그아웃</button>

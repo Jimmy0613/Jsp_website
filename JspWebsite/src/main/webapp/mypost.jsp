@@ -1,19 +1,17 @@
-<%@page import="com.cre.w.sys.Board"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.sys.Member"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
+<%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
+<%@page import="com.cre.w.sys.Board"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.cre.w.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JspWebsite</title>
+<title>Insert title here</title>
 <%
 /* CSS/JS 파일 캐시 방지 */
 String styleCss = application.getRealPath("/css/mypage.css");
@@ -41,6 +39,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	} else {
 	cup = Integer.parseInt(request.getParameter("page"));
 	}
+	ArrayList<PostDTO> mypost = (ArrayList<PostDTO>) request.getAttribute("list");
 	%>
 	<div class="container">
 		<div class="header">
@@ -90,29 +89,67 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					</div>
 				</div>
 				<div id="x">
-					<%
-					String mode = request.getParameter("mode");
-					if (mode == null) {
-						mode = "mypost";
-					}
-					switch (mode) {
-					case "mypost":
-						response.sendRedirect("/web/mypost");
-						break;
-					case "myreply":
-						response.sendRedirect("/web/myreply");
-						break;
-					case "myemail":
-					%>
-					<%@ include file="/include/myemail.jsp"%>
-					<%
-					break;
-					}
-					%>
-
+					<span id="t">내가 쓴 글</span> <br>
+					<div class="list">
+						<div class="list_m">
+							<div class="list_n" style="background-color: white;">
+								<div></div>
+								<div>게시판</div>
+								<div>제목</div>
+								<div>♡</div>
+								<div>조회수</div>
+								<hr>
+							</div>
+							<div class="list_z">
+								<%
+								if (mypost.size() != 0) {
+									Board bo = new Board();
+									for (PostDTO p : mypost) {
+										String category = bo.switchCategory(p.getCategory());
+										String title = "";
+										if (p.getTitle().length() > 16) {
+									title = p.getTitle().substring(0, 16) + "...";
+										} else {
+									title = p.getTitle();
+										}
+								%>
+								<div class="list_n">
+									<div></div>
+									<div><%=category%></div>
+									<div style="text-align: left;">
+										<a
+											href="/web/read?postNum=<%=p.getpNum()%>&category=<%=p.getCategory()%>"><%=title%></a>
+										<%
+										if (p.getReply() > 0) {
+										%>
+										(<%=p.getReply()%>)
+										<%
+										}
+										%>
+									</div>
+									<div><%=p.getHeart()%></div>
+									<div><%=p.getViews()%></div>
+								</div>
+								<%
+								}
+								%>
+								<%
+								} else {
+								%>
+								<div>작성한 글이 없습니다.</div>
+								<%
+								}
+								%>
+							</div>
+							<div class="page">
+								<%@ include file="/include/pageMypost.jsp"%>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

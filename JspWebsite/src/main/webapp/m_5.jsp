@@ -17,15 +17,15 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet" href="css/m_5.css">
 </head>
 <body>
@@ -44,34 +44,34 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		<div class="header">
 			<div class="title">Jsp Website</div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div id="gamebox">
 				<div id="screen">
 					<div id="t">
-						<%@include file="include/title.jsp"%>
+						<%@include file="/include/title.jsp"%>
 					</div>
 					<div id="n"></div>
 					<div id="w">
 						<!-- m_2 복도 -->
-						<button id="we_btn" onclick="location.href='m_2.jsp?mode=move'">복도</button>
+						<button id="we_btn" onclick="location.href='/m_2.jsp?mode=move'">복도</button>
 					</div>
 					<!------------------스크린 ------------------>
 					<div id="screen_c">
 						<%
 						if (mode.equals("bag")) {
 						%>
-						<%@ include file="include/bag.jsp"%>
+						<%@ include file="/include/bag.jsp"%>
 						<%
 						} else if (mode.equals("map")) {
 						%>
-						<%@ include file="include/map.jsp"%>
+						<%@ include file="/include/map.jsp"%>
 						<%
 						} else if (mode.equals("return") || player.getPower() <= 0) {
 						%>
-						<%@ include file="include/return.jsp"%>
+						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
 						switch (mode) {
@@ -80,12 +80,12 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						case "normal":
 						%>
 						<div id="desk">
-							<img src="img/desk.png" id="deskimg">
-							<button onclick="location.href='m_5.jsp?mode=action1'">서랍
+							<img src="/img/desk.png" id="deskimg">
+							<button onclick="location.href='/m_5.jsp?mode=action1'">서랍
 								열기</button>
 						</div>
 						<div id="player">
-							<img src="img/humannormal.jpg" id="playerimg">
+							<img src="/img/humannormal.jpg" id="playerimg">
 						</div>
 						<%
 						break;
@@ -101,17 +101,17 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 								log.send("💡 ''방으로'' 아이콘을 누르면 즉시 \'나의 방\'으로 이동할 수 있습니다.", "tip");
 						%>
 						<div id="desk">
-							<img src="img/desk.png" id="deskimg">
+							<img src="/img/desk.png" id="deskimg">
 						</div>
 						<div id="player">
-							<img src="img/humanmap.png" id="playerimg2">
+							<img src="/img/humanmap.png" id="playerimg2">
 						</div>
 						<%
 						} else {
 						Log.turnCount++;
 						log.send("[ " + Log.turnCount + " ] 서랍을 열었습니다. 아무것도 없습니다.", "normal");
 						%>
-						<jsp:forward page="m_5.jsp">
+						<jsp:forward page="/m_5.jsp">
 							<jsp:param value="normal" name="mode" />
 						</jsp:forward>
 						<%
@@ -128,14 +128,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (player.getStory() >= 7) {
 						%>
-						<button id="ns_btn" onclick="location.href='m_6.jsp?mode=move'">마당</button>
+						<button id="ns_btn" onclick="location.href='/m_6.jsp?mode=move'">마당</button>
 						<%
 						}
 						%>
 					</div>
 				</div>
 				<div id="system">
-					<%@ include file="include/sys_game.jsp"%>
+					<%@ include file="/include/sys_game.jsp"%>
 				</div>
 			</div>
 		</div>

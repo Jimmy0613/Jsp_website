@@ -19,28 +19,28 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/board.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/board.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/list.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/list.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/search.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/search.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div class="menu_left">
-				<%@ include file="include/menuLeft.jsp"%>
+				<%@ include file="/include/menuLeft.jsp"%>
 			</div>
 			<div class="list">
-				<%@ include file="include/listSearch.jsp"%>
+				<%@ include file="/include/listSearch.jsp"%>
 			</div>
 		</div>
 	</div>

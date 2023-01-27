@@ -16,6 +16,7 @@ import com.cre.w.dto.MemberDTO;
 import com.cre.w.dto.PostDTO;
 import com.cre.w.dto.ReplyDTO;
 import com.cre.w.sys.Board;
+import com.cre.w.sys.Charac;
 import com.cre.w.sys.Member;
 import com.cre.w.sys.Page;
 
@@ -24,49 +25,56 @@ public class Controller extends HttpServlet {
 	Board board = new Board();
 	Member member = new Member();
 	Page pp = new Page();
-	String forward;
+	HttpSession session;
+	PrintWriter out;
 
-	public Controller() {
-		super();
-	}
+	String forward;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		PrintWriter out = response.getWriter();
+		String where = "";
+		String category;
+		String path;
+		String cgk;
+		String postNum;
+		String location;
+		MemberDTO loginMember;
+		ArrayList<PostDTO> list;
+		ArrayList<ReplyDTO> reply;
+		PostDTO post;
+		String pageStr;
+		int page = 1;
+		int totalPage;
+		int totalPb;
+		int currentPb;
+		session = request.getSession();
+		out = response.getWriter();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-		String path = request.getPathInfo();
-		String category = request.getParameter("category");
+		loginMember = (MemberDTO) session.getAttribute("loginMember");
+		path = request.getPathInfo();
+		category = request.getParameter("category");
 		if (category == null) {
 			category = "popular";
 		}
-		String cgk = board.switchCategory(category);
-		String p = request.getParameter("page");
-		int page = 1;
-		if (p != null) {
-			page = Integer.parseInt(p);
+		cgk = board.switchCategory(category);
+		pageStr = request.getParameter("page");
+		if (pageStr != null) {
+			page = Integer.parseInt(pageStr);
 		}
 		request.setAttribute("page", page);
 		request.setAttribute("category", category);
 		request.setAttribute("cgKorean", cgk);
 
-		String postNum = request.getParameter("postNum");
+		postNum = request.getParameter("postNum");
 		if (postNum != null) {
 			request.setAttribute("postNum", postNum);
 		}
-		String location = request.getParameter("location");
+		location = request.getParameter("location");
 		if (location == null) {
 			location = "/index.jsp";
 		}
-		ArrayList<PostDTO> list;
-		ArrayList<ReplyDTO> reply;
-		PostDTO post;
-		int totalPage;
-		int totalPb;
-		int currentPb;
 
 		if (path != null) {
 			switch (path) {
@@ -127,7 +135,7 @@ public class Controller extends HttpServlet {
 			case "/board":
 				list = board.getList(category, page);
 				request.setAttribute("list", list);
-				String where = "where category = '" + category + "'";
+				where = "where category = '" + category + "'";
 				totalPage = pp.getTotalPage(where);
 				totalPb = 1;
 				currentPb = 1;
@@ -143,47 +151,99 @@ public class Controller extends HttpServlet {
 				request.setAttribute("currentPb", currentPb);
 				forward = "/board.jsp";
 				break;
-			case "/mypage":
-				String mode = request.getParameter("mode");
-				if (mode == null) {
-					mode = "mypost";
+			case "/search":
+				String key = request.getParameter("key");
+				if (key == null) {
+					key = "title";
 				}
-				request.setAttribute("mode", mode);
-				switch (mode) {
-				case "mypost":
-					list = board.mypost(loginMember.getId(), page);
-					request.setAttribute("list", list);
-					totalPage = pp.getMypostPage(loginMember);
-					if (page % Page.PAGE_BLOCK == 0) {
-						currentPb = page / Page.PAGE_BLOCK;
-						totalPb = totalPage / Page.PAGE_BLOCK;
-					} else {
-						currentPb = page / Page.PAGE_BLOCK + 1;
-						totalPb = page / Page.PAGE_BLOCK;
-					}
-					request.setAttribute("totalPage", totalPage);
-					request.setAttribute("totalPb", totalPb);
-					request.setAttribute("currentPb", currentPb);
-					forward = "/mypage.jsp?mode=mypost";
-					break;
-				case "myreply":
-					reply = board.myreply(loginMember.getId(), page);
-					request.setAttribute("reply", reply);
-					totalPage = pp.getMyreplyPage(loginMember);
-					if (page % Page.PAGE_BLOCK == 0) {
-						currentPb = page / Page.PAGE_BLOCK;
-						totalPb = totalPage / Page.PAGE_BLOCK;
-					} else {
-						currentPb = page / Page.PAGE_BLOCK + 1;
-						totalPb = page / Page.PAGE_BLOCK;
-					}
-					request.setAttribute("totalPage", totalPage);
-					request.setAttribute("totalPb", totalPb);
-					request.setAttribute("currentPb", currentPb);
-					forward = "/mypage.jsp?mode=myreply";
-					break;
+				String keyword = request.getParameter("keyword");
+				if (keyword == null) {
+					keyword = "";
 				}
+				request.setAttribute("key", key);
+				request.setAttribute("keyword", keyword);
+				switch (category) {
+				case "general":
+				case "anonym":
+					where = String.format("where %s like '%%%s%%' and category = '%s'", key, keyword, category);
+					break;
+				default:
+					where = String.format("where %s like '%%%s%%'", key, keyword);
+				}
+				list = board.searchList(where, page);
+				request.setAttribute("list", list);
+				totalPage = pp.getTotalPage(where);
+				totalPb = 1;
+				currentPb = 1;
+				if (page % Page.PAGE_BLOCK == 0) {
+					currentPb = page / Page.PAGE_BLOCK;
+					totalPb = totalPage / Page.PAGE_BLOCK;
+				} else {
+					currentPb = page / Page.PAGE_BLOCK + 1;
+					totalPb = page / Page.PAGE_BLOCK;
+				}
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("totalPb", totalPb);
+				request.setAttribute("currentPb", currentPb);
+				forward = "/search.jsp";
 				break;
+			case "/mypost":
+				list = board.mypost(loginMember.getId(), page);
+				request.setAttribute("list", list);
+				totalPage = pp.getMypostPage(loginMember);
+				if (page % Page.PAGE_BLOCK == 0) {
+					currentPb = page / Page.PAGE_BLOCK;
+					totalPb = totalPage / Page.PAGE_BLOCK;
+				} else {
+					currentPb = page / Page.PAGE_BLOCK + 1;
+					totalPb = page / Page.PAGE_BLOCK;
+				}
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("totalPb", totalPb);
+				request.setAttribute("currentPb", currentPb);
+				forward = "/mypost.jsp";
+				break;
+			case "/myreply":
+				reply = board.myreply(loginMember.getId(), page);
+				request.setAttribute("reply", reply);
+				totalPage = pp.getMyreplyPage(loginMember);
+				if (page % Page.PAGE_BLOCK == 0) {
+					currentPb = page / Page.PAGE_BLOCK;
+					totalPb = totalPage / Page.PAGE_BLOCK;
+				} else {
+					currentPb = page / Page.PAGE_BLOCK + 1;
+					totalPb = page / Page.PAGE_BLOCK;
+				}
+				request.setAttribute("totalPage", totalPage);
+				request.setAttribute("totalPb", totalPb);
+				request.setAttribute("currentPb", currentPb);
+				forward = "/myreply.jsp";
+				break;
+			case "/myemail":
+				String email = request.getParameter("email");
+				if (member.isEmail(email)) {
+					out.println("<script>alert('이미 등록된 이메일입니다.')</script>");
+					out.println("<script>location.href='/mypage.jsp?mode=myemail'</script>");
+					return;
+				} else if (loginMember.getEmail().equals("")) {
+					loginMember.setEmail(email);
+					member.memberUpdate(loginMember);
+					session.setAttribute("loginMember", loginMember);
+					out.println("<script>alert('등록되었습니다.')</script>");
+					out.println("<script>location.href='/mypage.jsp'</script>");
+					return;
+				} else if (email.equals(loginMember.getEmail())) {
+					out.println("<script>alert('기존과 동일한 이메일입니다.')</script>");
+					out.println("<script>location.href='/mypage.jsp?mode=myemail'</script>");
+					return;
+				} else {
+					loginMember.setEmail(email);
+					member.memberUpdate(loginMember);
+					session.setAttribute("loginMember", loginMember);
+					out.println("<script>alert('변경되었습니다.')</script>");
+					out.println("<script>location.href='/mypage.jsp'</script>");
+					return;
+				}
 			case "/read":
 				board.view(postNum);
 				post = board.selectPost(postNum);
@@ -253,6 +313,30 @@ public class Controller extends HttpServlet {
 				board.replyCount(postNum, "-1");
 				response.sendRedirect("/web/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
 				return;
+			case "/newChar":
+				Charac character = new Charac();
+				String loginC1 = loginMember.getCharacter1();
+				String input_name = request.getParameter("c_name");
+				String alertCh = character.newAlert(input_name);
+				if (alertCh.equals("")) {
+					character.newCharacter(input_name, loginMember.getId());
+					if (loginC1.equals("x")) {
+						member.updateCharacter("CHARACTER1", input_name, loginMember.getId());
+						loginMember.setCharacter1(input_name);
+						member.memberUpdate(loginMember);
+					} else {
+						member.updateCharacter("CHARACTER2", input_name, loginMember.getId());
+						loginMember.setCharacter2(input_name);
+						member.memberUpdate(loginMember);
+					}
+					session.setAttribute("loginMember", loginMember);
+					out.println("<script>location.href='/character.jsp'</script>");
+					return;
+				} else {
+					out.println("<script>alert('사용할 수 없는 이름입니다. " + alertCh + "')</script>");
+					out.println("<script>location.href='/newChar.jsp'</script>");
+					return;
+				}
 			}
 		}
 

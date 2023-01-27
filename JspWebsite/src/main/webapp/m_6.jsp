@@ -17,15 +17,15 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet" href="css/m_6.css">
 </head>
 <body>
@@ -44,18 +44,18 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		<div class="header">
 			<div class="title">Jsp Website</div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div id="gamebox">
 				<div id="screen">
 					<div id="t">
-						<%@include file="include/title.jsp"%>
+						<%@include file="/include/title.jsp"%>
 					</div>
 					<div id="n">
 						<!-- m_5 거실 -->
-						<button id="ns_btn" onclick="location.href='m_5.jsp?mode=move'">거실</button>
+						<button id="ns_btn" onclick="location.href='/m_5.jsp?mode=move'">거실</button>
 					</div>
 					<div id="w"></div>
 					<!------------------스크린 ------------------>
@@ -63,15 +63,15 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (mode.equals("bag")) {
 						%>
-						<%@ include file="include/bag.jsp"%>
+						<%@ include file="/include/bag.jsp"%>
 						<%
 						} else if (mode.equals("map")) {
 						%>
-						<%@ include file="include/map.jsp"%>
+						<%@ include file="/include/map.jsp"%>
 						<%
 						} else if (mode.equals("return") || player.getPower() <= 0) {
 						%>
-						<%@ include file="include/return.jsp"%>
+						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
 						switch (mode) {
@@ -82,17 +82,17 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 								log.send(player.getName() + "🗣 \"돈이다! \"", "speech");
 						%>
 						<div id="sp1">
-							<img src="img/sp_m6_1.jpg">
+							<img src="/img/sp_m6_1.jpg">
 						</div>
 						<div id="wall">
-							<img src="img/wall.png">
+							<img src="/img/wall.png">
 						</div>
 						<div id="player">
-							<img src="img/human6.jpg">
+							<img src="/img/human6.jpg">
 						</div>
 						<div id="coin">
-							<img src="img/coin.jpg">
-							<button onclick="location.href='m_6.jsp?mode=action1'">줍기</button>
+							<img src="/img/coin.jpg">
+							<button onclick="location.href='/m_6.jsp?mode=action1'">줍기</button>
 						</div>
 
 						<%
@@ -100,24 +100,24 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						log.send(player.getName() + "🗣 \"깜짝이야! 누구세요?! \"", "speech");
 						%>
 						<div id="sp3">
-							<img src="img/sp_m6_3.jpg">
+							<img src="/img/sp_m6_3.jpg">
 						</div>
 						<div id="wall2">
-							<img src="img/wallhuman.png">
-							<button onclick="location.href='m_6.jsp?mode=action2'">다가가기</button>
+							<img src="/img/wallhuman.png">
+							<button onclick="location.href='/m_6.jsp?mode=action2'">다가가기</button>
 						</div>
 						<div id="player">
-							<img src="img/human6.jpg">
+							<img src="/img/human6.jpg">
 						</div>
 
 						<%
 						} else {
 						%>
 						<div id="wall">
-							<img src="img/wall.png">
+							<img src="/img/wall.png">
 						</div>
 						<div id="player">
-							<img src="img/humannormal.jpg">
+							<img src="/img/humannormal.jpg">
 						</div>
 						<%
 						}
@@ -130,13 +130,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5, 금화 +5)", "story");
 						%>
 						<div id="sp2">
-							<img src="img/sp_m6_2.jpg">
+							<img src="/img/sp_m6_2.jpg">
 						</div>
 						<div id="wall">
-							<img src="img/wall.png">
+							<img src="/img/wall.png">
 						</div>
 						<div id="player2">
-							<img src="img/humancoin.png">
+							<img src="/img/humancoin.png">
 						</div>
 						<%
 						break;
@@ -148,13 +148,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						%>
 
 						<div id="sp4">
-							<img src="img/sp_m6_4.jpg">
+							<img src="/img/sp_m6_4.jpg">
 						</div>
 						<div id="wall">
-							<img src="img/wall.png">
+							<img src="/img/wall.png">
 						</div>
 						<div id="player">
-							<img src="img/humansurprised.jpg">
+							<img src="/img/humansurprised.jpg">
 						</div>
 						<%
 						}
@@ -167,7 +167,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (player.getStory() >= 9) {
 						%>
-						<button id="we_btn" onclick="location.href='m_7.jsp?mode=move'">집
+						<button id="we_btn" onclick="location.href='/m_7.jsp?mode=move'">집
 							앞</button>
 						<%
 						}
@@ -176,7 +176,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<div id="s"></div>
 				</div>
 				<div id="system">
-					<%@ include file="include/sys_game.jsp"%>
+					<%@ include file="/include/sys_game.jsp"%>
 				</div>
 			</div>
 		</div>

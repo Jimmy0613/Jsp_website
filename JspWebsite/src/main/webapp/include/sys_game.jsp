@@ -22,11 +22,11 @@
 	%>
 	<script>
 		function showLog() {
-			window.open("include/log.jsp", "지난 로그",
+			window.open("/include/log.jsp", "지난 로그",
 					"width=500, height=700, top=200, left=100");
 		}
 		function showStory() {
-			window.open("include/story.jsp", "지난 이야기",
+			window.open("/include/story.jsp", "지난 이야기",
 					"width=500, height=300, top=200, left=100");
 		}
 	</script>
@@ -49,7 +49,7 @@
 			<%=ms.getInfo()%>
 		</div>
 		<div id="msgbox">
-			<%@include file="logTen.jsp"%>
+			<%@include file="/include/logTen.jsp"%>
 		</div>
 		<div id="show">
 			<button onclick="showLog();">지난 기록 보기</button>
@@ -59,25 +59,25 @@
 	</div>
 	<div id="s_menu_right">
 		<div class="icon" id="icon1">
-			<a href="<%=ms.getMapId()%>.jsp?mode=return"><img
-				src="img/returnhome.png"></a>
+			<a href="/<%=ms.getMapId()%>.jsp?mode=return"><img
+				src="/img/returnhome.png"></a>
 		</div>
 		<b class="icon_t" id="icon1_t">방으로</b>
 
 		<div class="icon" id="icon2">
-			<a href="<%=ms.getMapId()%>.jsp?mode=map"><img
-				src="img/map.png" id="mapimg"></a>
+			<a href="/<%=ms.getMapId()%>.jsp?mode=map"><img
+				src="/img/map.png" id="mapimg"></a>
 		</div>
 		<b class="icon_t" id="icon2_t">지도</b>
 
 		<div class="icon" id="icon3">
-			<a href="<%=ms.getMapId()%>.jsp?mode=bag"><img
-				src="img/bag.png" id="bagimg"></a>
+			<a href="/<%=ms.getMapId()%>.jsp?mode=bag"><img
+				src="/img/bag.png" id="bagimg"></a>
 		</div>
 		<b class="icon_t" id="icon3_t">가방</b>
 
 		<div class="icon" id="icon4">
-			<a href="character.jsp"><img src="img/charac.png"></a>
+			<a href="/character.jsp"><img src="/img/charac.png"></a>
 		</div>
 		<b class="icon_t" id="icon4_t">캐릭터</b>
 

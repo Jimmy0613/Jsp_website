@@ -22,9 +22,9 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/board.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/board.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%
@@ -38,12 +38,12 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 		<div class="header">
 			<div class="title"></div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div class="menu_left">
-				<%@ include file="include/menuLeft.jsp"%>
+				<%@ include file="/include/menuLeft.jsp"%>
 			</div>
 			<div class="write">
 				<span style="font-size: 1.2em;">수정</span>

@@ -1,5 +1,6 @@
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.cre.w.dto.MemberDTO"%>
 <%@page import="com.cre.w.sys.Board"%>
 <%@page import="com.cre.w.sys.Page"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,17 +13,15 @@
 </head>
 <body>
 	<%
-	String ky = (String)request.getAttribute("key");
-	String kw = (String)request.getAttribute("keyword");
-	int tp1 = (Integer)request.getAttribute("totalPage");
+	String md = request.getParameter("mode");
 	int cPage1 = (Integer)request.getAttribute("page");
+	int tp1 = (Integer)request.getAttribute("totalPage");
+	int tpb = (Integer)request.getAttribute("totalPb");
 	int pb = (Integer)request.getAttribute("currentPb");
-	String cg1 = (String)request.getAttribute("category");
-	
-	//(처음)
+	//(처음) 관련================================================
 	if (cPage1 > 1) {
 	%>
-	<a href="/web/search?page=1&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"
+	<a href="/web/myreply?page=1&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">처음</a>
 	<%
 	} else { 
@@ -30,18 +29,18 @@
 	<a style="font-weight: bolder; font-size: 0.8em; cursor:default;">처음</a>
 	<%
 	}
-	//======================================================================
-	//(이전)
-	if (cPage1 > 1) {
-	if (cPage1 % Page.PAGE_BLOCK == 1) {
+	//========================================================
+	//(이전) 관련================================================
+	if (cPage1 > 1) { 
+	if (cPage1 % Page.PAGE_BLOCK == 1) { 
 	%>
 	<a
-		href="/web/search?page=<%=((pb - 1) * Page.PAGE_BLOCK)%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"
+		href="/web/myreply?page=<%=((pb - 1) * Page.PAGE_BLOCK)%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">이전</a>
 	<%
 	} else if (cPage1 > 1) {
 	%>
-	<a href="/web/search?page=<%=(cPage1 - 1)%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"
+	<a href="/web/myreply?page=<%=(cPage1 - 1)%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">이전</a>
 	<%
 	}
@@ -57,11 +56,11 @@
 	if (i == cPage1) {
 	%>
 	<a style="font-weight: bolder;"
-		href="/web/search?page=<%=i%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"><%=i%></a>
+		href="/web/myreply?page=<%=i%>&mode=<%=md%>"><%=i%></a>
 	<%
 	} else {
 	%>
-	<a href="/web/search?page=<%=i%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"><%=i%></a>
+	<a href="/web/myreply?page=<%=i%>&mode=<%=md%>"><%=i%></a>
 	<%
 	}
 	}
@@ -69,28 +68,27 @@
 	//(다음)
 	if (cPage1 % Page.PAGE_BLOCK == 0) {
 	%>
-	<a
-		href="/web/search?page=<%=(pb * Page.PAGE_BLOCK + 1)%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"
+	<a href="/web/myreply?page=<%=(pb * Page.PAGE_BLOCK + 1)%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">다음</a>
 	<%
-	} else if (cPage1 < tp1) { 
+	} else if (cPage1 < tp1) {
 	%>
-	<a href="/web/search?page=<%=cPage1 + 1%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"
+	<a href="/web/myreply?page=<%=cPage1 + 1%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">다음</a>
 	<%
-	} else { 
+	} else {
 	%>
 	<a style="font-weight: bolder; font-size: 0.8em; cursor:default;">다음</a>
 	<%
 	}
 	//===========================================================
-	//(마지막) 
+	//(마지막) 관련================================================
 	if (cPage1 < tp1) {
 	%>
-	<a href="/web/search?page=<%=tp1%>&category=<%=cg1%>&key=<%=ky %>&keyword=<%=kw %>"
+	<a href="/web/myreply?page=<%=tp1%>&mode=<%=md%>"
 		style="font-weight: bolder; font-size: 0.8em;">마지막</a>
 	<%
-	} else { 
+	} else {
 	%>
 	<a style="font-weight: bolder; font-size: 0.8em; cursor:default;">마지막</a>
 	<%

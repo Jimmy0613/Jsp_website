@@ -14,7 +14,7 @@
 	<span id="t">이메일</span>
 	<br>
 	<div class="email">
-		<form action="ServletEmail">
+		<form action="/web/myemail">
 			<%
 			if (eme.getEmail().equals("")) {
 			%>

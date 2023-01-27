@@ -25,6 +25,9 @@ public class Board extends BoardDAO {
 		case "report":
 			cg = "신고";
 			break;
+		case "all":
+			cg = "전체";
+			break;
 		}
 		return cg;
 	}
@@ -67,8 +70,9 @@ public class Board extends BoardDAO {
 		return selectList(sql);
 	}
 
-	public ArrayList<PostDTO> searchList(String key, String keyword, String where) {
-		String sql = String.format("select * from %s where %s like '%%%s%%' %s;", Db.TABLE_BOARD, key, keyword, where);
+	public ArrayList<PostDTO> searchList(String where, int currentPage) {
+		String sql = String.format("select * from %s %s order by post_num desc limit %d, %d;", Db.TABLE_BOARD, where,
+				(currentPage - 1) * Page.PER_PAGE, Page.PER_PAGE);
 		return selectList(sql);
 	}
 

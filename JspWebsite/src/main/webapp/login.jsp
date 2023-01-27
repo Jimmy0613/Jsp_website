@@ -16,9 +16,9 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/join.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/join.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%
@@ -30,7 +30,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	<div class="container">
 		<div class="header">
 			<div class="title"></div>
-			<div class="menu"><%@include file="include/menuTop.jsp"%></div>
+			<div class="menu"><%@include file="/include/menuTop.jsp"%></div>
 		</div>
 		<div class="content">
 			<div class="join">
@@ -42,7 +42,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 							아이디<br> <input name="id"><br>비밀번호<br> <input
 								name="pw" type="password"> <br>
 							<button id="login_button" type="submit">로그인</button>
-							<a href="join.jsp?location=/login.jsp"> 회원가입 </a>
+							<a href="/join.jsp?location=/login.jsp"> 회원가입 </a>
 						</p>
 					</form>
 				</div>

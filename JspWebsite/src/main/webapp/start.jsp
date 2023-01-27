@@ -22,7 +22,7 @@
 	log.load();
 	log.send("[ " + Log.turnCount + " ] 환영합니다!", "good");
 	log.send("💡 시스템 메시지는 캐릭터 변경, 로그아웃시 초기화됩니다.", "tip");
-	response.sendRedirect(player.getLocation() + ".jsp?mode=normal");
+	response.sendRedirect("/" + player.getLocation() + ".jsp?mode=normal");
 	%>
 </body>
 </html>

@@ -16,9 +16,9 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/join.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/join.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 </head>
 <body>
 	<%

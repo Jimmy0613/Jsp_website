@@ -17,15 +17,15 @@ Date lastModifiedStyle = new Date(style.lastModified());
 SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 %>
 <link rel="stylesheet"
-	href="css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/common.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/screen.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/system.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/sys_game.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet"
-	href="css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
+	href="/css/map.css?ver=<%=fmt.format(lastModifiedStyle)%>">
 <link rel="stylesheet" href="css/m_2.css">
 </head>
 <body>
@@ -42,16 +42,16 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 	%>
 	<div class="container">
 		<div class="header">
-			<div class="title">Jsp Website</div>
+			<div class="title"></div>
 			<div class="menu">
-				<%@include file="include/menuTop.jsp"%>
+				<%@include file="/include/menuTop.jsp"%>
 			</div>
 		</div>
 		<div class="content">
 			<div id="gamebox">
 				<div id="screen">
 					<div id="t">
-						<%@include file="include/title.jsp"%>
+						<%@include file="/include/title.jsp"%>
 					</div>
 					<div id="n"></div>
 					<div id="w">
@@ -59,7 +59,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (player.getStory() >= 3) {
 						%>
-						<button id="we_btn" onclick="location.href='m_3.jsp?mode=move'">주방</button>
+						<button id="we_btn" onclick="location.href='/m_3.jsp?mode=move'">주방</button>
 						<%
 						}
 						%>
@@ -69,15 +69,15 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (mode.equals("bag")) {
 						%>
-						<%@ include file="include/bag.jsp"%>
+						<%@ include file="/include/bag.jsp"%>
 						<%
 						} else if (mode.equals("map")) {
 						%>
-						<%@ include file="include/map.jsp"%>
+						<%@ include file="/include/map.jsp"%>
 						<%
 						} else if (mode.equals("return") || player.getPower() <= 0) {
 						%>
-						<%@ include file="include/return.jsp"%>
+						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
 						switch (mode) {
@@ -93,31 +93,31 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 								player.setPower(player.getPower() - 2);
 								player.setStory(1);
 						%>
-						<jsp:forward page="m_2.jsp">
+						<jsp:forward page="/m_2.jsp">
 							<jsp:param value="action1" name="mode" />
 						</jsp:forward>
 						<%
 						} else if (player.getStory() < 2) {
 						%>
-						<jsp:forward page="m_2.jsp">
+						<jsp:forward page="/m_2.jsp">
 							<jsp:param value="action1" name="mode" />
 						</jsp:forward>
 						<%
 						}
 						%>
 						<div id="player">
-							<img src="img/humannormal.jpg" id="playerimg">
+							<img src="/img/humannormal.jpg" id="playerimg">
 						</div>
 						<%
 						break;
 						case "action1":
 						%><div id="player">
-							<img src="img/humansurprised.jpg" id="playerimg">
+							<img src="/img/humansurprised.jpg" id="playerimg">
 						</div>
 						<div id="mice">
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<button onclick="location.href='m_2.jsp?mode=action2'">쫓아내기</button>
-							<img src="img/mice.png" id="miceimg">
+							<button onclick="location.href='/m_2.jsp?mode=action2'">쫓아내기</button>
+							<img src="/img/mice.png" id="miceimg">
 						</div>
 						<%
 						break;
@@ -132,14 +132,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 								log.send("💡 침대에서 자면 힘을 회복할 수 있습니다.", "tip");
 							}
 						%>
-						<jsp:forward page="m_2.jsp">
+						<jsp:forward page="/m_2.jsp">
 							<jsp:param value="action3" name="mode" />
 						</jsp:forward>
 						<%
 						case "action3":
 						%>
 						<div id="player">
-							<img src="img/humanactive.jpg" id="playerimg">
+							<img src="/img/humanactive.jpg" id="playerimg">
 						</div>
 						<%
 						break;
@@ -154,19 +154,19 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%
 						if (player.getStory() >= 5) {
 						%>
-						<button id="we_btn" onclick="location.href='m_5.jsp?mode=move'">거실</button>
+						<button id="we_btn" onclick="location.href='/m_5.jsp?mode=move'">거실</button>
 						<%
 						}
 						%>
 					</div>
 					<div id="s">
 						<!-- m_1 나의 방 -->
-						<button id="ns_btn" onclick="location.href='m_1.jsp?mode=move'">나의
+						<button id="ns_btn" onclick="location.href='/m_1.jsp?mode=move'">나의
 							방</button>
 					</div>
 				</div>
 				<div id="system">
-					<%@ include file="include/sys_game.jsp"%>
+					<%@ include file="/include/sys_game.jsp"%>
 				</div>
 			</div>
 		</div>
