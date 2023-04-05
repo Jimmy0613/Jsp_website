@@ -1,4 +1,4 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,12 +9,12 @@
 </head>
 <body>
 	<%
-	MemberDTO eme = (MemberDTO) session.getAttribute("loginMember");
+	UserDTO eme = (UserDTO) session.getAttribute("loginUser");
 	%>
 	<span id="t">이메일</span>
 	<br>
 	<div class="email">
-		<form action="/member/myemail">
+		<form action="/user/myemail">
 			<%
 			if (eme.getEmail().equals("")) {
 			%>

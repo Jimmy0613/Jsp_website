@@ -31,14 +31,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
-	character.characterUpdate(player);
-	session.setAttribute("player", player);
-	session.setAttribute("m_id", "m_4");
-	String mode = request.getParameter("mode");
-	Map map = new Map();
-	Log log = new Log();
-	MapDTO m4 = map.getMap("m_4");
+		CharacterDTO player = (CharacterDTO) session.getAttribute("player");
+		character.characterUpdate(player);
+		session.setAttribute("player", player);
+		session.setAttribute("m_id", "m_4");
+		String mode = request.getParameter("mode");
+		Map map = new Map();
+		Log log = new Log();
+		MapDTO m4 = map.getMap("m_4");
 	%>
 	<div class="container">
 		<div class="header">
@@ -74,11 +74,11 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
-						switch (mode) {
-						case "move":
-							map.move(m4, player);
-						case "normal":
-							if (player.getStory() < 5) {
+										switch (mode) {
+										case "move":
+											map.move(m4, player);
+										case "normal":
+											if (player.getStory() < 5) {
 						%>
 						<div id="bag">
 							<img src="/img/bag.png" id="bagimg">
@@ -92,21 +92,21 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						case "action1":
-							player.setStory(5);
-							player.setExp(player.getExp() + 5);
-							log.send(player.getName() + "🗣 \"가방이다! \"", "speech");
-							log.send("👜 이제 가방을 사용할 수 있습니다.", "good");
-							log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
-							log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (거실)", "map");
+										case "action1":
+											player.setStory(5);
+											player.setExp(player.getExp() + 5);
+											log.send(player.getName() + "🗣 \"가방이다! \"", "speech");
+											log.send("👜 이제 가방을 사용할 수 있습니다.", "good");
+											log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
+											log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (거실)", "map");
 						%>
 						<div id="player">
 							<img src="/img/humanbag.png" id="playerimg2">
 						</div>
 						<%
 						break;
-						}
-						}
+										}
+										}
 						%>
 					</div>
 					<!------------------스크린 ------------------>

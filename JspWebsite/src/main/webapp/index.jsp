@@ -1,5 +1,5 @@
 <%@page import="com.cre.w.dao.RpsDAO"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.Board"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -27,7 +27,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 </head>
 <body>
 	<%
-	MemberDTO member = (MemberDTO) session.getAttribute("loginMember");
+	UserDTO user = (UserDTO) session.getAttribute("loginUser");
 	%>
 	<div class="container">
 		<div class="header">
@@ -40,7 +40,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			<div class="member_info">
 				<p style="margin: 10px;">내 정보</p>
 				<%
-				if (member == null) {
+				if (user == null) {
 				%>
 				<div style="padding: 20px;">
 					<span style="color: grey;">로그인이 필요합니다.</span> <br> <br> <a
@@ -55,10 +55,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					style="align-items: center; justify-content: center;">
 					<div id="f">
 						<div style="grid-column-start: 1; grid-column-end: 3;">
-							<%=member.getInfo()%> <br> <b style="color:red;">❤</b> : <%=member.getHeart()%> 개
+							<%=user.getInfo()%> <br> <b style="color:red;">❤</b> : <%=user.getHeart()%> 개
 						</div>
 						<button id="memberinfo" onclick="location.href='/mypage.jsp'">회원정보</button>
-						<form id="logout" action="/member/logout">
+						<form id="logout" action="/user/logout">
 							<input type="hidden" name="location" value="/index.jsp">
 							<button type="submit">로그아웃</button>
 						</form>
@@ -74,13 +74,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<span style="font-size:0.7em;">가위 바위 보 글자를 클릭하면 바로 도전!</span><br>
 				</p>
 				<%
-				if (member == null) {
+				if (user == null) {
 				%>
 				<div style="padding: 10px; color: grey;">로그인이 필요합니다.</div>
 				<%
 				} else {
 				RpsDAO rps = new RpsDAO();
-				int count = rps.getCountToday(member.getId());
+				int count = rps.getCountToday(user.getId());
 				int chance = 3 - count;
 				%>
 				<div id="rps" style="padding: 10px;">
@@ -89,7 +89,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<%
 					if (chance > 0) {
 					%>
-					<span id="rtext"> <a href="/member/rps?input=s">가위✌</a> | <a href="/member/rps?input=r">바위✊</a> | <a href="/member/rps?input=p">보🖐</a>
+					<span id="rtext"> <a href="/user/rps?input=s">가위✌</a> | <a href="/user/rps?input=r">바위✊</a> | <a href="/user/rps?input=p">보🖐</a>
 					</span>
 					<%
 					} else {

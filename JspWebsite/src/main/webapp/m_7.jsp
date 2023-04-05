@@ -31,14 +31,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
-	character.characterUpdate(player);
-	session.setAttribute("player", player);
-	session.setAttribute("m_id", "m_7");
-	String mode = request.getParameter("mode");
-	Map map = new Map();
-	Log log = new Log();
-	MapDTO m7 = map.getMap("m_7");
+		CharacterDTO player = (CharacterDTO) session.getAttribute("player");
+		character.characterUpdate(player);
+		session.setAttribute("player", player);
+		session.setAttribute("m_id", "m_7");
+		String mode = request.getParameter("mode");
+		Map map = new Map();
+		Log log = new Log();
+		MapDTO m7 = map.getMap("m_7");
 	%>
 	<div class="container">
 		<div class="header">
@@ -74,19 +74,19 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
-						switch (mode) {
-						case "move":
-							map.move(m7, player);
-						case "normal":
-							out.println("준비중 ㅎㅎ");
-							break;
-						case "action1":
+										switch (mode) {
+										case "move":
+											map.move(m7, player);
+										case "normal":
+											out.println("준비중 ㅎㅎ");
+											break;
+										case "action1":
 
-							break;
-						case "action2":
+											break;
+										case "action2":
 
-						}
-						}
+										}
+										}
 						%>
 					</div>
 					<!------------------스크린 ------------------>

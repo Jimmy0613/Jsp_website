@@ -45,13 +45,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 </head>
 <body>
 	<%
-	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-	int currentPage = (Integer) request.getAttribute("page");
-	String postNum = (String) request.getAttribute("postNum");
-	PostDTO post = (PostDTO) request.getAttribute("post");
-	String category = (String) request.getAttribute("category");
-	String category2 = (String) request.getAttribute("cgKorean");
-	ArrayList<ReplyDTO> reply = (ArrayList<ReplyDTO>) request.getAttribute("reply");
+	UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+		int currentPage = (Integer) request.getAttribute("page");
+		String postNum = (String) request.getAttribute("postNum");
+		PostDTO post = (PostDTO) request.getAttribute("post");
+		String category = (String) request.getAttribute("category");
+		String category2 = (String) request.getAttribute("cgKorean");
+		ArrayList<ReplyDTO> reply = (ArrayList<ReplyDTO>) request.getAttribute("reply");
 	%>
 	<div class="container">
 		<div class="header">
@@ -93,7 +93,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%=post.getReply()%>개 | 하트
 						<%=post.getHeart()%>개
 						<%
-					if (loginMember != null) {
+					if (loginUser != null) {
 					%>
 						<form action="/board/heart">
 							<input type="hidden" name="postNum" value="<%=post.getpNum()%>">
@@ -127,8 +127,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 							<%=r.getContent()%>
 							(<%=r.getrDate()%>)
 							<%
-							if (loginMember != null) {
-								if (r.getWriter().equals(loginMember.getName())) {
+							if (loginUser != null) {
+								if (r.getWriter().equals(loginUser.getName())) {
 									String formId = "form" + r.getrNum();
 							%>
 							<form id="<%=formId%>" method="get" action="/board/delReply"
@@ -153,7 +153,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						}
 						%>
 						<%
-						if (loginMember != null) {
+						if (loginUser != null) {
 						%>
 						<form class="reply" action="/board/reply">
 							<input type="hidden" value="<%=postNum%>" name="postNum">
@@ -169,8 +169,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				</div>
 				<div id="edl">
 					<%
-					if (loginMember != null) {
-						if (loginMember.getName().equals(post.getWriter()) || loginMember.getId().equals("manager")) {
+					if (loginUser != null) {
+						if (loginUser.getName().equals(post.getWriter()) || loginUser.getId().equals("manager")) {
 					%>
 					<button
 						onclick="location.href='/edit.jsp?postNum=<%=postNum%>&category=<%=category%>&page=<%=currentPage%>'">수정</button>

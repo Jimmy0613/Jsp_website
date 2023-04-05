@@ -1,4 +1,4 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,13 +9,13 @@
 </head>
 <body>
 	<%
-	MemberDTO member = (MemberDTO) session.getAttribute("loginMember");
+	UserDTO user = (UserDTO) session.getAttribute("loginUser");
 	%>
 	<div class="member">
 		<div class="member_info" style="min-height:100px;">
 		<p style="margin: 10px;">내 정보</p>
 			<%
-			if (member == null) {
+			if (user == null) {
 			%>
 			<div>
 				<span style="color:grey;">로그인이 필요합니다.</span> <br><br> <a style="font-size: 0.9em;"
@@ -27,11 +27,11 @@
 			} else {
 			%>
 			<div class="login_info">
-				<span><%=member.getInfo()%> </span> <span
-					style="text-align: center;"><b style="color:red;">❤</b> : <%=member.getHeart()%>개</span>
+				<span><%=user.getInfo()%> </span> <span
+					style="text-align: center;"><b style="color:red;">❤</b> : <%=user.getHeart()%>개</span>
 				<div id="f">
 					<button id="memberinfo" onclick="location.href='/mypage.jsp'">회원정보</button>
-					<form id="logout" action="/member/logout">
+					<form id="logout" action="/user/logout">
 						<input type="hidden" name="location" value="/board/board">
 						<button type="submit">로그아웃</button>
 					</form>

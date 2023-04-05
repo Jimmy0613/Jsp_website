@@ -3,7 +3,7 @@ package com.cre.w.db;
 public class Db {
 	//테이블&디비 이름============================================
 	public static final String DATABASE = "JSP_WEBSITE";
-	public static final String TABLE_MEMBER = "MEMBERS";
+	public static final String TABLE_USER = "USER";
 	public static final String TABLE_BOARD = "BOARD";
 	public static final String TABLE_REPLY = "REPLY";
 	public static final String TABLE_CHARACTER = "CHARACTERS";

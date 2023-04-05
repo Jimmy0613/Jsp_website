@@ -31,15 +31,15 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	//나의방
-	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
-	character.characterUpdate(player);
-	session.setAttribute("player", player);
-	session.setAttribute("m_id", "m_1");
-	String mode = request.getParameter("mode");
-	Map map = new Map();
-	Log log = new Log();
-	MapDTO m1 = map.getMap("m_1");
+		Charac character = new Charac();
+		CharacterDTO player = (CharacterDTO) session.getAttribute("player");
+		character.characterUpdate(player);
+		session.setAttribute("player", player);
+		session.setAttribute("m_id", "m_1");
+		String mode = request.getParameter("mode");
+		Map map = new Map();
+		Log log = new Log();
+		MapDTO m1 = map.getMap("m_1");
 	%>
 	<div class="container">
 		<div class="header">
@@ -81,11 +81,11 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
-						String msg = "";
-						switch (mode) {
-						case "move":
-							map.move(m1, player);
-						case "normal":
+										String msg = "";
+										switch (mode) {
+										case "move":
+											map.move(m1, player);
+										case "normal":
 						%>
 						<div id="bed">
 							<button onclick="location.href='/m_1.jsp?mode=action1'">잠자기</button>
@@ -96,15 +96,15 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						case "action1":
-							if (player.getPower() == player.getMaxPower()) {
-								log.send(player.getName() + "🗣 \"지금은 잘 필요가 없는 것 같은데?\"", "speech");
-								if (player.getStory() < 0) {
-							player.setStory(0);
-							player.setExp(player.getExp() + 5);
-							log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
-							log.send("💡 ''지난 이야기 보기''를 통해 완료한 이야기 목록을 볼 수 있습니다.", "tip");
-							log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (복도)", "map");
+										case "action1":
+											if (player.getPower() == player.getMaxPower()) {
+												log.send(player.getName() + "🗣 \"지금은 잘 필요가 없는 것 같은데?\"", "speech");
+												if (player.getStory() < 0) {
+											player.setStory(0);
+											player.setExp(player.getExp() + 5);
+											log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
+											log.send("💡 ''지난 이야기 보기''를 통해 완료한 이야기 목록을 볼 수 있습니다.", "tip");
+											log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (복도)", "map");
 						%>
 						<jsp:forward page="/m_1.jsp">
 							<jsp:param value="normal" name="mode" />
@@ -121,8 +121,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						} else {
-						Log.turnCount++;
-						log.send("[ " + Log.turnCount + " ] 🛏 침대에 누웠습니다..", "normal");
+										Log.turnCount++;
+										log.send("[ " + Log.turnCount + " ] 🛏 침대에 누웠습니다..", "normal");
 						%>
 						<div id="bed">
 							<button onclick="location.href='/m_1.jsp?mode=action2'">일어나기</button>
@@ -130,17 +130,17 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						}
-						break;
-						case "action2":
-						Log.turnCount++;
-						player.setPower(player.getMaxPower());
-						log.send("[ " + Log.turnCount + " ] 힘을 회복했습니다.", "normal");
-						if (player.getStory() < 3) {
-						player.setStory(3);
-						player.setExp(player.getExp() + 10);
-						log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +10)", "story");
-						log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (주방)", "map");
-						}
+										break;
+										case "action2":
+										Log.turnCount++;
+										player.setPower(player.getMaxPower());
+										log.send("[ " + Log.turnCount + " ] 힘을 회복했습니다.", "normal");
+										if (player.getStory() < 3) {
+										player.setStory(3);
+										player.setExp(player.getExp() + 10);
+										log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +10)", "story");
+										log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (주방)", "map");
+										}
 						%>
 						<jsp:forward page="/m_1.jsp">
 							<jsp:param value="action3" name="mode" />
@@ -157,8 +157,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						}
-						}
+										}
+										}
 						%>
 					</div>
 					<div id="e"></div>

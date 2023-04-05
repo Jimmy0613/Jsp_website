@@ -1,6 +1,6 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.Board"%>
-<%@page import="com.cre.w.Member"%>
+<%@page import="com.cre.w.User"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.dao.BoardDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -29,7 +29,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	String category = request.getParameter("category");
-	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+		UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
 	%>
 	<div class="container">
 		<div class="header">
@@ -50,7 +50,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<%if(category.equals("anonym")) {%>
 					<input id="writer" placeholder="익명" readonly><br>
 					<%} else{ %>
-					<input id="writer" placeholder="<%=loginMember.getName()%>" readonly><br>
+					<input id="writer" placeholder="<%=loginUser.getName()%>" readonly><br>
 					<%} %>
 					<textarea id="content" placeholder="내용" name="content"></textarea>
 					<button id="write_button" type="submit">글쓰기</button>

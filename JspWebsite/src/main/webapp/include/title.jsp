@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
-final String VERSION = "_v0.0.4";
+final String VERSION = "_v0.0.5";
 %>
 </head>
 <body>

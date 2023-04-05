@@ -1,7 +1,7 @@
 package com.cre.w.dto;
 
 public class CharacterDTO {
-	private String memberId;
+	private String userId;
 	private String name;
 	private String location;
 	private int story;
@@ -16,7 +16,7 @@ public class CharacterDTO {
 
 	public CharacterDTO(String mem_id, String name, String location, int story, int level, int exp, int max_exp,
 			int power, int max_power, int coin) {
-		this.memberId = mem_id;
+		this.userId = mem_id;
 		this.name = name;
 		this.location = location;
 		this.story = story;
@@ -48,7 +48,7 @@ public class CharacterDTO {
 	}
 
 	public String getMemberId() {
-		return memberId;
+		return userId;
 	}
 
 	public String getLocation() {

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import com.cre.w.Charac;
-import com.cre.w.Member;
-import com.cre.w.dto.MemberDTO;
+import com.cre.w.User;
+import com.cre.w.dto.UserDTO;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/game/*")
 public class GameCntrler extends HttpServlet {
-	Member member = new Member();
+	User user = new User();
 	HttpSession session;
 	PrintWriter out;
 
@@ -30,26 +30,26 @@ public class GameCntrler extends HttpServlet {
 		out = response.getWriter();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+		UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
 		String path = request.getPathInfo();
 
 		if (path != null) {
 			switch (path) {
 			case "/newChar":
 				Charac character = new Charac();
-				String loginC1 = loginMember.getCharacter1();
+				String loginC1 = loginUser.getCharacter1();
 				String input_name = request.getParameter("c_name");
 				String alertCh = character.newAlert(input_name);
 				if (alertCh.equals("")) {
-					character.newCharacter(input_name, loginMember.getId());
+					character.newCharacter(input_name, loginUser.getId());
 					if (loginC1.equals("x")) {
-						loginMember.setCharacter1(input_name);
-						member.memberUpdate(loginMember);
+						loginUser.setCharacter1(input_name);
+						user.userUpdate(loginUser);
 					} else {
-						loginMember.setCharacter2(input_name);
-						member.memberUpdate(loginMember);
+						loginUser.setCharacter2(input_name);
+						user.userUpdate(loginUser);
 					}
-					session.setAttribute("loginMember", loginMember);
+					session.setAttribute("loginUser", loginUser);
 					out.println("<script>location.href='/character.jsp'</script>");
 					return;
 				} else {

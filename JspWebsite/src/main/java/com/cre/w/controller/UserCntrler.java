@@ -3,9 +3,9 @@ package com.cre.w.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.cre.w.Member;
+import com.cre.w.User;
 import com.cre.w.dao.RpsDAO;
-import com.cre.w.dto.MemberDTO;
+import com.cre.w.dto.UserDTO;
 import com.cre.w.dto.RpsDTO;
 
 import jakarta.servlet.ServletException;
@@ -15,9 +15,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/member/*")
-public class MemberCntrler extends HttpServlet {
-	Member member = new Member();
+@WebServlet("/user/*")
+public class UserCntrler extends HttpServlet {
+	User user = new User();
 	RpsDAO rps = new RpsDAO();
 	HttpSession session;
 	PrintWriter out;
@@ -30,7 +30,7 @@ public class MemberCntrler extends HttpServlet {
 		out = response.getWriter();
 		String path = request.getPathInfo();
 
-		MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
+		UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
 		String location;
 		location = request.getParameter("location");
 		if (location == null) {
@@ -39,10 +39,10 @@ public class MemberCntrler extends HttpServlet {
 		if (path != null) {
 			switch (path) {
 			case "/join":
-				String alertJoin = member.joinAlert(request.getParameter("id"), request.getParameter("pw"),
+				String alertJoin = user.joinAlert(request.getParameter("id"), request.getParameter("pw"),
 						request.getParameter("pwcheck"), request.getParameter("name"), request.getParameter("email"));
 				if (alertJoin.equals("")) {
-					member.newMember(request.getParameter("id"), request.getParameter("pw"),
+					user.newUser(request.getParameter("id"), request.getParameter("pw"),
 							request.getParameter("name"), request.getParameter("email"));
 					out.println("<script>alert('가입 완료!');</script>");
 					out.println("<script>location.href='" + location + "'</script>");
@@ -53,10 +53,10 @@ public class MemberCntrler extends HttpServlet {
 					return;
 				}
 			case "/login":
-				String alertLogin = member.loginAlert(request.getParameter("id"), request.getParameter("pw"));
-				MemberDTO login = member.getMember(request.getParameter("id"));
+				String alertLogin = user.loginAlert(request.getParameter("id"), request.getParameter("pw"));
+				UserDTO login = user.getUser(request.getParameter("id"));
 				if (alertLogin.equals("")) {
-					session.setAttribute("loginMember", login);
+					session.setAttribute("loginUser", login);
 					out.println("<script>alert('" + login.getId() + "님 안녕하세요!');</script>");
 					out.println("<script>location.href='" + location + "'</script>");
 					return;
@@ -66,7 +66,7 @@ public class MemberCntrler extends HttpServlet {
 					return;
 				}
 			case "/logout":
-				session.removeAttribute("loginMember");
+				session.removeAttribute("loginUser");
 				response.sendRedirect(location);
 				return;
 			case "/rps":
@@ -90,45 +90,45 @@ public class MemberCntrler extends HttpServlet {
 				String result = rps.rps(input, com);
 				switch (result) {
 				case "win":
-					loginMember.setHeart(loginMember.getHeart() + 2);
+					loginUser.setHeart(loginUser.getHeart() + 2);
 					alert += "\\n우와! 이겼습니다!";
 					break;
 				case "draw":
 					alert += "\\n앗! 비겼습니다~";
 					break;
 				case "lose":
-					loginMember.setHeart(loginMember.getHeart() - 1);
+					loginUser.setHeart(loginUser.getHeart() - 1);
 					alert += "\\n으악! 졌습니다ㅠ";
 					break;
 				}
-				member.memberUpdate(loginMember);
-				request.setAttribute("loginMember", loginMember);
-				RpsDTO rpsDto = new RpsDTO(loginMember.getId(), result);
+				user.userUpdate(loginUser);
+				request.setAttribute("loginUser", loginUser);
+				RpsDTO rpsDto = new RpsDTO(loginUser.getId(), result);
 				rps.update(rpsDto);
 				out.print("<script>alert('" + alert + "')</script>");
 				out.print("<script>location.href='/index.jsp'</script>");
 				return;
 			case "/myemail":
 				String email = request.getParameter("email");
-				if (member.isEmail(email)) {
+				if (user.isEmail(email)) {
 					out.println("<script>alert('이미 등록된 이메일입니다.')</script>");
 					out.println("<script>location.href='/mypage.jsp?mode=myemail'</script>");
 					return;
-				} else if (loginMember.getEmail().equals("")) {
-					loginMember.setEmail(email);
-					member.memberUpdate(loginMember);
-					session.setAttribute("loginMember", loginMember);
+				} else if (loginUser.getEmail().equals("")) {
+					loginUser.setEmail(email);
+					user.userUpdate(loginUser);
+					session.setAttribute("loginUser", loginUser);
 					out.println("<script>alert('등록되었습니다.')</script>");
 					out.println("<script>location.href='/mypage.jsp'</script>");
 					return;
-				} else if (email.equals(loginMember.getEmail())) {
+				} else if (email.equals(loginUser.getEmail())) {
 					out.println("<script>alert('기존과 동일한 이메일입니다.')</script>");
 					out.println("<script>location.href='/mypage.jsp?mode=myemail'</script>");
 					return;
 				} else {
-					loginMember.setEmail(email);
-					member.memberUpdate(loginMember);
-					session.setAttribute("loginMember", loginMember);
+					loginUser.setEmail(email);
+					user.userUpdate(loginUser);
+					session.setAttribute("loginUser", loginUser);
 					out.println("<script>alert('변경되었습니다.')</script>");
 					out.println("<script>location.href='/mypage.jsp'</script>");
 					return;

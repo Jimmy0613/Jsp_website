@@ -3,7 +3,7 @@ package com.cre.w.dto;
 public class PostDTO {
 	private int pNum;
 	private String category;
-	private String wr_id;
+	private String writer_id;
 	private String writer;
 	private String title;
 	private String content;
@@ -17,7 +17,7 @@ public class PostDTO {
 			int views, int heart) {
 		this.pNum = pNum;
 		this.category = category;
-		this.wr_id = wr_id;
+		this.writer_id = wr_id;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
@@ -29,14 +29,14 @@ public class PostDTO {
 	
 	// write
 	public PostDTO(String wr_id, String writer, String title, String content) {
-		this.wr_id = wr_id;
+		this.writer_id = wr_id;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 	}
 	
-	public String getWr_id() {
-		return wr_id;
+	public String getWriter_id() {
+		return writer_id;
 	}
 
 	public String getCategory() {

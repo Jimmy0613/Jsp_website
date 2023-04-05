@@ -25,24 +25,26 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	Story story = new Story();
-	CharacterDTO player = (CharacterDTO)session.getAttribute("player");
+	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
 	ArrayList<StoryDTO> dtos = story.select();
 	ArrayList<StoryDTO> dtosP = story.load(player);
 
-	if (dtosP.size() != 0) {
+	if (dtosP.size() > 1) {
 		for (StoryDTO s : dtosP) {
+			if (s.getStNum() != -1) {
 	%>
 	<span><%=s.getStNum()%>.<%=s.getTitle()%>: <%=s.getDesc()%></span>
 	<br>
 	<%
 	}
-		if(dtos.get(dtos.size()-1).getStNum()==player.getStory()){
-			%>
-			<br>
-			<span> 🎊 모든 이야기를 완료했습니다!</span>
-			<br>
-			<%
-		}
+	}
+	if (dtos.get(dtos.size() - 1).getStNum() == player.getStory()) {
+	%>
+	<br>
+	<span> 🎊 모든 이야기를 완료했습니다!</span>
+	<br>
+	<%
+	}
 	} else {
 	%>
 	<span> ❌ 아직 완료한 이야기가 없습니다.</span>

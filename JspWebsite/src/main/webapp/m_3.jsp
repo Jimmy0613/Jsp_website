@@ -31,14 +31,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
-	character.characterUpdate(player);
-	session.setAttribute("player", player);
-	session.setAttribute("m_id", "m_3");
-	String mode = request.getParameter("mode");
-	Map map = new Map();
-	Log log = new Log();
-	MapDTO m3 = map.getMap("m_3");
+		CharacterDTO player = (CharacterDTO) session.getAttribute("player");
+		character.characterUpdate(player);
+		session.setAttribute("player", player);
+		session.setAttribute("m_id", "m_3");
+		String mode = request.getParameter("mode");
+		Map map = new Map();
+		Log log = new Log();
+		MapDTO m3 = map.getMap("m_3");
 	%>
 	<div class="container">
 		<div class="header">
@@ -71,10 +71,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
-						switch (mode) {
-						case "move":
-							map.move(m3, player);
-						case "normal":
+										switch (mode) {
+										case "move":
+											map.move(m3, player);
+										case "normal":
 						%>
 						<div id="fridge">
 							<img src="/img/fridge.jpg" id="fridgeimg">
@@ -86,16 +86,16 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						case "action1":
-							if (player.getStory() < 4) {
-								player.setStory(4);
-								player.setExp(player.getExp() + 5);
-								Log.turnCount++;
-								log.send("[ " + Log.turnCount + " ] 냉장고를 열었습니다.", "normal");
-								log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
-								log.send("🎉 새로운 지역이 열렸습니다. (다용도실)", "map");
-								log.send("💡 냉장고에는 음식 아이템을 넣을 수 있습니다.", "tip");
-							}
+										case "action1":
+											if (player.getStory() < 4) {
+												player.setStory(4);
+												player.setExp(player.getExp() + 5);
+												Log.turnCount++;
+												log.send("[ " + Log.turnCount + " ] 냉장고를 열었습니다.", "normal");
+												log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
+												log.send("🎉 새로운 지역이 열렸습니다. (다용도실)", "map");
+												log.send("💡 냉장고에는 음식 아이템을 넣을 수 있습니다.", "tip");
+											}
 						%>
 						<button id="f_btn" onclick="location.href='/m_3.jsp?mode=normal'">닫기</button>
 						<div id="f_open">
@@ -121,8 +121,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						}
-						}
+										}
+										}
 						%>
 					</div>
 					<!------------------스크린 ------------------>

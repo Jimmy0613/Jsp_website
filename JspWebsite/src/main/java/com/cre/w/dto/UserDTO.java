@@ -1,6 +1,6 @@
 package com.cre.w.dto;
 
-public class MemberDTO {
+public class UserDTO {
 	private String id;
 	private String pw;
 	private String name;
@@ -13,7 +13,7 @@ public class MemberDTO {
 	private String character2;
 	private String info;
 
-	public MemberDTO(String id, String pw, String name, String email, String jDate, int pCount, int rCount, int heart, String character1, String character2) {
+	public UserDTO(String id, String pw, String name, String email, String jDate, int pCount, int rCount, int heart, String character1, String character2) {
 		this.id = id;
 		this.pw = pw;
 		this.name = name;

@@ -22,9 +22,9 @@ public class Charac extends CharacterDAO {
 		return alert;
 	}
 
-	public void newCharacter(String name, String mem_id) {
-		String sql = String.format("INSERT INTO %s(NAME, MEMBER_ID) VALUES('%s','%s');", Db.TABLE_CHARACTER, name,
-				mem_id);
+	public void newCharacter(String name, String user_id) {
+		String sql = String.format("INSERT INTO %s(NAME, USER_ID) VALUES('%s','%s');", Db.TABLE_CHARACTER, name,
+				user_id);
 		update(sql);
 	}
 

@@ -31,14 +31,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
-	character.characterUpdate(player);
-	session.setAttribute("player", player);
-	session.setAttribute("m_id", "m_5");
-	String mode = request.getParameter("mode");
-	Map map = new Map();
-	Log log = new Log();
-	MapDTO m5 = map.getMap("m_5");
+		CharacterDTO player = (CharacterDTO) session.getAttribute("player");
+		character.characterUpdate(player);
+		session.setAttribute("player", player);
+		session.setAttribute("m_id", "m_5");
+		String mode = request.getParameter("mode");
+		Map map = new Map();
+		Log log = new Log();
+		MapDTO m5 = map.getMap("m_5");
 	%>
 	<div class="container">
 		<div class="header">
@@ -74,10 +74,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
-						switch (mode) {
-						case "move":
-							map.move(m5, player);
-						case "normal":
+										switch (mode) {
+										case "move":
+											map.move(m5, player);
+										case "normal":
 						%>
 						<div id="desk">
 							<img src="/img/desk.png" id="deskimg">
@@ -89,16 +89,16 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						case "action1":
-							if (player.getStory() < 6) {
-								player.setStory(6);
-								player.setExp(player.getExp() + 5);
-								Log.turnCount++;
-								log.send("[ " + Log.turnCount + " ] 서랍을 열었습니다.", "normal");
-								log.send(player.getName() + "🗣 \"지도다! \"", "speech");
-								log.send("👜 이제 지도를 사용할 수 있습니다.", "good");
-								log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
-								log.send("💡 ''방으로'' 아이콘을 누르면 즉시 \'나의 방\'으로 이동할 수 있습니다.", "tip");
+										case "action1":
+											if (player.getStory() < 6) {
+												player.setStory(6);
+												player.setExp(player.getExp() + 5);
+												Log.turnCount++;
+												log.send("[ " + Log.turnCount + " ] 서랍을 열었습니다.", "normal");
+												log.send(player.getName() + "🗣 \"지도다! \"", "speech");
+												log.send("👜 이제 지도를 사용할 수 있습니다.", "good");
+												log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5)", "story");
+												log.send("💡 ''방으로'' 아이콘을 누르면 즉시 \'나의 방\'으로 이동할 수 있습니다.", "tip");
 						%>
 						<div id="desk">
 							<img src="/img/desk.png" id="deskimg">
@@ -108,17 +108,17 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						} else {
-						Log.turnCount++;
-						log.send("[ " + Log.turnCount + " ] 서랍을 열었습니다. 아무것도 없습니다.", "normal");
+										Log.turnCount++;
+										log.send("[ " + Log.turnCount + " ] 서랍을 열었습니다. 아무것도 없습니다.", "normal");
 						%>
 						<jsp:forward page="/m_5.jsp">
 							<jsp:param value="normal" name="mode" />
 						</jsp:forward>
 						<%
 						}
-						break;
-						}
-						}
+										break;
+										}
+										}
 						%>
 					</div>
 					<!------------------스크린 ------------------>

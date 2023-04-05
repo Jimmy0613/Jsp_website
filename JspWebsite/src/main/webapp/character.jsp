@@ -1,5 +1,5 @@
 <%@page import="com.cre.w.dto.CharacterDTO"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.Charac"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -43,9 +43,9 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<div id="system">
 					<%
 					Charac ch = new Charac();
-					MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-					String loginC1 = loginMember.getCharacter1();
-					String loginC2 = loginMember.getCharacter2();
+					UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+					String loginC1 = loginUser.getCharacter1();
+					String loginC2 = loginUser.getCharacter2();
 					%>
 					<div id="s_info">
 						<div id="c_mode">&nbsp;&nbsp;👩 캐릭터 선택 🧑</div>
@@ -103,13 +103,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<b class="icon_t" id="icon1_t">홈</b>
 
 						<div class="icon" id="icon2">
-							<a href="/member/logout?location=/index_rpg.jsp"><img
+							<a href="/user/logout?location=/index_rpg.jsp"><img
 								src="img/logout.png"></a>
 						</div>
 						<b class="icon_t" id="icon2_t">로그아웃</b>
 					</div>
 					<div id="s_banner_bot">
-						<%=loginMember.getInfo()%>
+						<%=loginUser.getInfo()%>
 					</div>
 				</div>
 			</div>

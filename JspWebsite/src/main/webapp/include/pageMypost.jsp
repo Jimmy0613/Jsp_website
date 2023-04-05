@@ -1,6 +1,6 @@
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.Board"%>
 <%@page import="com.cre.w.Page"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

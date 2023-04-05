@@ -1,7 +1,7 @@
 package com.cre.w;
 
 import com.cre.w.dao.BoardDAO;
-import com.cre.w.dto.MemberDTO;
+import com.cre.w.dto.UserDTO;
 
 public class Page extends BoardDAO {
 	public final static int PER_PAGE = 10;
@@ -19,8 +19,8 @@ public class Page extends BoardDAO {
 		return totalPage;
 	}
 	
-	public int getMypostPage(MemberDTO loginMember) {
-		int postCount = getMypostCount(loginMember);
+	public int getMypostPage(UserDTO loginUser) {
+		int postCount = getMypostCount(loginUser);
 		int totalPage = 0;
 		if (postCount % PER_PAGE == 0) {
 			totalPage = postCount / PER_PAGE;
@@ -30,8 +30,8 @@ public class Page extends BoardDAO {
 		return totalPage;
 	}
 	
-	public int getMyreplyPage(MemberDTO loginMember) {
-		int postCount = getMyreplyCount(loginMember);
+	public int getMyreplyPage(UserDTO loginUser) {
+		int postCount = getMyreplyCount(loginUser);
 		int totalPage = 0;
 		if (postCount % PER_PAGE == 0) {
 			totalPage = postCount / PER_PAGE;

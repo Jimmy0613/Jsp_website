@@ -1,6 +1,6 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.Board"%>
-<%@page import="com.cre.w.Member"%>
+<%@page import="com.cre.w.User"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -29,10 +29,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	String postNum = request.getParameter("postNum");
-	String category = request.getParameter("category");
-	Board board = new Board();
-	PostDTO post = board.selectPost(postNum);
-	String content = post.getContent().replace("<br>", "\r\n");
+		String category = request.getParameter("category");
+		Board board = new Board();
+		PostDTO post = board.selectPost(postNum);
+		String content = post.getContent().replace("<br>", "\r\n");
 	%>
 	<div class="container">
 		<div class="header">

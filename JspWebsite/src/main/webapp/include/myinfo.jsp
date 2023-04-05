@@ -1,4 +1,4 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,12 +9,11 @@
 </head>
 <body>
 <%
-MemberDTO user = (MemberDTO)session.getAttribute("loginMember");
-
+UserDTO user = (UserDTO)session.getAttribute("loginUser");
 %>
 	<div class="myInfo">
 		<span id="t">회원 정보</span><span style="font-size: 0.8em;">
-			&nbsp;<a href="/member/logout?location=/index.jsp">로그아웃</a>
+			&nbsp;<a href="/user/logout?location=/index.jsp">로그아웃</a>
 		</span>
 		<hr>
 		<div id="p">

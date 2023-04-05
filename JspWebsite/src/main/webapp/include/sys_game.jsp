@@ -1,9 +1,9 @@
 <%@page import="com.cre.w.dto.MapDTO"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.dto.CharacterDTO"%>
 <%@page import="com.cre.w.Map"%>
 <%@page import="com.cre.w.Charac"%>
-<%@page import="com.cre.w.Member"%>
+<%@page import="com.cre.w.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,10 +15,10 @@
 <body>
 	<%
 	Map maps = new Map();
-	MemberDTO loginMember = (MemberDTO)session.getAttribute("loginMember");
-	CharacterDTO ps = (CharacterDTO)session.getAttribute("player");
-	String mids = (String)session.getAttribute("m_id");
-	MapDTO ms = maps.getMap(mids);
+		UserDTO loginUser = (UserDTO)session.getAttribute("loginUser");
+		CharacterDTO ps = (CharacterDTO)session.getAttribute("player");
+		String mids = (String)session.getAttribute("m_id");
+		MapDTO ms = maps.getMap(mids);
 	%>
 	<script>
 		function showLog() {
@@ -83,7 +83,7 @@
 
 	</div>
 	<div id="s_banner_bot">
-		<%=loginMember.getInfo()%>
+		<%=loginUser.getInfo()%>
 	</div>
 </body>
 </html>

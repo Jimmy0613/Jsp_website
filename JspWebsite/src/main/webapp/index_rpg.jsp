@@ -1,4 +1,4 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -38,11 +38,11 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				</div>
 				<div id="system">
 					<%
-					MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-					String loginInfo = "🙂 먼저 로그인해주세요.";
-					if (loginMember != null) {
-						loginInfo = "🙂 " + loginMember.getId() + "(" + loginMember.getName() + ") 님";
-					}
+					UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+								String loginInfo = "🙂 먼저 로그인해주세요.";
+								if (loginUser != null) {
+									loginInfo = "🙂 " + loginUser.getId() + "(" + loginUser.getName() + ") 님";
+								}
 					%>
 					<div id="s_info">
 						<div id="c_mode">&nbsp;&nbsp;🍀 홈</div>
@@ -51,7 +51,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<div id="s_content"></div>
 
 					<%
-					if (loginMember == null) {
+					if (loginUser == null) {
 					%>
 					<div id="s_menu_right">
 						<div class="icon" id="icon1">
@@ -85,7 +85,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<b class="icon_t" id="icon2_t">캐릭터</b>
 
 						<div class="icon" id="icon3">
-							<a href="/member/logout?location=/index_rpg.jsp"><img
+							<a href="/user/logout?location=/index_rpg.jsp"><img
 								src="/img/logout.png"></a>
 						</div>
 						<b class="icon_t" id="icon3_t">로그아웃</b>

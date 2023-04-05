@@ -77,13 +77,13 @@ public class Board extends BoardDAO {
 	}
 
 	public ArrayList<PostDTO> mypost(String myId, int currentPage) {
-		String sql = String.format("SELECT * FROM %s where wr_id='%s' order by post_num desc limit %d, %d;",
+		String sql = String.format("SELECT * FROM %s where writer_id='%s' order by post_num desc limit %d, %d;",
 				Db.TABLE_BOARD, myId, (currentPage - 1) * Page.PER_PAGE, Page.PER_PAGE);
 		return selectList(sql);
 	}
 
 	public ArrayList<ReplyDTO> myreply(String myId, int currentPage) {
-		String sql = String.format("SELECT * FROM %s where wr_id='%s' order by reply_num desc limit %d, %d;",
+		String sql = String.format("SELECT * FROM %s where re_writer_id='%s' order by reply_num desc limit %d, %d;",
 				Db.TABLE_REPLY, myId, (currentPage - 1) * Page.PER_PAGE, Page.PER_PAGE);
 		return selectReply(sql);
 	}
@@ -119,21 +119,26 @@ public class Board extends BoardDAO {
 		update(sql);
 	}
 
+	public void postCount(String writer_id, String value) {
+		String sql = String.format("update %s set post_count = post_count %s where writer_id=%s", Db.TABLE_BOARD, value, writer_id);
+		update(sql);
+	}
+	
 	public void replyCount(String postNum, String value) {
 		String sql = String.format("update %s set reply = reply %s where post_num=%s", Db.TABLE_BOARD, value, postNum);
 		update(sql);
 	}
 
-	public void newPost(String wr_id, String writer, String title, String content, String cg) {
+	public void newPost(String writer_id, String writer, String title, String content, String cg) {
 		String sql = String.format(
-				"insert into %s (wr_id, writer, title, content, category) values('%s', '%s','%s','%s','%s')",
-				Db.TABLE_BOARD, wr_id, writer, title, content, cg);
+				"insert into %s (writer_id, writer, title, content, category) values('%s', '%s','%s','%s','%s')",
+				Db.TABLE_BOARD, writer_id, writer, title, content, cg);
 		update(sql);
 	}
 
-	public void newReply(String wr_id, String writer, String content, String postNum) {
-		String sql = String.format("insert into %s(post_num,wr_id,writer,content) values(%s,'%s','%s','%s');",
-				Db.TABLE_REPLY, postNum, wr_id, writer, content);
+	public void newReply(String writer_id, String writer, String content, String postNum) {
+		String sql = String.format("insert into %s(post_num,re_writer_id,writer,content) values(%s,'%s','%s','%s');",
+				Db.TABLE_REPLY, postNum, writer_id, writer, content);
 		update(sql);
 	}
 }

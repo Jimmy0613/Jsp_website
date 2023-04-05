@@ -30,7 +30,7 @@ public class CharacterDAO extends DAO {
 			connection();
 			result = st.executeQuery(sql);
 			while (result.next()) {
-				String mem_id = result.getString("MEMBER_ID");
+				String user_id = result.getString("USER_ID");
 				String name = result.getString("NAME");
 				String location = result.getString("LOCATION");
 				int story = result.getInt("STORY");
@@ -41,7 +41,7 @@ public class CharacterDAO extends DAO {
 				int max_power = result.getInt("MAX_POWER");
 				int coin = result.getInt("COIN");
 
-				dto = new CharacterDTO(mem_id, name, location, story, level, exp, max_exp, power,
+				dto = new CharacterDTO(user_id, name, location, story, level, exp, max_exp, power,
 						max_power, coin);
 			}
 			close();

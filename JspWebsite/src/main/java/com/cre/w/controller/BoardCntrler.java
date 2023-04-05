@@ -13,16 +13,16 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import com.cre.w.Board;
-import com.cre.w.Member;
+import com.cre.w.User;
 import com.cre.w.Page;
-import com.cre.w.dto.MemberDTO;
+import com.cre.w.dto.UserDTO;
 import com.cre.w.dto.PostDTO;
 import com.cre.w.dto.ReplyDTO;
 
 @WebServlet("/board/*")
 public class BoardCntrler extends HttpServlet {
 	Board board = new Board();
-	Member member = new Member();
+	User user = new User();
 	Page pp = new Page();
 	HttpSession session;
 	PrintWriter out;
@@ -37,7 +37,7 @@ public class BoardCntrler extends HttpServlet {
 		String cgk;
 		String postNum;
 		String location;
-		MemberDTO loginMember;
+		UserDTO loginUser;
 		ArrayList<PostDTO> list;
 		ArrayList<ReplyDTO> reply;
 		PostDTO post;
@@ -50,7 +50,7 @@ public class BoardCntrler extends HttpServlet {
 		out = response.getWriter();
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		loginMember = (MemberDTO) session.getAttribute("loginMember");
+		loginUser = (UserDTO) session.getAttribute("loginUser");
 		path = request.getPathInfo();
 		category = request.getParameter("category");
 		if (category == null) {
@@ -78,27 +78,28 @@ public class BoardCntrler extends HttpServlet {
 			case "/write":
 				String conWrite = request.getParameter("content");
 				conWrite = conWrite.replace("\r\n", "<br>");
-				loginMember.setHeart(loginMember.getHeart() + 3);
-				loginMember.setPCount(loginMember.getPCount() + 1);
-				member.memberUpdate(loginMember);
-				session.setAttribute("loginMember", loginMember);
-				String writerName = loginMember.getName();
+				loginUser.setHeart(loginUser.getHeart() + 3);
+				loginUser.setPCount(loginUser.getPCount() + 1);
+				user.userUpdate(loginUser);
+				session.setAttribute("loginUser", loginUser);
+				String writerName = loginUser.getName();
 				if(category.equals("anonym")) {
 					writerName="익명";
 				}
-				board.newPost(loginMember.getId(), writerName, request.getParameter("title"), conWrite,
+				board.postCount(loginUser.getId(), "+1");
+				board.newPost(loginUser.getId(), writerName, request.getParameter("title"), conWrite,
 						category);
 				response.sendRedirect("/board/board?category=" + category + "&page=" + page);
 				return;
 			case "/reply":
 				post = board.selectPost(postNum);
-				if (!post.getWr_id().equals(loginMember.getId())) {
-					loginMember.setHeart(loginMember.getHeart() + 1);
+				if (!post.getWriter_id().equals(loginUser.getId())) {
+					loginUser.setHeart(loginUser.getHeart() + 1);
 				}
-				loginMember.setRCount(loginMember.getRCount() + 1);
-				member.memberUpdate(loginMember);
-				session.setAttribute("loginMember", loginMember);
-				board.newReply(loginMember.getId(), loginMember.getName(), request.getParameter("conReply"), postNum);
+				loginUser.setRCount(loginUser.getRCount() + 1);
+				user.userUpdate(loginUser);
+				session.setAttribute("loginUser", loginUser);
+				board.newReply(loginUser.getId(), loginUser.getName(), request.getParameter("conReply"), postNum);
 				board.replyCount(postNum, "+1");
 				response.sendRedirect("/board/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
 				return;
@@ -167,9 +168,9 @@ public class BoardCntrler extends HttpServlet {
 				forward = "/read.jsp";
 				break;
 			case "/mypost":
-				list = board.mypost(loginMember.getId(), page);
+				list = board.mypost(loginUser.getId(), page);
 				request.setAttribute("list", list);
-				totalPage = pp.getMypostPage(loginMember);
+				totalPage = pp.getMypostPage(loginUser);
 				if (page % Page.PAGE_BLOCK == 0) {
 					currentPb = page / Page.PAGE_BLOCK;
 					totalPb = totalPage / Page.PAGE_BLOCK;
@@ -183,9 +184,9 @@ public class BoardCntrler extends HttpServlet {
 				forward = "/mypost.jsp";
 				break;
 			case "/myreply":
-				reply = board.myreply(loginMember.getId(), page);
+				reply = board.myreply(loginUser.getId(), page);
 				request.setAttribute("reply", reply);
-				totalPage = pp.getMyreplyPage(loginMember);
+				totalPage = pp.getMyreplyPage(loginUser);
 				if (page % Page.PAGE_BLOCK == 0) {
 					currentPb = page / Page.PAGE_BLOCK;
 					totalPb = totalPage / Page.PAGE_BLOCK;
@@ -206,26 +207,26 @@ public class BoardCntrler extends HttpServlet {
 				return;
 			case "/heart":
 				post = board.selectPost(postNum);
-				if (loginMember.getHeart() < 1) {
+				if (loginUser.getHeart() < 1) {
 					out.println("<script>alert('하트가 부족합니다..')</script>");
 					out.println("<script>location.href='/board/read?category=" + category + "&postNum=" + postNum
 							+ "&page=" + page + "'</script>");
 					return;
 				} else {
-					MemberDTO writer = member.getMember(post.getWr_id());
+					UserDTO writer = user.getUser(post.getWriter_id());
 					if (writer != null) {
-						if (loginMember.getId().equals(post.getWr_id())) {
+						if (loginUser.getId().equals(post.getWriter_id())) {
 							out.println("<script>alert('내가 쓴 글에는 할 수 없습니다.')</script>");
 							out.println("<script>location.href='/board/read?category=" + category + "&postNum=" + postNum
 									+ "&page=" + page + "'</script>");
 							return;
 						} else {
 							board.heart(postNum);
-							loginMember.setHeart(loginMember.getHeart() - 1);
-							member.memberUpdate(loginMember);
-							session.setAttribute("loginMember", loginMember);
+							loginUser.setHeart(loginUser.getHeart() - 1);
+							user.userUpdate(loginUser);
+							session.setAttribute("loginUser", loginUser);
 							writer.setHeart(writer.getHeart() + 1);
-							member.memberUpdate(writer);
+							user.userUpdate(writer);
 							response.sendRedirect(
 									"/board/read?category=" + category + "&postNum=" + postNum + "&page=" + page);
 							return;
@@ -239,22 +240,22 @@ public class BoardCntrler extends HttpServlet {
 				}
 			case "/delete":
 				post = board.selectPost(postNum);
-				loginMember.setHeart(loginMember.getHeart() - post.getHeart() - 3);
-				loginMember.setPCount(loginMember.getPCount() - 1);
-				member.memberUpdate(loginMember);
-				session.setAttribute("loginMember", loginMember);
+				loginUser.setHeart(loginUser.getHeart() - post.getHeart() - 3);
+				loginUser.setPCount(loginUser.getPCount() - 1);
+				user.userUpdate(loginUser);
+				session.setAttribute("loginUser", loginUser);
 				board.delete(postNum);
 				request.removeAttribute("postNum");
 				response.sendRedirect("/board/board?category=" + category + "&page=" + page);
 				return;
 			case "/delReply":
 				post = board.selectPost(postNum);
-				if (!post.getWr_id().equals(loginMember.getId())) {
-					loginMember.setHeart(loginMember.getHeart() - 1);
+				if (!post.getWriter_id().equals(loginUser.getId())) {
+					loginUser.setHeart(loginUser.getHeart() - 1);
 				}
-				loginMember.setRCount(loginMember.getRCount() - 1);
-				member.memberUpdate(loginMember);
-				session.setAttribute("loginMember", loginMember);
+				loginUser.setRCount(loginUser.getRCount() - 1);
+				user.userUpdate(loginUser);
+				session.setAttribute("loginUser", loginUser);
 				board.deleteReply(request.getParameter("reNum"));
 				board.replyCount(postNum, "-1");
 				response.sendRedirect("/board/read?category=" + category + "&postNum=" + postNum + "&page=" + page);

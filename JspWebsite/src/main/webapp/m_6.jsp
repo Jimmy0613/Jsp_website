@@ -31,14 +31,14 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 <body>
 	<%
 	Charac character = new Charac();
-	CharacterDTO player = (CharacterDTO) session.getAttribute("player");
-	character.characterUpdate(player);
-	session.setAttribute("player", player);
-	session.setAttribute("m_id", "m_6");
-	String mode = request.getParameter("mode");
-	Map map = new Map();
-	Log log = new Log();
-	MapDTO m6 = map.getMap("m_6");
+		CharacterDTO player = (CharacterDTO) session.getAttribute("player");
+		character.characterUpdate(player);
+		session.setAttribute("player", player);
+		session.setAttribute("m_id", "m_6");
+		String mode = request.getParameter("mode");
+		Map map = new Map();
+		Log log = new Log();
+		MapDTO m6 = map.getMap("m_6");
 	%>
 	<div class="container">
 		<div class="header">
@@ -74,12 +74,12 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						<%@ include file="/include/return.jsp"%>
 						<%
 						} else {
-						switch (mode) {
-						case "move":
-							map.move(m6, player);
-						case "normal":
-							if (player.getStory() < 8) {
-								log.send(player.getName() + "🗣 \"돈이다! \"", "speech");
+										switch (mode) {
+										case "move":
+											map.move(m6, player);
+										case "normal":
+											if (player.getStory() < 8) {
+												log.send(player.getName() + "🗣 \"돈이다! \"", "speech");
 						%>
 						<div id="sp1">
 							<img src="/img/sp_m6_1.jpg">
@@ -97,7 +97,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 
 						<%
 						} else if (player.getStory() == 8) {
-						log.send(player.getName() + "🗣 \"깜짝이야! 누구세요?! \"", "speech");
+										log.send(player.getName() + "🗣 \"깜짝이야! 누구세요?! \"", "speech");
 						%>
 						<div id="sp3">
 							<img src="/img/sp_m6_3.jpg">
@@ -121,13 +121,13 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						}
-						break;
-						case "action1":
-						player.setStory(8);
-						player.setExp(player.getExp() + 5);
-						player.setCoin(player.getCoin() + 5);
-						log.send(player.getName() + "🗣 \"아싸! \"", "speech");
-						log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5, 금화 +5)", "story");
+										break;
+										case "action1":
+										player.setStory(8);
+										player.setExp(player.getExp() + 5);
+										player.setCoin(player.getCoin() + 5);
+										log.send(player.getName() + "🗣 \"아싸! \"", "speech");
+										log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +5, 금화 +5)", "story");
 						%>
 						<div id="sp2">
 							<img src="/img/sp_m6_2.jpg">
@@ -140,11 +140,11 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						break;
-						case "action2":
-							player.setStory(9);
-							log.send(player.getName() + "🗣 \"사라졌다?! \"", "speech");
-							log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +10)", "story");
-							log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (집 앞)", "map");
+										case "action2":
+											player.setStory(9);
+											log.send(player.getName() + "🗣 \"사라졌다?! \"", "speech");
+											log.send("🎉 새로운 이야기를 완료했습니다. (경험치 +10)", "story");
+											log.send("🏃‍♂️ 새로운 지역이 열렸습니다. (집 앞)", "map");
 						%>
 
 						<div id="sp4">
@@ -158,7 +158,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 						</div>
 						<%
 						}
-						}
+										}
 						%>
 					</div>
 					<!------------------스크린 ------------------>

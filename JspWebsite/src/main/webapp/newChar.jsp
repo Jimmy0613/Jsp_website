@@ -1,4 +1,4 @@
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -42,8 +42,8 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				</div>
 				<div id="system">
 					<%
-					MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-					String loginInfo = "🙂 " + loginMember.getId() + "(" + loginMember.getName() + ") 님";
+					UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+								String loginInfo = "🙂 " + loginUser.getId() + "(" + loginUser.getName() + ") 님";
 					%>
 					<div id="s_info">
 						<div id="c_mode">&nbsp;&nbsp;👩 캐릭터 만들기 🧑</div>
@@ -52,7 +52,7 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 					<div id="character">
 						<div id="c_info">
 							<form id="form_c" action="/game/newChar">
-								<input type="hidden" name="id" value="<%=loginMember.getId()%>">
+								<input type="hidden" name="user_id" value="<%=loginUser.getId()%>">
 								이름:&nbsp;&nbsp; <input name="c_name" placeholder="2~6자">
 								&nbsp;&nbsp;<br>
 								<button type="submit">만들기</button>

@@ -37,10 +37,10 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 			</div>
 			<%
 			String category = (String)request.getAttribute("category");
-			if (category == null) {
-				category = "popular";
-			}
-			if (category.equals("popular")) {
+				if (category == null) {
+					category = "popular";
+				}
+				if (category.equals("popular")) {
 			%>
 			<div class="list">
 				<%@ include file="/include/listPopular.jsp"%>

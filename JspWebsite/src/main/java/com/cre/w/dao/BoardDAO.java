@@ -3,7 +3,7 @@ package com.cre.w.dao;
 import java.util.ArrayList;
 
 import com.cre.w.db.Db;
-import com.cre.w.dto.MemberDTO;
+import com.cre.w.dto.UserDTO;
 import com.cre.w.dto.PostDTO;
 import com.cre.w.dto.ReplyDTO;
 
@@ -27,7 +27,7 @@ public class BoardDAO extends DAO {
 			while (result.next()) {
 				int pNum = result.getInt("post_num");
 				String category = result.getString("category");
-				String wr_id = result.getString("wr_id");
+				String writer_id = result.getString("writer_id");
 				String writer = result.getString("writer");
 				String title = result.getString("title");
 				String content = result.getString("content");
@@ -36,7 +36,7 @@ public class BoardDAO extends DAO {
 				int views = result.getInt("views");
 				int heart = result.getInt("heart");
 
-				dto = new PostDTO(pNum, category, wr_id, writer, title, content, date, reply, views, heart);
+				dto = new PostDTO(pNum, category, writer_id, writer, title, content, date, reply, views, heart);
 			}
 			close();
 		} catch (Exception e) {
@@ -52,7 +52,7 @@ public class BoardDAO extends DAO {
 			while (result.next()) {
 				int pNum = result.getInt("post_num");
 				String category = result.getString("category");
-				String wr_id = result.getString("wr_id");
+				String writer_id = result.getString("writer_id");
 				String writer = result.getString("writer");
 				String title = result.getString("title");
 				String content = result.getString("content");
@@ -61,7 +61,7 @@ public class BoardDAO extends DAO {
 				int views = result.getInt("views");
 				int heart = result.getInt("heart");
 
-				PostDTO dto = new PostDTO(pNum, category, wr_id, writer, title, content, date, reply, views, heart);
+				PostDTO dto = new PostDTO(pNum, category, writer_id, writer, title, content, date, reply, views, heart);
 				dtos.add(dto);
 			}
 			close();
@@ -87,9 +87,9 @@ public class BoardDAO extends DAO {
 		return postCount;
 	}
 	
-	public int getMypostCount(MemberDTO loginMember) {
+	public int getMypostCount(UserDTO loginUser) {
 		int postCount = 0;
-		String sql = String.format("SELECT count(*) FROM %s where wr_id='%s';", Db.TABLE_BOARD, loginMember.getId());
+		String sql = String.format("SELECT count(*) FROM %s where writer_id='%s';", Db.TABLE_BOARD, loginUser.getId());
 		try {
 			connection();
 			result = st.executeQuery(sql);
@@ -102,9 +102,9 @@ public class BoardDAO extends DAO {
 		return postCount;
 	}
 	
-	public int getMyreplyCount(MemberDTO loginMember) {
+	public int getMyreplyCount(UserDTO loginUser) {
 		int postCount = 0;
-		String sql = String.format("SELECT count(*) FROM %s where wr_id='%s';", Db.TABLE_REPLY, loginMember.getId());
+		String sql = String.format("SELECT count(*) FROM %s where writer_id='%s';", Db.TABLE_REPLY, loginUser.getId());
 		try {
 			connection();
 			result = st.executeQuery(sql);

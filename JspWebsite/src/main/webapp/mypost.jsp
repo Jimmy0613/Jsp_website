@@ -1,7 +1,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
 <%@page import="com.cre.w.dto.PostDTO"%>
 <%@page import="com.cre.w.Board"%>
 <%@page import="java.util.ArrayList"%>
@@ -26,20 +26,20 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 </head>
 <body>
 	<%
-	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-	if (loginMember == null) {
-		out.println("<script>alert('로그인 후 이용 가능한 페이지입니다.')</script>");
+	UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			out.println("<script>alert('로그인 후 이용 가능한 페이지입니다.')</script>");
 	%>
 	<jsp:forward page="index.jsp"></jsp:forward>
 	<%
 	}
-	int cup;
-	if (request.getParameter("page") == null) {
-	cup = 1;
-	} else {
-	cup = Integer.parseInt(request.getParameter("page"));
-	}
-	ArrayList<PostDTO> mypost = (ArrayList<PostDTO>) request.getAttribute("list");
+		int cup;
+		if (request.getParameter("page") == null) {
+		cup = 1;
+		} else {
+		cup = Integer.parseInt(request.getParameter("page"));
+		}
+		ArrayList<PostDTO> mypost = (ArrayList<PostDTO>) request.getAttribute("list");
 	%>
 	<div class="container">
 		<div class="header">

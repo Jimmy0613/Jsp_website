@@ -1,6 +1,6 @@
 <%@page import="com.cre.w.Board"%>
-<%@page import="com.cre.w.dto.MemberDTO"%>
-<%@page import="com.cre.w.Member"%>
+<%@page import="com.cre.w.dto.UserDTO"%>
+<%@page import="com.cre.w.User"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.io.File"%>
@@ -28,19 +28,19 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 </head>
 <body>
 	<%
-	MemberDTO loginMember = (MemberDTO) session.getAttribute("loginMember");
-	if (loginMember == null) {
-		out.println("<script>alert('로그인 후 이용 가능한 페이지입니다.')</script>");
+	UserDTO loginUser = (UserDTO) session.getAttribute("loginUser");
+		if (loginUser == null) {
+			out.println("<script>alert('로그인 후 이용 가능한 페이지입니다.')</script>");
 	%>
 	<jsp:forward page="index.jsp"></jsp:forward>
 	<%
 	}
-	int cup;
-	if (request.getParameter("page") == null) {
-	cup = 1;
-	} else {
-	cup = Integer.parseInt(request.getParameter("page"));
-	}
+		int cup;
+		if (request.getParameter("page") == null) {
+		cup = 1;
+		} else {
+		cup = Integer.parseInt(request.getParameter("page"));
+		}
 	%>
 	<div class="container">
 		<div class="header">
@@ -55,17 +55,17 @@ SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMddhhmmssSSS");
 				<div id="x">
 					<%
 					String mode = request.getParameter("mode");
-					if (mode == null) {
-						mode = "mypost";
-					}
-					switch (mode) {
-					case "mypost":
-						response.sendRedirect("/board/mypost");
-						break;
-					case "myreply":
-						response.sendRedirect("/board/myreply");
-						break;
-					case "myemail":
+								if (mode == null) {
+									mode = "mypost";
+								}
+								switch (mode) {
+								case "mypost":
+									response.sendRedirect("/board/mypost");
+									break;
+								case "myreply":
+									response.sendRedirect("/board/myreply");
+									break;
+								case "myemail":
 					%>
 					<%@ include file="/include/myemail.jsp"%>
 					<%

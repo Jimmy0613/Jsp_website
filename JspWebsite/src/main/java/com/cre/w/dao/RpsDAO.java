@@ -12,7 +12,7 @@ public class RpsDAO extends DAO {
 	private String today = format.format(date);
 
 	public int getCountToday(String id) {
-		String sql = String.format("select count(*) from %s where date='%s' and member_id='%s'", Db.TABLE_RPS, today,
+		String sql = String.format("select count(*) from %s where date='%s' and user='%s'", Db.TABLE_RPS, today,
 				id);
 		int count = 0;
 		try {
@@ -76,8 +76,8 @@ public class RpsDAO extends DAO {
 	}
 
 	public void update(RpsDTO dto) {
-		String sql = String.format("insert into %s(member_id,result) values('%s','%s');", Db.TABLE_RPS,
-				dto.getMember_id(), dto.getResult());
+		String sql = String.format("insert into %s(user, result) values('%s','%s');", Db.TABLE_RPS,
+				dto.getUser_id(), dto.getResult());
 		try {
 			connection();
 			st.executeUpdate(sql);
